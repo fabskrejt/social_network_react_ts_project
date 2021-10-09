@@ -1,0 +1,6 @@
+.nav {
+    grid-area: n;
+    background: darkslategray;
+    height: 600px;
+    color: aliceblue;
+}

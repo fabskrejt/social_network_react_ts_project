@@ -1,7 +1,9 @@
 import React from "react";
+import profileStyle from './Profile.module.css'
+
 const Profile = () =>{
     return(
-        <main className="main">
+        <main className={profileStyle.main}>
             <section className='profile-banner'>
                 <img className='profile-banner__img'
                      src='https://images.squarespace-cdn.com/content/v1/57dea572579fb3ea46810d43/1477314236757-Z9L4BOPJRYS6JZEO0OBA/image-asset.png?format=1000w'/>

@@ -10,13 +10,6 @@
     margin: auto;
 }
 
-.header {
-    grid-area: h;
-    background: darkslategray;
-    color: aliceblue;
-
-}
-
 .header__img {
 
 }
@@ -25,16 +18,6 @@
 
 }
 
-.main {
-    grid-area: m;
-}
-
-.nav {
-    grid-area: n;
-    background: darkslategray;
-    height: 600px;
-    color: aliceblue;
-}
 
 .background {
     background: #585b62;
