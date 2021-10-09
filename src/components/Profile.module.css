@@ -1,3 +1,62 @@
 .main {
     grid-area: m;
 }
+
+.profileBanner {
+
+}
+
+.profileBannerImg {
+    width: 100%;
+    height: 150px;
+}
+
+.profileInfo {
+    display: flex;
+    align-items: center;
+}
+
+.description {
+    padding-left: 20px;
+}
+
+.descriptionName {
+    padding-bottom: 20px;
+}
+
+.avatarImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.postsMaker {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.input {
+    height: 70px;
+    width: 700px;
+    border-radius: 10px;
+    border-style: none;
+}
+
+.posts {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.item {
+    padding-top: 20px;
+}
+
+.itemAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.itemText {
+    padding-left: 20px;
+}
