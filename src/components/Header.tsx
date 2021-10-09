@@ -1,11 +1,11 @@
 import React from "react";
-import headerStyle from './Header.module.css'
+import hStyle from './Header.module.css'
 
 const Header = () => {
     return (
-        <header className={headerStyle.header}>
+        <header className={hStyle.header}>
             <div>
-                <img className="header__img" src=''/>
+                <img className={hStyle.headerImg} src='https://www.wallpapertip.com/wmimgs/183-1835364_abstract-logo-transparent-background.jpg'/>
                 <span className='header__text'>Social Network</span>
             </div>
         </header>

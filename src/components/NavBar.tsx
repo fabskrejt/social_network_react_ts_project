@@ -1,24 +1,24 @@
 import React from "react";
-import navStyle from './NavBar.module.css'
+import nStyle from './NavBar.module.css'
 
 
 const NavBar = () => {
     return (
         <div>
-            <nav className={navStyle.nav}>
-                <div className='nav__item'>
+            <nav className={nStyle.nav}>
+                <div className={nStyle.navItem}>
                     Profile
                 </div>
-                <div className='nav__item'>
+                <div className={nStyle.navItem}>
                     Messages
                 </div>
-                <div className='nav__item'>
+                <div className={nStyle.navItem}>
                     News
                 </div>
-                <div className='nav__item'>
+                <div className={nStyle.navItem}>
                     Music
                 </div>
-                <div className='nav__item'>
+                <div className={nStyle.navItem}>
                     Settings
                 </div>
             </nav>
