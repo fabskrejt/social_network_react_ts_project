@@ -5,9 +5,10 @@
             'n m';
     grid-template-rows: 60px 1fr;
     grid-template-columns: 3fr 10fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
     max-width: 1200px;
     margin: auto;
+    color: whitesmoke;
 }
 
 .header__img {
@@ -20,6 +21,6 @@
 
 
 .background {
-    background: #585b62;
+    background: #161d2d;
     height: 100ch;
 }

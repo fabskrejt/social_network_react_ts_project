@@ -1,12 +1,24 @@
 .nav {
     grid-area: n;
-    background: darkslategray;
+    background-color: #232c40;
     height: 600px;
-    color: aliceblue;
+    color: whitesmoke;
     padding-left: 40px;
     padding-top: 30px;
+    border-radius: 30px;
 }
 .navItem{
     padding-top: 10px;
     font-size: 18px;
+
+
+
+}
+.navItem a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.navItem .active {
+    background-color: #2f394f ;
 }
