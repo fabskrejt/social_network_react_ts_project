@@ -7,14 +7,20 @@
 }
 
 .users {
-background-color: #232c40;;
+    background-color: #232c40;;
     padding-left: 10px;
     padding-top: 40px;
     border-radius: 30px;
+
+}
+.usersItem{
+    padding-bottom: 5px;
+    padding-left: 20px;
 }
 
-.usersItem {
-
+.usersItem a {
+    color: whitesmoke;
+    text-decoration: none;
 }
 
 .dialogs {

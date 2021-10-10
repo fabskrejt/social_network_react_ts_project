@@ -10,15 +10,14 @@
 .navItem{
     padding-top: 10px;
     font-size: 18px;
-
-
-
 }
+
 .navItem a{
     text-decoration: none;
     color: whitesmoke;
 }
 
-.navItem .active {
-    background-color: #2f394f ;
+.navItem a.active {
+    background-color: #465065;
+
 }
