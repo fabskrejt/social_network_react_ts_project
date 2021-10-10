@@ -32,11 +32,6 @@ const Profile = () => {
                     </div>
                 </div>
             </section>
-            <section className={pStyle.postsMaker}>
-                <header className='posts-maker__title'>My posts</header>
-                <input className={pStyle.input}/>
-                <button className='posts-maker__button'>Send</button>
-            </section>
             <MyPosts/>
         </main>
     )

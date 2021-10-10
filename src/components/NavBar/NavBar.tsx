@@ -1,5 +1,6 @@
 import React from "react";
 import nStyle from './NavBar.module.css'
+import {Link} from "react-router-dom";
 
 
 const NavBar = () => {
@@ -7,19 +8,19 @@ const NavBar = () => {
         <div>
             <nav className={nStyle.nav}>
                 <div className={nStyle.navItem}>
-                    Profile
+                    <Link to='/profile'>Profile</Link>
                 </div>
                 <div className={nStyle.navItem}>
-                    Messages
+                   <Link to='/dialogs'>Messages</Link>
                 </div>
                 <div className={nStyle.navItem}>
-                    News
+                    <Link to='/news'>News</Link>
                 </div>
                 <div className={nStyle.navItem}>
-                    Music
+                    <Link to='/music'>Music</Link>
                 </div>
                 <div className={nStyle.navItem}>
-                    Settings
+                    <Link to='/settings'>Settings</Link>
                 </div>
             </nav>
         </div>
