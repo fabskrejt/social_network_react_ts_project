@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6fcd3071-438c-4f63-a80a-be0daf8b2c01" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavBar/NavBar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar/NavBar.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +86,10 @@
       <workItem from="1633816153805" duration="63000" />
       <workItem from="1633816228915" duration="1999000" />
       <workItem from="1633818240620" duration="232000" />
-      <workItem from="1633853412694" duration="14224000" />
+      <workItem from="1633853412694" duration="15238000" />
+      <workItem from="1633886921118" duration="1399000" />
+      <workItem from="1633963728639" duration="1246000" />
+      <workItem from="1634236357285" duration="1022000" />
     </task>
     <servers />
   </component>

@@ -6,7 +6,7 @@ const MyPosts = () =>{
     return(<div>
         <section className={pStyle.postsMaker}>
             <header className='posts-maker__title'>My posts</header>
-            <input className={pStyle.input}/>
+            <textarea className={pStyle.input}/>
             <button className='posts-maker__button'>Send</button>
         </section>
             <section className={pStyle.posts}>

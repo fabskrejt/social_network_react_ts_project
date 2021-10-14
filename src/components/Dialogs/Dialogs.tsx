@@ -2,25 +2,30 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import dStyle from './Dialogs.module.css'
 
+
+type PropsOfDialogItem = {
+    name: string
+    id: string
+}
+const DialogItem = (props:PropsOfDialogItem) =>{
+
+    return(
+        <div className={dStyle.usersItem}>
+            <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
+        </div>
+    )
+}
+
 const Dialogs = () => {
     return (
         <div className={dStyle.dialogPage}>
             <div className={dStyle.users}>
-                <div className={dStyle.usersItem}>
-                    <NavLink to='/dialogs/1'>Rusik</NavLink>
-                </div>
-                <div className={dStyle.usersItem}>
-                    <NavLink to='/dialogs/2'>Toshik</NavLink>
-                </div>
-                <div className={dStyle.usersItem}>
-                    <NavLink to='/dialogs/3'>Vovchick</NavLink>
-                </div>
-                <div className={dStyle.usersItem}>
-                    <NavLink to='/dialogs/4'>Dimas</NavLink>
-                </div>
-                <div className={dStyle.usersItem}>
-                    <NavLink to='/dialogs/5'>Kisli</NavLink>
-                </div>
+                <DialogItem name = {'Rusik'} id = {'1'}/>
+                <DialogItem name = {'Toshik'} id = {'2'}/>
+                <DialogItem name = {'Vovchick'} id = {'3'}/>
+                <DialogItem name = {'Dimas'} id = {'4'}/>
+                <DialogItem name = {'Kisli'} id = {'5'}/>
+
 
             </div>
             <div className={dStyle.dialogs}>
