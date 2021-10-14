@@ -1,5 +1,5 @@
 import React from "react";
-import pStyle from "../Profile.module.css";
+import pStyle from "./ProfileInfo.module.css";
 
 type PropsOfProfileInfo = {
     userName: string
@@ -9,7 +9,7 @@ type PropsOfProfileInfo = {
     site: string
 }
 
-const ProfileInfo = (props:PropsOfProfileInfo) => {
+const ProfileInfo = (props: PropsOfProfileInfo) => {
     return (
         <div>
             <section className={pStyle.profileBanner}>

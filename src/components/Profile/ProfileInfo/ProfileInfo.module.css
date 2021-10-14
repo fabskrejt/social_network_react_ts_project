@@ -1,0 +1,25 @@
+.profileBanner {
+
+}
+
+.profileBannerImg {
+    width: 100%;
+    height: 150px;
+    border-radius: 30px;
+}
+.profileInfo {
+    display: flex;
+    align-items: center;
+}
+.description {
+    padding-left: 20px;
+}
+.descriptionName {
+    padding-bottom: 20px;
+}
+.avatarImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
