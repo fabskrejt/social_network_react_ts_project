@@ -5,7 +5,7 @@ import dStyle from './Dialogs.module.css'
 
 type PropsOfDialogItem = {
     name: string
-    id: string
+    id: number
 }
 const DialogItem = (props: PropsOfDialogItem) => {
     return (
@@ -17,6 +17,7 @@ const DialogItem = (props: PropsOfDialogItem) => {
 
 type PropsOfMessage = {
     message: string
+    id: number
 }
 const Message = (props: PropsOfMessage) => {
     return (
@@ -25,21 +26,30 @@ const Message = (props: PropsOfMessage) => {
 }
 
 const Dialogs = () => {
+    let dialogsData =[
+        {id: 1, name:'Rusik'},
+        {id: 2, name:'Toshik'},
+        {id: 3, name:'Vovchick'},
+        {id: 4, name:'Dimas'},
+        {id: 5, name:'Kisli'},
+    ]
+
+    let messages = [
+        {id : 1, textMessage: 'Message 1'},
+        {id : 2, textMessage: 'Message 2'},
+        {id : 3, textMessage: 'Message 3'},
+        {id : 4, textMessage: 'Message 4'},
+        {id : 5, textMessage: 'Message 5'},
+        {id : 6, textMessage: 'Message 6'},
+    ]
     return (
         <div className={dStyle.dialogPage}>
+
             <div className={dStyle.users}>
-                <DialogItem name={'Rusik'} id={'1'}/>
-                <DialogItem name={'Toshik'} id={'2'}/>
-                <DialogItem name={'Vovchick'} id={'3'}/>
-                <DialogItem name={'Dimas'} id={'4'}/>
-                <DialogItem name={'Kisli'} id={'5'}/>
+                {dialogsData.map( i => <DialogItem name={i.name} id={i.id}/> )}
             </div>
             <div className={dStyle.dialogs}>
-                <Message message={'Message 1'}/>
-                <Message message={'Message 2'}/>
-                <Message message={'Message 3'}/>
-                <Message message={'Message 4'}/>
-                <Message message={'Message 5'}/>
+                {messages.map( i =>  <Message id = {i.id} message={i.textMessage}/> )}
             </div>
         </div>
     )
