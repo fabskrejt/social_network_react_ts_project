@@ -1,0 +1,9 @@
+.usersItem {
+    padding-bottom: 5px;
+    padding-left: 20px;
+}
+
+.usersItem a {
+    color: whitesmoke;
+    text-decoration: none;
+}
