@@ -4,7 +4,7 @@
             'h h'
             'n m';
     grid-template-rows: 60px 1fr;
-    grid-template-columns: 3fr 10fr;
+    grid-template-columns: 2fr 10fr;
     grid-gap: 20px;
     max-width: 1200px;
     margin: auto;
