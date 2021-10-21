@@ -21,6 +21,12 @@ let messages = [
     {id: 7, textMessage: 'Message 7'},
 ]
 
+let postsData = [
+    {postText: 'Hello my friends', like: 15},
+    {postText: 'How are you?', like: 5},
+    {postText: 'What are you do?', like: 25},
+]
+
 export type DialogsDataPropsType = {
     id: number
     name: string
@@ -31,10 +37,13 @@ export type  MessagesPropsType = {
     textMessage: string
 }
 
-
+export  type PostsDataPropsType = {
+    postText: string
+    like: number
+}
 ReactDOM.render(
     <React.StrictMode>
-        <App dialogsData={dialogsData} messages={messages}/>
+        <App dialogsData={dialogsData} messages={messages} postsData={postsData}/>
     </React.StrictMode>,
     document.getElementById('root')
 );

@@ -1,14 +1,11 @@
 import React from "react";
 import pStyle from './MyPosts.module.css'
 import Post from "./Post/Post";
+import {ProfilePropsType} from "../Profile";
 
-const MyPosts = () => {
-    let postsData = [
-        {postText: 'Hello my friends', like: 15},
-        {postText: 'How are you?', like: 5},
-        {postText: 'What are you do?', like: 25},
-    ]
-    let postElement = postsData.map(i => <Post message={i.postText} like={i.like}/>)
+const MyPosts = (props: ProfilePropsType) => {
+
+    let postElement = props.postsData.map(i => <Post message={i.postText} like={i.like}/>)
 
     return (<div>
             <section className={pStyle.postsMaker}>
