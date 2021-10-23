@@ -1,9 +1,12 @@
 import React from "react";
 import pStyle from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ProfilePropsType} from "../Profile";
+import {PostsDataType,} from "../../../redux/state";
 
-const MyPosts = (props: ProfilePropsType) => {
+type MyPostsPropsType = {
+    postsData: Array<PostsDataType>
+}
+const MyPosts = (props: MyPostsPropsType) => {
 
     let postElement = props.postsData.map(i => <Post message={i.postText} like={i.like}/>)
 
