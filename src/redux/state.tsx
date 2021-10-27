@@ -1,19 +1,21 @@
 import {renderEntireTree} from "../render";
+import {v1} from "uuid";
 
 type DialogsDataType = {
-    id: number
+    id: string
     name: string
 
 }
 
 export type MessagesType = {
-    id: number
+    id: string
     textMessage: string
 }
 
 export type PostsDataType = {
     postText: string
     like: number
+    id: string
 }
 
 export type MessagesPageType = {
@@ -33,33 +35,33 @@ export type  StateType = {
 export let state: StateType = {
     messagesPage: {
         dialogsData: [
-            {id: 1, name: 'Rusik'},
-            {id: 2, name: 'Toshik'},
-            {id: 3, name: 'Vovchick'},
-            {id: 4, name: 'Dimas'},
-            {id: 5, name: 'Kisli'},
+            {id: v1(), name: 'Rusik'},
+            {id: v1(), name: 'Toshik'},
+            {id: v1(), name: 'Vovchick'},
+            {id: v1(), name: 'Dimas'},
+            {id: v1(), name: 'Kisli'},
         ],
         messages: [
-            {id: 1, textMessage: 'Message 1'},
-            {id: 2, textMessage: 'Message 2'},
-            {id: 3, textMessage: 'Message 3'},
-            {id: 4, textMessage: 'Message 4'},
-            {id: 5, textMessage: 'Message 5'},
-            {id: 6, textMessage: 'Message 6'},
-            {id: 7, textMessage: 'Message 7'},
+            {id: v1(), textMessage: 'Message 1'},
+            {id: v1(), textMessage: 'Message 2'},
+            {id: v1(), textMessage: 'Message 3'},
+            {id: v1(), textMessage: 'Message 4'},
+            {id: v1(), textMessage: 'Message 5'},
+            {id: v1(), textMessage: 'Message 6'},
+            {id: v1(), textMessage: 'Message 7'},
         ]
     },
     profilePage: {
         postsData: [
-            {postText: 'Hello my friends', like: 15},
-            {postText: 'How are you?', like: 5},
-            {postText: 'What are you do?', like: 25},
+            {id: v1(), postText: 'Hello my friends', like: 15},
+            {id: v1(), postText: 'How are you?', like: 5},
+            {id: v1(), postText: 'What are you do?', like: 25},
         ]
     }
 }
 
 export const addPost = (value: string) => {
-    const newPost: PostsDataType = {postText: value, like: 10}
+    const newPost: PostsDataType = {id: v1(), postText: value, like: 10}
     state.profilePage.postsData.unshift(newPost)
     renderEntireTree(state)
 }

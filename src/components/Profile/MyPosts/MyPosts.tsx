@@ -9,7 +9,7 @@ type MyPostsPropsType = {
 }
 const MyPosts = (props: MyPostsPropsType) => {
     const [postChangeValue, setPostChangeValue] = useState('')
-    let postElement = props.postsData.map(i => <Post message={i.postText} like={i.like}/>)
+    let postElement = props.postsData.map(i => <Post key={i.id} message={i.postText} like={i.like}/>)
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => setPostChangeValue(e.currentTarget.value)
     let addPost = () => props.addPost(postChangeValue)
 
