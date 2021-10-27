@@ -12,16 +12,10 @@ import {PostsDataType, ProfilePageType, state, StateType} from "./redux/state";
 
 type AppPropsType = {
     appState: StateType
+    addPost: (value: string) => void
 }
 
 const App = (props: AppPropsType) => {
-
-    const [posts, setNewPost] = useState<Array<PostsDataType>>(props.appState.profilePage.postsData)
-    const addPost = (value: string) => {
-        const newPost: PostsDataType = {postText: value, like: 10}
-        setNewPost([newPost, ...posts])
-    }
-
     return (
         <BrowserRouter>
             <div className="background">
@@ -29,8 +23,7 @@ const App = (props: AppPropsType) => {
                     <Header/>
                     <NavBar/>
                     <Route path='/profile'
-                           render={() => <Profile profilePage={props.appState.profilePage} addPost={addPost}
-                                                  posts={posts}/>}/>
+                           render={() => <Profile profilePage={props.appState.profilePage} addPost={props.addPost}/>}/>
                     <Route exact path='/dialogs'
                            render={() => <Dialogs dialogsPage={props.appState.messagesPage}/>}/>
                     <Route path='/news' component={News}/>

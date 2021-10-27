@@ -1,3 +1,5 @@
+import {renderEntireTree} from "../render";
+
 type DialogsDataType = {
     id: number
     name: string
@@ -54,8 +56,13 @@ export let state: StateType = {
             {postText: 'What are you do?', like: 25},
         ]
     }
-
-
 }
+
+export const addPost = (value: string) => {
+    const newPost: PostsDataType = {postText: value, like: 10}
+    state.profilePage.postsData.unshift(newPost)
+    renderEntireTree(state)
+}
+
 
 
