@@ -18,8 +18,10 @@ const Dialogs = (props: DialogsPropsType) => {
     let dialogsElement = props.dialogsPage.dialogsData.map(i => <DialogItem name={i.name} id={i.id}/>)
     let messagesElement = props.dialogsPage.messages.map(i => <Message id={i.id} message={i.textMessage}/>)
     const addMessage = () => {
-      props.addMessage(messageText)
-        setMessageText('')
+        if(messageText) {
+            props.addMessage(messageText)
+            setMessageText('')
+        }
     }
 
     return (
