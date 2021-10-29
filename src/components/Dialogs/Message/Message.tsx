@@ -1,5 +1,5 @@
 import dStyle from "./Message.module.css";
-import React, {ChangeEvent, useState} from "react";
+import React from "react";
 
 type PropsOfMessage = {
     message: string

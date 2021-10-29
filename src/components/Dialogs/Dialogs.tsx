@@ -10,12 +10,11 @@ type DialogsPropsType = {
     addMessage: (value: string) => void
 }
 
-const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = (props: DialogsPropsType) => {
     const [messageText, setMessageText] = useState('')
     const changeMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setMessageText(e.currentTarget.value)
     }
-
     let dialogsElement = props.dialogsPage.dialogsData.map(i => <DialogItem name={i.name} id={i.id}/>)
     let messagesElement = props.dialogsPage.messages.map(i => <Message id={i.id} message={i.textMessage}/>)
     const addMessage = () => {
@@ -34,11 +33,7 @@ const Dialogs = (props: DialogsPropsType) => {
                 {messagesElement}
                 <textarea value={messageText} onChange={changeMessageText}></textarea>
                 <Button title={'add'} callBack={addMessage}/>
-                {/*<button onClick={addMessage}>add</button>*/}
-
             </div>
         </div>
     )
 }
-
-export default Dialogs
