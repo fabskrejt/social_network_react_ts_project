@@ -2,6 +2,7 @@ import React, {ChangeEvent, useState} from "react";
 import pStyle from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {PostsDataType,} from "../../../redux/state";
+import {Button} from "../../Button/Button";
 
 type MyPostsPropsType = {
     postsData: Array<PostsDataType>
@@ -21,7 +22,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             <section className={pStyle.postsMaker}>
                 <header className='posts-maker__title'>My posts</header>
                 <textarea value={postChangeValue} onChange={onPostChange} className={pStyle.input}/>
-                <button onClick={addPost} className='posts-maker__button'>Send</button>
+                <Button callBack={addPost} title={'Send'}/>
             </section>
             <section className={pStyle.posts}>
                 {postElement}
