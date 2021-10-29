@@ -2,7 +2,8 @@ import React, {ChangeEvent, useState} from "react";
 import dStyle from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import { MessagesPageType} from "../../redux/state";
+import {MessagesPageType} from "../../redux/state";
+import {Button} from "../Button/Button";
 
 type DialogsPropsType = {
     dialogsPage: MessagesPageType
@@ -18,7 +19,7 @@ const Dialogs = (props: DialogsPropsType) => {
     let dialogsElement = props.dialogsPage.dialogsData.map(i => <DialogItem name={i.name} id={i.id}/>)
     let messagesElement = props.dialogsPage.messages.map(i => <Message id={i.id} message={i.textMessage}/>)
     const addMessage = () => {
-        if(messageText) {
+        if (messageText) {
             props.addMessage(messageText)
             setMessageText('')
         }
@@ -32,7 +33,8 @@ const Dialogs = (props: DialogsPropsType) => {
             <div className={dStyle.dialogs}>
                 {messagesElement}
                 <textarea value={messageText} onChange={changeMessageText}></textarea>
-                <button onClick={addMessage}>add</button>
+                <Button title={'add'} callBack={addMessage}/>
+                {/*<button onClick={addMessage}>add</button>*/}
 
             </div>
         </div>

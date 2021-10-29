@@ -12,11 +12,11 @@ const MyPosts = (props: MyPostsPropsType) => {
     let postElement = props.postsData.map(i => <Post key={i.id} message={i.postText} like={i.like}/>)
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => setPostChangeValue(e.currentTarget.value)
     let addPost = () => {
-        props.addPost(postChangeValue)
-        setPostChangeValue('')
+        if (postChangeValue) {
+            props.addPost(postChangeValue)
+            setPostChangeValue('')
+        }
     }
-
-
     return (<div>
             <section className={pStyle.postsMaker}>
                 <header className='posts-maker__title'>My posts</header>
