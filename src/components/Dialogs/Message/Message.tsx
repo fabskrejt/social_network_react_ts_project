@@ -1,5 +1,5 @@
 import dStyle from "./Message.module.css";
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 
 type PropsOfMessage = {
     message: string
@@ -8,7 +8,10 @@ type PropsOfMessage = {
 
 const Message = (props: PropsOfMessage) => {
     return (
-        <div className={dStyle.dialogsItem}> {props.message}</div>
+        <div>
+            <div className={dStyle.dialogsItem}> {props.message}</div>
+        </div>
+
     )
 }
 

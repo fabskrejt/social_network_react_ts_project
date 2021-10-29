@@ -67,4 +67,10 @@ export const addPost = (value: string) => {
 }
 
 
+export const addMessage =(value: string) => {
+    const  newMessage: MessagesType = {id: v1(), textMessage: value}
+    state.messagesPage.messages.push(newMessage)
+    renderEntireTree(state)
+}
+
 
