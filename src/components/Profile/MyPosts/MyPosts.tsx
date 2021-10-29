@@ -22,7 +22,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             <section className={pStyle.postsMaker}>
                 <header className='posts-maker__title'>My posts</header>
                 <textarea value={postChangeValue} onChange={onPostChange} className={pStyle.input}/>
-                <Button callBack={addPost} title={'Send'}/>
+                <Button style={pStyle.button} callBack={addPost} title={'Send'}/>
             </section>
             <section className={pStyle.posts}>
                 {postElement}

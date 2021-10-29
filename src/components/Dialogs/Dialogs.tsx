@@ -32,7 +32,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={dStyle.dialogs}>
                 {messagesElement}
                 <textarea value={messageText} onChange={changeMessageText}></textarea>
-                <Button title={'add'} callBack={addMessage}/>
+                <Button style={dStyle.button} title={'add'} callBack={addMessage}/>
             </div>
         </div>
     )

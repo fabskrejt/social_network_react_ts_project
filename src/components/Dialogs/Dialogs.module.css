@@ -21,3 +21,8 @@
     padding-top: 40px;
     border-radius: 30px;
 }
+.button {
+    background-color: #465065;
+    border-radius: 5px;
+    color: whitesmoke;
+}
