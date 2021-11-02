@@ -1,10 +1,8 @@
-import {renderEntireTree} from "../render";
 import {v1} from "uuid";
 
 type DialogsDataType = {
     id: string
     name: string
-
 }
 
 export type MessagesType = {
@@ -30,6 +28,9 @@ export type ProfilePageType = {
 export type  StateType = {
     messagesPage: MessagesPageType
     profilePage: ProfilePageType
+}
+export let renderEntireTree = (state: StateType) => {
+    console.log('rerender ')
 }
 
 export let state: StateType = {
@@ -67,10 +68,12 @@ export const addPost = (value: string) => {
 }
 
 
-export const addMessage =(value: string) => {
-    const  newMessage: MessagesType = {id: v1(), textMessage: value}
+export const addMessage = (value: string) => {
+    const newMessage: MessagesType = {id: v1(), textMessage: value}
     state.messagesPage.messages.push(newMessage)
     renderEntireTree(state)
 }
 
-
+export const subscribe = (observer: () => void) => {
+    renderEntireTree = observer
+}

@@ -18,6 +18,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             setPostChangeValue('')
         }
     }
+
     return (<div>
             <section className={pStyle.postsMaker}>
                 <header className='posts-maker__title'>My posts</header>
