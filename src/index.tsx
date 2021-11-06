@@ -5,13 +5,12 @@ import ReactDOM from "react-dom";
 import React from "react";
 import App from "./App";
 
-    ReactDOM.render(
-        <React.StrictMode>
-            <App appState={store.getState()} addPost={store.addPost.bind(store)} addMessage={store.addMessage.bind(store)}/>
-        </React.StrictMode>,
-        document.getElementById('root')
-    );
-
+ReactDOM.render(
+    <React.StrictMode>
+        <App appState={store.getState()} dispatch={store.dispatch.bind(store)}/>
+    </React.StrictMode>,
+    document.getElementById('root')
+);
 
 
 // If you want to start measuring performance in your app, pass a function

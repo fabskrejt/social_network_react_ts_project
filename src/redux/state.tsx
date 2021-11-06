@@ -30,11 +30,21 @@ export type  StateType = {
     profilePage: ProfilePageType
 }
 
+export type AddPostActionType = {
+    type: 'ADD-POST'
+    value: string
+}
+export type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+    value: string
+}
+
+export type ActionTypes = AddMessageActionType | AddPostActionType
+
 export type StoreType = {
     _state: StateType
     getState: () => StateType
-    addPost: (value: string) => void
-    addMessage: (value: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 export const store: StoreType = {
@@ -68,14 +78,16 @@ export const store: StoreType = {
     getState() {
         return this._state
     },
-    addPost(value: string) {
-        const newPost: PostsDataType = {id: v1(), postText: value, like: 10}
-        this._state.profilePage.postsData.unshift(newPost)
-        /*    renderEntireTree(state)*/
+    dispatch(action) {
+        switch (action.type) {
+            case "ADD-POST":
+                const newPost: PostsDataType = {id: v1(), postText: action.value, like: 10}
+                this._state.profilePage.postsData.unshift(newPost)
+                break
+            case "ADD-MESSAGE":
+                const newMessage: MessagesType = {id: v1(), textMessage: action.value}
+                this._state.messagesPage.messages.push(newMessage)
+                break
+        }
     },
-    addMessage(value: string) {
-        const newMessage: MessagesType = {id: v1(), textMessage: value}
-        this._state.messagesPage.messages.push(newMessage)
-        /*    renderEntireTree(state)*/
-    }
 }
