@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fcd3071-438c-4f63-a80a-be0daf8b2c01" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/redux/dialog-reducer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/profile-reducer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPosts.tsx" afterDir="false" />
@@ -117,7 +119,8 @@
       <workItem from="1635857593903" duration="12458000" />
       <workItem from="1636218477319" duration="6663000" />
       <workItem from="1636234971241" duration="677000" />
-      <workItem from="1636286491544" duration="2243000" />
+      <workItem from="1636286491544" duration="3541000" />
+      <workItem from="1636315689367" duration="1880000" />
     </task>
     <servers />
   </component>

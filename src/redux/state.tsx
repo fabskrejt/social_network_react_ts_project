@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {profileReducer} from "./profile-reducer";
+import {dialogReducer} from "./dialog-reducer";
 
 type DialogsDataType = {
     id: string
@@ -49,8 +51,6 @@ export type StoreType = {
     dispatch: (action: ActionTypes) => void
 }
 
-const ADD_POST = 'ADD-POST';
-const ADD_MESSAGE = 'ADD-MESSAGE';
 
 export const store: StoreType = {
     _state: {
@@ -84,24 +84,9 @@ export const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        switch (action.type) {
-            case ADD_POST:
-                const newPost: PostsDataType = {id: v1(), postText: action.value, like: 10}
-                this._state.profilePage.postsData.unshift(newPost)
-                break
-            case ADD_MESSAGE:
-                const newMessage: MessagesType = {id: v1(), textMessage: action.value}
-                this._state.messagesPage.messages.push(newMessage)
-                break
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagesPage = dialogReducer(this._state.messagesPage, action)
+
     },
 }
-
-export const addPostAC = (postChangeValue: string): ActionTypes => ({
-    type: ADD_POST,
-    value: postChangeValue,
-})
-export const addMessageAC = (messageText: string): ActionTypes => ({
-    type: ADD_MESSAGE,
-        value: messageText
-})
