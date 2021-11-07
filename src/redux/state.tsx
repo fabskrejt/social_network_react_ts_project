@@ -30,10 +30,12 @@ export type  StateType = {
     profilePage: ProfilePageType
 }
 
+
 export type AddPostActionType = {
     type: 'ADD-POST'
     value: string
 }
+
 export type AddMessageActionType = {
     type: 'ADD-MESSAGE'
     value: string
@@ -46,6 +48,9 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionTypes) => void
 }
+
+const ADD_POST = 'ADD-POST';
+const ADD_MESSAGE = 'ADD-MESSAGE';
 
 export const store: StoreType = {
     _state: {
@@ -80,14 +85,23 @@ export const store: StoreType = {
     },
     dispatch(action) {
         switch (action.type) {
-            case "ADD-POST":
+            case ADD_POST:
                 const newPost: PostsDataType = {id: v1(), postText: action.value, like: 10}
                 this._state.profilePage.postsData.unshift(newPost)
                 break
-            case "ADD-MESSAGE":
+            case ADD_MESSAGE:
                 const newMessage: MessagesType = {id: v1(), textMessage: action.value}
                 this._state.messagesPage.messages.push(newMessage)
                 break
         }
     },
 }
+
+export const addPostAC = (postChangeValue: string): ActionTypes => ({
+    type: ADD_POST,
+    value: postChangeValue,
+})
+export const addMessageAC = (messageText: string): ActionTypes => ({
+    type: ADD_MESSAGE,
+        value: messageText
+})
