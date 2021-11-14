@@ -52,6 +52,7 @@ export type StoreType = {
 }
 
 
+/*
 export const store: StoreType = {
     _state: {
         messagesPage: {
@@ -90,3 +91,4 @@ export const store: StoreType = {
 
     },
 }
+*/
