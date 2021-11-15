@@ -1,37 +1,24 @@
-import React, {ChangeEvent, useState} from "react";
-import pStyle from './MyPosts.module.css'
-import Post from "./Post/Post";
-import {ActionTypes, PostsDataType,} from "../../../redux/state";
-import {Button} from "../../Button/Button";
+import React from "react";
+import {StoreType,} from "../../../redux/state";
 import {addPostAC} from "../../../redux/profile-reducer";
+import MyPosts from "./MyPosts";
 
-type MyPostsPropsType = {
-    postsData: Array<PostsDataType>
-    dispatch: (action: ActionTypes) => void
+type MyPostsContainerPropsType = {
+    store: StoreType
 }
 
-const MyPosts = (props: MyPostsPropsType) => {
-    const [postChangeValue, setPostChangeValue] = useState('')
-    let postElement = props.postsData.map(i => <Post key={i.id} message={i.postText} like={i.like}/>)
-    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => setPostChangeValue(e.currentTarget.value)
-    let addPost = () => {
+export const MyPostsContainer = (props: MyPostsContainerPropsType) => {
+    let state = props.store.getState()
+    let addPost = (postChangeValue: string) => {
         if (postChangeValue) {
-            props.dispatch(addPostAC(postChangeValue))
-            setPostChangeValue('')
+            props.store.dispatch(addPostAC(postChangeValue))
         }
     }
 
-    return (<div>
-            <section className={pStyle.postsMaker}>
-                <header className='posts-maker__title'>My posts</header>
-                <textarea value={postChangeValue} onChange={onPostChange} className={pStyle.input}/>
-                <Button style={pStyle.button} callBack={addPost} title={'Send'}/>
-            </section>
-            <section className={pStyle.posts}>
-                {postElement}
-            </section>
-        </div>
+    return (
+        <MyPosts postsData={state.profilePage.postsData}
+                 addPost={addPost}
+        />
     )
 }
 
-export default MyPosts
