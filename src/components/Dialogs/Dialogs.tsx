@@ -8,7 +8,8 @@ import {addMessageAC} from "../../redux/dialog-reducer";
 
 type DialogsPropsType = {
     dialogsPage: MessagesPageType
-    dispatch: (action: ActionTypes) => void
+    addMessage: (addMessage:string)=>void
+    /*dispatch: (action: ActionTypes) => void*/
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -18,9 +19,10 @@ export const Dialogs = (props: DialogsPropsType) => {
     }
     let dialogsElement = props.dialogsPage.dialogsData.map(i => <DialogItem name={i.name} id={i.id}/>)
     let messagesElement = props.dialogsPage.messages.map(i => <Message id={i.id} message={i.textMessage}/>)
-    const addMessage = () => {
+    const onAddMessage = () => {
         if (messageText) {
-            props.dispatch(addMessageAC(messageText))
+            props.addMessage(messageText)
+           /* props.dispatch(addMessageAC(messageText))*/
             setMessageText('')
         }
     }
@@ -33,7 +35,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={dStyle.dialogs}>
                 {messagesElement}
                 <textarea value={messageText} onChange={changeMessageText}/>
-                <Button style={dStyle.button} title={'add'} callBack={addMessage}/>
+                <Button style={dStyle.button} title={'add'} callBack={onAddMessage}/>
             </div>
         </div>
     )

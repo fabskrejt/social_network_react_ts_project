@@ -9,6 +9,7 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import {ActionTypes, StateType, StoreType} from "./redux/state";
 import {Dialogs} from "./components/Dialogs/Dialogs";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 /*type AppPropsType = {
     appState: StateType
@@ -35,8 +36,7 @@ const App = (props: AppPropsType) => {
                            render={() => <Dialogs dialogsPage={props.appState.messagesPage}
                                                   dispatch={props.dispatch}/>}/>*/}
                     <Route exact path='/dialogs'
-                           render={() => <Dialogs dialogsPage={state.messagesPage}
-                                                  dispatch={props.store.dispatch}/>}/>
+                           render={() => <DialogsContainer store={props.store}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
