@@ -7,9 +7,13 @@ type DialogsDataType = {
     name: string
 }
 
-export type MessagesType = {
+ type MessagesType = {
     id: string
     textMessage: string
+}
+type MessagesPageType = {
+    dialogsData: Array<DialogsDataType>
+    messages: Array<MessagesType>
 }
 
 export type PostsDataType = {
@@ -18,10 +22,7 @@ export type PostsDataType = {
     id: string
 }
 
-export type MessagesPageType = {
-    dialogsData: Array<DialogsDataType>
-    messages: Array<MessagesType>
-}
+
 
 export type ProfilePageType = {
     postsData: Array<PostsDataType>

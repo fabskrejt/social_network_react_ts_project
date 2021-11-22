@@ -10,14 +10,15 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
     dispatch: (action: ActionTypes) => void
 }*/
 type ProfilePropsType = {
-store:StoreType
+/*store:StoreType*/
 }
 const Profile = (props: ProfilePropsType) => {
     return (
         <main className={pStyle.main}>
             <ProfileInfo userName={'Vovchick'} birthday={'31.10.1992'} city={'Rostov-on-Don'} education={'TPU'}
                          site={'I have not'}/>
-            <MyPostsContainer store={props.store}/>
+         {/*   <MyPostsContainer store={props.store}/>*/}
+            <MyPostsContainer/>
             {/*<MyPosts postsData={props.profilePage.postsData} dispatch={props.dispatch}/>*/}
         </main>
     )

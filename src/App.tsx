@@ -17,10 +17,10 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 }*/
 
 type AppPropsType = {
-store:StoreType
+/*store:StoreType*/
 }
-const App = (props: AppPropsType) => {
-    let state = props.store.getState()
+const App = () => {
+/*    let state = props.store.getState()*/
     return (
         <BrowserRouter>
             <div className="background">
@@ -30,13 +30,15 @@ const App = (props: AppPropsType) => {
 {/*                    <Route path='/profile'
                            render={() => <Profile profilePage={props.appState.profilePage}
                                                   dispatch={props.dispatch}/>}/>*/}
+
                     <Route path='/profile'
-                           render={() => <Profile store={props.store}/>}/>
+                           render={() => <Profile /*store={props.store}*//>}/>
+
 {/*                    <Route exact path='/dialogs'
                            render={() => <Dialogs dialogsPage={props.appState.messagesPage}
                                                   dispatch={props.dispatch}/>}/>*/}
                     <Route exact path='/dialogs'
-                           render={() => <DialogsContainer store={props.store}/>}/>
+                           render={() => <DialogsContainer /*store={props.store}*//>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
