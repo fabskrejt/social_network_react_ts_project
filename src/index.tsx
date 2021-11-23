@@ -8,9 +8,8 @@ import {Provider} from "react-redux";
 
 ReactDOM.render(
     <React.StrictMode>
-        {/*<App appState={store.getState()} dispatch={store.dispatch.bind(store)}/>*/}
         <Provider store={store}>
-            <App />
+            <App/>
         </Provider>
 
     </React.StrictMode>,

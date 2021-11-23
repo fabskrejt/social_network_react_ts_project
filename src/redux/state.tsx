@@ -16,7 +16,7 @@ type MessagesPageType = {
     messages: Array<MessagesType>
 }
 
-export type PostsDataType = {
+type PostsDataType = {
     postText: string
     like: number
     id: string
@@ -24,7 +24,7 @@ export type PostsDataType = {
 
 
 
-export type ProfilePageType = {
+type ProfilePageType = {
     postsData: Array<PostsDataType>
 }
 

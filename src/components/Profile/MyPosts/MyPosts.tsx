@@ -1,14 +1,9 @@
 import React, {ChangeEvent, useState} from "react";
 import pStyle from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionTypes, PostsDataType,} from "../../../redux/state";
 import {Button} from "../../Button/Button";
-import {addPostAC} from "../../../redux/profile-reducer";
+import {PostsDataType} from "../../../redux/profile-reducer";
 
-/*type MyPostsPropsType = {
-    postsData: Array<PostsDataType>
-    dispatch: (action: ActionTypes) => void
-}*/
 
 type MyPostsPropsType = {
     postsData: Array<PostsDataType>
@@ -22,10 +17,6 @@ const MyPosts = (props: MyPostsPropsType) => {
     let onAddPost = () => {
         props.addPost(postChangeValue)
         setPostChangeValue('')
-        /*        if (postChangeValue) {
-                    props.dispatch(addPostAC(postChangeValue))
-                    setPostChangeValue('')
-                }*/
     }
 
     return (<div>
