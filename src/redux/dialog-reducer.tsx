@@ -42,8 +42,7 @@ export const dialogReducer = (state: MessagesPageType = initialState, action: Ac
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage: MessagesType = {id: v1(), textMessage: action.value}
-            state.messages.push(newMessage)
-            return state
+            return {...state, messages: [...state.messages, newMessage]}
     }
     return state
 }
