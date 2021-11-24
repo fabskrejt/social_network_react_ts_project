@@ -26,8 +26,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsDataType = {id: v1(), postText: action.value, like: 10}
-            state.postsData.unshift(newPost)
-            return state
+            return {...state, postsData: [newPost,...state.postsData]}
     }
     return state
 }
