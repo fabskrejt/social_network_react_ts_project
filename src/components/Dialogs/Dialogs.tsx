@@ -4,12 +4,11 @@ import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 /*import {ActionTypes, MessagesPageType} from "../../redux/state";*/
 import {Button} from "../Button/Button";
-import {addMessageAC, MessagesPageType} from "../../redux/dialog-reducer";
+import {MessagesPageType} from "../../redux/dialog-reducer";
 
 type DialogsPropsType = {
     dialogsPage: MessagesPageType
     addMessage: (addMessage:string)=>void
-    /*dispatch: (action: ActionTypes) => void*/
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
