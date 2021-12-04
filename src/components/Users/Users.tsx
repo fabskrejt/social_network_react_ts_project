@@ -1,6 +1,7 @@
 import React from "react";
 import {v1} from "uuid";
-import {usersReducer, UserType} from "../../redux/users-reducer";
+import {UserType} from "../../redux/users-reducer";
+import style from './Users.module.css'
 
 
 type UsersPropsType = {
@@ -9,12 +10,12 @@ type UsersPropsType = {
 export const Users = (props: UsersPropsType) => {
     const usersList = props.usersPage.map(i => {
         return (
-            <div key={i.id}>
-                <div>
+            <div key={i.id} className={style.user}>
+                <div className={style.userAva}>
                     <img src={i.avatarURL}/>
                     <span>{i.folowed ? 'Unfollow' : 'Follow'}</span>
                 </div>
-                <div>
+                <div className={style.userInfo}>
                     <span>{i.name}</span>
                     <span>{i.city}</span>
                     <span>{i.education}</span>
@@ -24,7 +25,7 @@ export const Users = (props: UsersPropsType) => {
     })
     return (
         //{id: v1(), name: 'Rusik', city: 'Tomsk', education: 'TUSUR', site: 'non', folowed: true},
-        <div>
+        <div className={style.usersList}>
             {usersList}
         </div>
     )
