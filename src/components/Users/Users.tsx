@@ -6,14 +6,18 @@ import style from './Users.module.css'
 
 type UsersPropsType = {
     usersPage: Array<UserType>
+    follow: (id: string) => void
 }
 export const Users = (props: UsersPropsType) => {
+    const follow = (id: string) => {
+        props.follow(id)
+    }
     const usersList = props.usersPage.map(i => {
         return (
             <div key={i.id} className={style.user}>
                 <div className={style.userAva}>
                     <img src={i.avatarURL}/>
-                    <span>{i.folowed ? 'Unfollow' : 'Follow'}</span>
+                    <span onClick={() => follow(i.id)}>{i.folowed ? 'Unfollow' : 'Follow'}</span>
                 </div>
                 <div className={style.userInfo}>
                     <span>{i.name}</span>

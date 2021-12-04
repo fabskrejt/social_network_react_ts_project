@@ -34,8 +34,8 @@ const initialState: InitialStateType = [
 export const usersReducer = (state = initialState, action: UserReducerActionType) => {
 
     switch (action.type) {
-            case 'FOLLOW':
-                    return state.map(i=> i.id === action.id ? {...i, followed: !i.folowed} : i)
+        case 'FOLLOW':
+                    return [...state].map(i=> i.id === action.id ? {...i, folowed: !i.folowed} : i)
         default:
             return state
     }
