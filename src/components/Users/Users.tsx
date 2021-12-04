@@ -9,9 +9,9 @@ type UsersPropsType = {
 export const Users = (props: UsersPropsType) => {
     const usersList = props.usersPage.map(i => {
         return (
-            <div>
+            <div key={i.id}>
                 <div>
-                    <img/>
+                    <img src={i.avatarURL}/>
                     <span>{i.folowed ? 'Unfollow' : 'Follow'}</span>
                 </div>
                 <div>
