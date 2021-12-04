@@ -1,7 +1,6 @@
-import React from "react";
 import {v1} from "uuid";
 
-type UserType = {
+export type UserType = {
     id: string
     name: string
     city: string
@@ -30,13 +29,14 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
     }
 }
 
+
 type UserReducerActionType = FollowACType
 
 type FollowACType = ReturnType<typeof followAC>
 
-const followAC = (id: string) => {
+export const followAC = (id: string) => {
     return {
         type: 'FOLLOW',
         id
-    }
+    } as const
 }
