@@ -13,10 +13,11 @@ export const Users = (props: UsersPropsType) => {
     const follow = (id: string) => {
         props.follow(id)
     }
-    const axios = require('axios')
+    const axios = require('axios').default
 
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: any) => console.log(response.data.items)
-    )
+    axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        .then((response: any) => console.log(response.data.items)
+        )
 
 
     const usersList = props.usersPage.map(i => {
