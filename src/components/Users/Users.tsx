@@ -29,7 +29,7 @@ export const Users = (props: UsersPropsType) => {
             <div key={i.id} className={style.user}>
                 <div className={style.userAva}>
                     <img src={i.avatarURL}/>
-                    <span onClick={() => follow(i.id)}>{i.folowed ? 'Unfollow' : 'Follow'}</span>
+                    <span onClick={() => follow(i.id)}>{i.followed ? 'Unfollow' : 'Follow'}</span>
                 </div>
                 <div className={style.userInfo}>
                     <span>{i.name}</span>

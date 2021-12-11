@@ -7,7 +7,10 @@ import {UsersC} from "./UsersClss";
 
 const mapStateToProps = (state: appStateType) => {
     return {
-        usersPage: state.usersPage
+        usersPage: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        count: state.usersPage.count,
+
     }
 }
 
