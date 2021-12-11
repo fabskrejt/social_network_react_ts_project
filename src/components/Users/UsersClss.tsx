@@ -1,5 +1,5 @@
 import React from "react";
-import {UserType} from "../../redux/users-reducer";
+import {setCurrentPageAC, UserType} from "../../redux/users-reducer";
 import style from './Users.module.css'
 import {default as axios} from "axios";
 
@@ -8,6 +8,9 @@ type UsersPropsType = {
     usersPage: Array<UserType>
     follow: (id: string) => void
     setUsers: (users: Array<UserType>) => void
+    setCurrentPage:(currentPage:number)=>void
+    pageSize: number
+    count: number
 }
 
 /*type GetUsersResponse = {
@@ -24,6 +27,7 @@ type UsersPropsType = {
             "followed": false
         },
 }*/
+
 /*export const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -44,15 +48,31 @@ export class UsersC extends React.Component<UsersPropsType, any> {
 //Lifecycle
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users?count=20')
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then((response: any) => this.setUsers(response.data.items)
             )
 
     }
+    onPageChanged=(pageNumber:number)=>{
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then((response: any) => this.setUsers(response.data.items)
+            )
+    }
 
     render() {
+        const pageCount = Math.ceil(this.props.count / this.props.pageSize)
+        const pages = []
+        for (let i = 1; i <= pageCount; i++) {
+            pages.push(i)
+        }
         return (
             <div className={style.usersList}>
+
+                <div>
+                    {pages.map(p => <span onClick={()=>this.onPageChanged(p)}>{p}</span>)}
+                </div>
+
                 {this.props.usersPage.map(i => {
                     return (
                         <div key={i.id} className={style.user}>

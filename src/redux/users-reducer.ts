@@ -19,12 +19,14 @@ type InitialStateType = {
     users: Array<UserType>
     pageSize: number
     count: number
+    currentPage: number
 
 }
 const initialState: InitialStateType = {
     users: [],
     pageSize: 5,
-    count: 3
+    count: 10,
+    currentPage: 1,
 }
 /*const initialState: InitialStateType = [
 /!*    {
@@ -59,16 +61,18 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
 
     switch (action.type) {
         case 'FOLLOW':
-            return {...state, users: state.users.map(i => i.id === action.id ? {...i, followed: !i.followed} : i) }
+            return {...state, users: state.users.map(i => i.id === action.id ? {...i, followed: !i.followed} : i)}
         case "SET-USERS":
-            return {...state, users:action.users}
+            return {...state, users: action.users}
+        case 'CHANGE-CURRENT-PAGE':
+            return {...state, currentPage: action.currentPage}
         default:
             return state
     }
 }
 
 
-type UserReducerActionType = FollowACType | SetUsersACType
+type UserReducerActionType = FollowACType | SetUsersACType | changeCurrentPageACType
 
 type FollowACType = ReturnType<typeof followAC>
 
@@ -84,5 +88,12 @@ export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: 'SET-USERS',
         users,
+    } as const
+}
+type changeCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: 'CHANGE-CURRENT-PAGE',
+        currentPage
     } as const
 }
