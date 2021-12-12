@@ -12,6 +12,7 @@ type UsersPropsType = {
     setCount: (Count: number) => void
     pageSize: number
     count: number
+    currentPage: number
 }
 
 /*type GetUsersResponse = {
@@ -66,16 +67,19 @@ export class UsersC extends React.Component<UsersPropsType, any> {
     }
 
     render() {
+        //need fix pagination (quantity pages)
         const pageCount = Math.ceil(this.props.count / this.props.pageSize)
         const pages = []
-        for (let i = 1; i <= pageCount; i++) {
+        for (let i = 1; i <= 10; i++) {
             pages.push(i)
         }
         return (
             <div className={style.usersList}>
-
-                <div>
-                    {pages.map(p => <span onClick={() => this.onPageChanged(p)}>{p}</span>)}
+                <div className={style.pagination}>
+                    {pages.map(p => p === this.props.currentPage
+                        ? <span className={style.active} onClick={() => this.onPageChanged(p)}>{p}</span>
+                        : <span onClick={() => this.onPageChanged(p)}>{p}</span>
+                    )}
                 </div>
 
                 {this.props.usersPage.map(i => {

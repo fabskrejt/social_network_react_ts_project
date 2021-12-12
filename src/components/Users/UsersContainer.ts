@@ -9,6 +9,7 @@ const mapStateToProps = (state: appStateType) => {
         usersPage: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         count: state.usersPage.count,
+        currentPage: state.usersPage.currentPage,
 
     }
 }
