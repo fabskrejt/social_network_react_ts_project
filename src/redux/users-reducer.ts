@@ -66,13 +66,15 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
             return {...state, users: action.users}
         case 'CHANGE-CURRENT-PAGE':
             return {...state, currentPage: action.currentPage}
+        case 'SET-COUNT':
+            return {...state, count: action.count}
         default:
             return state
     }
 }
 
 
-type UserReducerActionType = FollowACType | SetUsersACType | changeCurrentPageACType
+type UserReducerActionType = FollowACType | SetUsersACType | changeCurrentPageACType | setCountACTye
 
 type FollowACType = ReturnType<typeof followAC>
 
@@ -95,5 +97,13 @@ export const setCurrentPageAC = (currentPage: number) => {
     return {
         type: 'CHANGE-CURRENT-PAGE',
         currentPage
+    } as const
+}
+
+type setCountACTye = ReturnType<typeof setCountAC>
+export const setCountAC = (count: number) => {
+    return {
+        type: 'SET-COUNT',
+        count,
     } as const
 }
