@@ -72,7 +72,18 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
     render() {
         return (
             <div>
+
                 {this.props.isFetching
+                    && <Preloader/>}
+                <UsersFC
+                    pageSize={this.props.pageSize}
+                    count={this.props.count}
+                    currentPage={this.props.currentPage}
+                    onPageChanged={this.onPageChanged}
+                    usersPage={this.props.usersPage}
+                    follow={this.follow}
+                />
+{/*                {this.props.isFetching
                     ? <Preloader/>
                     : <UsersFC
                         pageSize={this.props.pageSize}
@@ -81,7 +92,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
                         onPageChanged={this.onPageChanged}
                         usersPage={this.props.usersPage}
                         follow={this.follow}
-                    />}
+                    />}*/}
             </div>
 
         )
