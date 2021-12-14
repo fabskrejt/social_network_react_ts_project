@@ -15,14 +15,14 @@ export type UserType = {
     photos: PhotosType
 }
 type InitialStateType1 = Array<UserType>
-type InitialStateType = {
+export type InitialUsersStateType = {
     users: Array<UserType>
     pageSize: number
     count: number
     currentPage: number
 
 }
-const initialState: InitialStateType = {
+const initialState: InitialUsersStateType = {
     users: [],
     pageSize: 5,
     count: 10,

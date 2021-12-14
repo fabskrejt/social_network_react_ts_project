@@ -2,7 +2,7 @@ import {appStateType} from "../../redux/store";
 import {followAC, setCountAC, setCurrentPageAC, setUsersAC, UserType} from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
-import {UsersC} from "./UsersClss";
+import {UsersC} from "./UsersAPIComponent";
 
 const mapStateToProps = (state: appStateType) => {
     return {
