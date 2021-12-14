@@ -49,9 +49,7 @@ export class UsersC extends React.Component<UsersPropsType, InitialUsersStateTyp
             )
     }
 
-
     render() {
-
         return (
             <UsersFC
                 pageSize={this.props.pageSize}

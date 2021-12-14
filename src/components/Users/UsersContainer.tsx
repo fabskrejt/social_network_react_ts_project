@@ -14,8 +14,6 @@ import {default as axios} from "axios";
 import {UsersFC} from "./UsersFC";
 
 
-
-
 type UsersPropsType = {
     usersPage: Array<UserType>
     follow: (id: string) => void
@@ -61,19 +59,17 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
             )
     }
 
-
     render() {
-
         return (
             <UsersFC
-                pageSize = {this.props.pageSize}
-        count = {this.props.count}
-        currentPage = {this.props.currentPage}
-        onPageChanged = {this.onPageChanged}
-        usersPage = {this.props.usersPage}
-        follow = {this.follow}
-        />
-    )
+                pageSize={this.props.pageSize}
+                count={this.props.count}
+                currentPage={this.props.currentPage}
+                onPageChanged={this.onPageChanged}
+                usersPage={this.props.usersPage}
+                follow={this.follow}
+            />
+        )
     }
 }
 
