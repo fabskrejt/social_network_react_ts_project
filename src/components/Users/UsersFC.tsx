@@ -3,7 +3,7 @@ import style from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
 
 
-type UsersFCPropsType = {
+export type UsersFCPropsType = {
     currentPage: number
     onPageChanged: (pageNumber: number) => void
     usersPage: Array<UserType>
