@@ -1,17 +1,42 @@
 import React from "react";
-import pStyle from './Profile.module.css'
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {default as axios} from "axios";
+import {connect} from "react-redux";
+import {appStateType} from "../../redux/store";
+import {Dispatch} from "redux";
+import Profile from "./Profile";
 
 
-const ProfileContainer = () => {
-    return (
-        <main className={pStyle.main}>
-            <ProfileInfo userName={'Vovchick'} birthday={'31.10.1992'} city={'Rostov-on-Don'} education={'TPU'}
-                         site={'I have not'}/>
-            <MyPostsContainer/>
-        </main>
-    )
+export class ProfileAPIContainer extends React.Component<any, any> {
+    componentDidMount() {
+        //  this.props.isFetchingToggle(true)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+            .then((response) => {
+                    // this.setUsers(response.data.items)
+                    // this.props.isFetchingToggle(false)
+                }
+            )
+    }
+
+    render() {
+        return (
+            <Profile/>
+        )
+    }
 }
 
-export default ProfileContainer
+const mapStateToProps = (state: appStateType) => {
+    return {
+        profile: state.profilePage.profile
+
+    }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        setUserProfile:
+    }
+}
+
+export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileAPIContainer)
+
+export default ProfileAPIContainer
