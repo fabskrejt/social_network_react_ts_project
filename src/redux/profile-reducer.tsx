@@ -19,11 +19,12 @@ const initialState = {
         {id: v1(), postText: 'How are you?', like: 5},
         {id: v1(), postText: 'What are you do?', like: 25},
     ] as Array<PostsDataType>,
-    profile: null
+    profile: {}
 }
 
 type InitialStateType = typeof initialState
 export const profileReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
+
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsDataType = {id: v1(), postText: action.value, like: 10}

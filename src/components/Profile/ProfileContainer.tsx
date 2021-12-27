@@ -5,7 +5,6 @@ import {appStateType} from "../../redux/store";
 import {Dispatch} from "redux";
 import Profile from "./Profile";
 import {setUserProfile} from "../../redux/profile-reducer";
-import {setUsersAC, UserType} from "../../redux/users-reducer";
 
 type ProfileAPIContainerPropsType = {
     setUserProfile:(profile:any)=>void
@@ -16,15 +15,16 @@ export class ProfileAPIContainer extends React.Component<ProfileAPIContainerProp
         //  this.props.isFetchingToggle(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then((response) => {
-                    this.props.setUserProfile(response.data.items)
+                    this.props.setUserProfile(response.data)
                     // this.props.isFetchingToggle(false)
                 }
             )
     }
 
     render() {
+        debugger
         return (
-            <Profile/>
+            <Profile {...this.props}/>
         )
     }
 }
