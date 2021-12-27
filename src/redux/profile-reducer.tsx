@@ -1,4 +1,3 @@
-import {AddMessageActionType, AddPostActionType} from "./state";
 import {v1} from "uuid";
 
 const ADD_POST = 'ADD-POST';
@@ -28,23 +27,27 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsDataType = {id: v1(), postText: action.value, like: 10}
-            return {...state, postsData: [newPost,...state.postsData]}
+            return {...state, postsData: [newPost, ...state.postsData]}
         case SET_USER_PROFILE:
+            return {...state, profile: action.profile}
     }
     return state
 }
 
+export type ActionTypes = AddPostActionType | setUserProfileType
 
-export type ActionTypes = AddMessageActionType | AddPostActionType
+type AddPostActionType = ReturnType<typeof addPostAC>
+export const addPostAC = (value: any) => {
+    return {
+        type: ADD_POST,
+        value,
+    } as const
+}
 
-export const addPostAC = (postChangeValue: string): ActionTypes => ({
-    type: ADD_POST,
-    value: postChangeValue,
-})
-
-export const setUserProfile = (profile:) => {
-    return{
+export type setUserProfileType = ReturnType<typeof setUserProfile>
+export const setUserProfile = (profile: any) => {
+    return {
         type: SET_USER_PROFILE,
         profile,
-    }
+    } as const
 }
