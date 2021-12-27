@@ -19,7 +19,12 @@ const initialState = {
         {id: v1(), postText: 'How are you?', like: 5},
         {id: v1(), postText: 'What are you do?', like: 25},
     ] as Array<PostsDataType>,
-    profile: {}
+    profile: {
+        photos:{
+            'small': ' ',
+            'large': ' '
+        }
+    }
 }
 
 type InitialStateType = typeof initialState
