@@ -58,6 +58,7 @@ export class UsersC extends React.Component<UsersPropsType, InitialUsersStateTyp
                 onPageChanged={this.onPageChanged}
                 usersPage={this.props.usersPage}
                 follow={this.follow}
+                unFollow={this.follow}
             />
         )
     }

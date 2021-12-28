@@ -9,6 +9,7 @@ export type UsersFCPropsType = {
     onPageChanged: (pageNumber: number) => void
     usersPage: Array<UserType>
     follow: (id: string) => void
+    unFollow: (id: string) => void
     pageSize: number
     count: number
 }
@@ -34,7 +35,13 @@ export const UsersFC = (props: UsersFCPropsType) => {
                         <div className={style.userAva}>
                             <img
                                 src={i.photos.small === null ? 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg' : i.photos.small}/>
-                            <span onClick={() => props.follow(i.id)}>{i.followed ? 'Unfollow' : 'Follow'}</span>
+
+                            {i.followed ?
+                                <span onClick={() => props.unFollow(i.id)}>Unfollow</span> :
+                                <span onClick={() => props.follow(i.id)}>Follow</span>
+                            }
+
+                            {/*<span onClick={() => props.follow(i.id)}>{i.followed ? 'Unfollow' : 'Follow'}</span>*/}
                         </div>
                         <div className={style.userInfo}>
                             <span>{i.name}</span>

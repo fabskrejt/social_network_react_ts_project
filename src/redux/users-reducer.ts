@@ -35,7 +35,9 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
 
     switch (action.type) {
         case 'FOLLOW':
-            return {...state, users: state.users.map(i => i.id === action.id ? {...i, followed: !i.followed} : i)}
+            return {...state, users: state.users.map(i => i.id === action.id ? {...i, followed: true} : i)}
+        case 'UNFOLLOW':
+            return {...state, users: state.users.map(i => i.id === action.id ? {...i, followed: false} : i)}
         case "SET-USERS":
             return {...state, users: action.users}
         case 'CHANGE-CURRENT-PAGE':
@@ -51,13 +53,21 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
 
 
 type UserReducerActionType =
-    FollowACType | SetUsersACType | changeCurrentPageACType | setCountACType | isFetchingType
+    FollowACType | SetUsersACType | changeCurrentPageACType | setCountACType | isFetchingType | unFollowAC
 
 type FollowACType = ReturnType<typeof followAC>
 
 export const followAC = (id: string) => {
     return {
         type: 'FOLLOW',
+        id
+    } as const
+}
+
+type unFollowAC = ReturnType<typeof unFollowAC>
+export const unFollowAC = (id: string) => {
+    return {
+        type: 'UNFOLLOW',
         id
     } as const
 }

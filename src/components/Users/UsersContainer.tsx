@@ -4,7 +4,7 @@ import {
     InitialUsersStateType, isFetching,
     setCountAC,
     setCurrentPageAC,
-    setUsersAC,
+    setUsersAC, unFollowAC,
     UserType
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
@@ -18,6 +18,7 @@ import {Preloader} from "../common/Preloader/Preloader";
 type UsersPropsType = {
     usersPage: Array<UserType>
     follow: (id: string) => void
+    unFollow: (id: string) => void
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (currentPage: number) => void
     setCount: (Count: number) => void
@@ -53,6 +54,9 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
     follow = (id: string) => {
         this.props.follow(id)
     }
+    unFollow = (id: string) => {
+        this.props.unFollow(id)
+    }
     setUsers = (users: Array<UserType>) => {
         this.props.setUsers(users)
     }
@@ -82,6 +86,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
                     onPageChanged={this.onPageChanged}
                     usersPage={this.props.usersPage}
                     follow={this.follow}
+                    unFollow={this.unFollow}
                 />
 {/*                {this.props.isFetching
                     ? <Preloader/>
@@ -114,6 +119,7 @@ const mapStateToProps = (state: appStateType) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         follow: (id: string) => dispatch(followAC(id)),
+        unFollow: (id: string) => dispatch(unFollowAC(id)),
         setUsers: (users: Array<UserType>) => dispatch(setUsersAC(users)),
         setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),
         setCount: (count: number) => dispatch(setCountAC(count)),
