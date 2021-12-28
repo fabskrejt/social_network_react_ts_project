@@ -20,12 +20,29 @@ const initialState = {
         {id: v1(), postText: 'What are you do?', like: 25},
     ] as Array<PostsDataType>,
     profile: {
-        photos:{
-            'small': ' ',
-            'large': ' '
+        "aboutMe": "",
+        "contacts":  {
+            "facebook": "",
+            "website": null,
+            "vk": "",
+            "twitter": '',
+            "instagram": '',
+            "youtube": null,
+            "github": '',
+            "mainLink": null,
+        },
+        "lookingForAJob": true,
+        "lookingForAJobDescription": '',
+        "fullName": '',
+        "userId": '',
+        "photos": {
+            "small": '',
+            "large": '',
         }
     }
 }
+
+
 
 type InitialStateType = typeof initialState
 export const profileReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
