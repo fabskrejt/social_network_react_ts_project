@@ -5,15 +5,20 @@ import {appStateType} from "../../redux/store";
 import {Dispatch} from "redux";
 import Profile from "./Profile";
 import {setUserProfile} from "../../redux/profile-reducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
+/*
 type ProfileAPIContainerPropsType = {
-    setUserProfile:(profile:any)=>void
+    setUserProfile: (profile: any) => void
 }
+*/
 
-export class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType, any> {
+class ProfileContainer extends React.Component<PropsType, any> {
+
     componentDidMount() {
+        const userId = this.props.match.params.userId
         //  this.props.isFetchingToggle(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then((response) => {
                     this.props.setUserProfile(response.data)
                     // this.props.isFetchingToggle(false)
@@ -22,27 +27,39 @@ export class ProfileAPIContainer extends React.Component<ProfileAPIContainerProp
     }
 
     render() {
-        debugger
         return (
             <Profile {...this.props}/>
         )
     }
 }
 
-const mapStateToProps = (state: appStateType) => {
+type PathParamsType ={
+    userId: string
+}
+
+type MapStateToPropsType = {
+    profile: any
+}
+type MapDispatchToPropsType = {
+    setUserProfile: (profile: any) => void
+}
+
+type OwnPropsType = MapDispatchToPropsType & MapStateToPropsType
+type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
+
+const mapStateToProps = (state: appStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile
 
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         setUserProfile: (profile: any) => dispatch(setUserProfile(profile)),
         //setUsers: (users: Array<UserType>) => dispatch(setUsersAC(users)),
     }
 }
 
-export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileAPIContainer)
-
-export default ProfileAPIContainer
+const withRouterProfileContainer = withRouter(ProfileContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouterProfileContainer)
