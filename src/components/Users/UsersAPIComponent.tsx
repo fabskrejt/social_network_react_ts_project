@@ -22,7 +22,7 @@ type UsersPropsType = {
         "API-KEY": "92d6c8c0-8f2a-49e6-90f5-89b9382df096"
     }
 });*/
-export class UsersC extends React.Component<UsersPropsType, InitialUsersStateType> {
+ class UsersC extends React.Component<UsersPropsType, InitialUsersStateType> {
 
 //Lifecycle
     componentDidMount() {

@@ -46,7 +46,7 @@ export const UsersFC = (props: UsersFCPropsType) => {
                                         },
                                     })
                                         .then((response) => {
-                                                if (response.data === 0) {
+                                                if (response.data.resultCode === 0) {
                                                     props.unFollow(i.id)
                                                 }
                                             }
@@ -61,7 +61,7 @@ export const UsersFC = (props: UsersFCPropsType) => {
                                         },
                                     })
                                         .then((response) => {
-                                            if (response.data === 0) {
+                                            if (response.data.resultCode === 0) {
                                                 props.follow(i.id)
                                             }
                                         })

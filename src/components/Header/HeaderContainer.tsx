@@ -3,7 +3,7 @@ import Header from "./Header";
 import {default as axios} from "axios";
 import {appStateType} from "../../redux/store";
 import {Dispatch} from "redux";
-import {setUserData} from "../../redux/auth-reducer";
+import {setUserDataAC} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 
 class HeaderContainer extends React.Component<any, any> {
@@ -41,7 +41,7 @@ const mapSateToProps = (state: appStateType) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        setUserData: (id: string, email: string, login: string) => dispatch(setUserData(id, email, login))
+        setUserData: (id: string, email: string, login: string) => dispatch(setUserDataAC(id, email, login))
     }
 }
 export default connect(mapSateToProps, mapDispatchToProps)(HeaderContainer)

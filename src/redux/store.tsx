@@ -8,7 +8,7 @@ let rootReducer = combineReducers({
     messagesPage: dialogReducer,
     profilePage: profileReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
 })
 
 export type appStateType = ReturnType<typeof rootReducer>

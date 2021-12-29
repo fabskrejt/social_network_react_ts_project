@@ -17,8 +17,6 @@ const Header = (props:HeaderPropsType) => {
             {
                 props.isAuth ? <div>{props.login}</div>: <div>Login</div>
             }
-
-
         </header>
     )
 }
