@@ -31,8 +31,7 @@ const initialState: InitialUsersStateType = {
     isFetching: false,
 }
 
-export const usersReducer = (state = initialState, action: UserReducerActionType) => {
-
+export const usersReducer = (state = initialState, action: UserReducerActionType):InitialUsersStateType  => {debugger
     switch (action.type) {
         case 'FOLLOW':
             return {...state, users: state.users.map(i => i.id === action.id ? {...i, followed: true} : i)}

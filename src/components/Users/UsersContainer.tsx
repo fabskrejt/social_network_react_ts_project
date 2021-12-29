@@ -41,7 +41,9 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
 //Lifecycle
     componentDidMount() {
         this.props.isFetchingToggle(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`,{
+            withCredentials: true
+        })
             .then((response) => {
                     this.setUsers(response.data.items)
                     this.props.isFetchingToggle(false)
@@ -64,7 +66,9 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.isFetchingToggle(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{
+            withCredentials: true
+        })
             .then((response) => {
                     this.setUsers(response.data.items)
                     this.props.setCount(response.data.totalCount)
@@ -85,8 +89,8 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
                     currentPage={this.props.currentPage}
                     onPageChanged={this.onPageChanged}
                     usersPage={this.props.usersPage}
-                    follow={this.follow}
-                    unFollow={this.unFollow}
+                    follow={this.props.follow}
+                    unFollow={this.props.unFollow}
                 />
 {/*                {this.props.isFetching
                     ? <Preloader/>

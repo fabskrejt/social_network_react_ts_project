@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
 import {Preloader} from "../common/Preloader/Preloader";
+import {default as axios} from "axios";
 
 
 export type UsersFCPropsType = {
@@ -37,11 +38,36 @@ export const UsersFC = (props: UsersFCPropsType) => {
                                 src={i.photos.small === null ? 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg' : i.photos.small}/>
 
                             {i.followed ?
-                                <span onClick={() => props.unFollow(i.id)}>Unfollow</span> :
-                                <span onClick={() => props.follow(i.id)}>Follow</span>
+                                <span onClick={() => {
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`, {
+                                        withCredentials: true,
+                                        headers: {
+                                            'API-KEY': '3938ec03-652e-45e2-8e89-4b9560fc50c6',
+                                        },
+                                    })
+                                        .then((response) => {
+                                                if (response.data === 0) {
+                                                    props.unFollow(i.id)
+                                                }
+                                            }
+                                        )
+                                }
+                                }>Unfollow</span> :
+                                <span onClick={() => {
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {
+                                            'API-KEY': '3938ec03-652e-45e2-8e89-4b9560fc50c6',
+                                        },
+                                    })
+                                        .then((response) => {
+                                            if (response.data === 0) {
+                                                props.follow(i.id)
+                                            }
+                                        })
+                                }
+                                }>Follow</span>
                             }
-
-                            {/*<span onClick={() => props.follow(i.id)}>{i.followed ? 'Unfollow' : 'Follow'}</span>*/}
                         </div>
                         <div className={style.userInfo}>
                             <span>{i.name}</span>
