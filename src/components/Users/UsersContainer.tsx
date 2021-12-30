@@ -1,19 +1,20 @@
 import {appStateType} from "../../redux/store";
 import {
     followAC,
-    InitialUsersStateType, isFetching,
+    InitialUsersStateType,
+    isFetching,
     setCountAC,
     setCurrentPageAC,
-    setUsersAC, unFollowAC,
+    setUsersAC,
+    unFollowAC,
     UserType
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import React from "react";
-import {default as axios} from "axios";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
-import {getUser} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 
 type UsersPropsType = {
@@ -30,13 +31,6 @@ type UsersPropsType = {
     isFetchingToggle: (value: boolean) => void
 }
 
-/*export const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    headers:     {
-        "API-KEY": "92d6c8c0-8f2a-49e6-90f5-89b9382df096"
-    }
-});*/
 export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUsersStateType> {
 
 //Lifecycle
@@ -45,11 +39,11 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
         /*axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`,{
             withCredentials: true
         })*/
-            getUser(this.props.pageSize, this.props.currentPage).then((response) => {
-                    this.setUsers(response.data.items)
-                    this.props.isFetchingToggle(false)
-                }
-            )
+        usersAPI.getUser(this.props.pageSize, this.props.currentPage).then((data) => {
+                this.setUsers(data.items)
+                this.props.isFetchingToggle(false)
+            }
+        )
     }
 
     //Callback
@@ -66,12 +60,10 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.isFetchingToggle(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{
-            withCredentials: true
-        })
-            .then((response) => {
-                    this.setUsers(response.data.items)
-                    this.props.setCount(response.data.totalCount)
+        usersAPI.getUser(this.props.pageSize, pageNumber)
+            .then((data) => {
+                    this.setUsers(data.items)
+                    this.props.setCount(data.totalCount)
                     this.props.isFetchingToggle(false)
                 }
             )
@@ -82,7 +74,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
             <div>
 
                 {this.props.isFetching
-                    && <Preloader/>}
+                && <Preloader/>}
                 <UsersFC
                     pageSize={this.props.pageSize}
                     count={this.props.count}
@@ -92,7 +84,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
                     follow={this.props.follow}
                     unFollow={this.props.unFollow}
                 />
-{/*                {this.props.isFetching
+                {/*                {this.props.isFetching
                     ? <Preloader/>
                     : <UsersFC
                         pageSize={this.props.pageSize}
