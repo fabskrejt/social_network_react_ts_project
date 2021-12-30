@@ -13,6 +13,7 @@ import React from "react";
 import {default as axios} from "axios";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
+import {getUser} from "../../api/api";
 
 
 type UsersPropsType = {
@@ -41,10 +42,10 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
 //Lifecycle
     componentDidMount() {
         this.props.isFetchingToggle(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`,{
+        /*axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`,{
             withCredentials: true
-        })
-            .then((response) => {
+        })*/
+            getUser(this.props.pageSize ).then((response) => {
                     this.setUsers(response.data.items)
                     this.props.isFetchingToggle(false)
                 }
