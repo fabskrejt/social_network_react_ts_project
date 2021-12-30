@@ -45,12 +45,11 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
         /*axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`,{
             withCredentials: true
         })*/
-            getUser(this.props.pageSize ).then((response) => {
+            getUser(this.props.pageSize, this.props.currentPage).then((response) => {
                     this.setUsers(response.data.items)
                     this.props.isFetchingToggle(false)
                 }
             )
-
     }
 
     //Callback
