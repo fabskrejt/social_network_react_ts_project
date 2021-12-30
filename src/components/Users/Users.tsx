@@ -5,13 +5,13 @@ import style from './Users.module.css'
 
 type UsersPropsType = {
     usersPage: Array<UserType>
-    follow: (id: string) => void
+    follow: (id: number) => void
     setUsers: (users: Array<UserType>) => void
 }
 
 export const Users = (props: UsersPropsType) => {
 
-    const follow = (id: string) => {
+    const follow = (id: number) => {
         props.follow(id)
     }
     const setUsers = (users: Array<UserType>) => {

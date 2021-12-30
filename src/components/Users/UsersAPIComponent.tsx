@@ -22,7 +22,7 @@ type UsersPropsType = {
         "API-KEY": "92d6c8c0-8f2a-49e6-90f5-89b9382df096"
     }
 });*/
- class UsersC extends React.Component<UsersPropsType, InitialUsersStateType> {
+ class UsersC extends React.Component<any, InitialUsersStateType> {
 
 //Lifecycle
     componentDidMount() {
@@ -51,7 +51,8 @@ type UsersPropsType = {
 
     render() {
         return (
-            <UsersFC
+            <div/>
+/*            <UsersFC
                 pageSize={this.props.pageSize}
                 count={this.props.count}
                 currentPage={this.props.currentPage}
@@ -59,7 +60,8 @@ type UsersPropsType = {
                 usersPage={this.props.usersPage}
                 follow={this.follow}
                 unFollow={this.follow}
-            />
+
+            />*/
         )
     }
 }

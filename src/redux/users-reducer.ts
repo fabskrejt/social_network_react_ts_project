@@ -1,11 +1,13 @@
 import {v1} from "uuid";
 
+const FOLLOWING_IN_PROGRESS = 'FOLLOWING-IN-PROGRESS'
+
 type PhotosType = {
     small: string
     large: string
 }
 export type UserType = {
-    id: string
+    id: number
     name: string
     city: string
     education: string
@@ -21,6 +23,7 @@ export type InitialUsersStateType = {
     count: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 
 }
 const initialState: InitialUsersStateType = {
@@ -29,9 +32,10 @@ const initialState: InitialUsersStateType = {
     count: 10,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: []
 }
 
-export const usersReducer = (state = initialState, action: UserReducerActionType):InitialUsersStateType  => {debugger
+export const usersReducer = (state = initialState, action: UserReducerActionType): InitialUsersStateType => {
     switch (action.type) {
         case 'FOLLOW':
             return {...state, users: state.users.map(i => i.id === action.id ? {...i, followed: true} : i)}
@@ -45,6 +49,12 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
             return {...state, count: action.count}
         case "TOGGLE-FETCHING":
             return {...state, isFetching: action.value}
+        case FOLLOWING_IN_PROGRESS:
+            return {
+                ...state, followingInProgress: action.status
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
         default:
             return state
     }
@@ -52,19 +62,33 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
 
 
 type UserReducerActionType =
-    FollowACType | SetUsersACType | changeCurrentPageACType | setCountACType | isFetchingType | unFollowAC
+    FollowACType
+    | SetUsersACType
+    | changeCurrentPageACType
+    | setCountACType
+    | isFetchingType
+    | unFollowAC
+    | followingToUserInProgress
 
 type FollowACType = ReturnType<typeof followAC>
 
-export const followAC = (id: string) => {
+export const followAC = (id: number) => {
     return {
         type: 'FOLLOW',
         id
     } as const
 }
 
+type followingToUserInProgress = ReturnType<typeof followingToUserInProgress>
+export const followingToUserInProgress = (status: boolean, userId: number) => {
+    return {
+        type: FOLLOWING_IN_PROGRESS,
+        status,
+        userId,
+    } as const
+}
 type unFollowAC = ReturnType<typeof unFollowAC>
-export const unFollowAC = (id: string) => {
+export const unFollowAC = (id: number) => {
     return {
         type: 'UNFOLLOW',
         id

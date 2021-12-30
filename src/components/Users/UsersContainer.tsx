@@ -1,6 +1,6 @@
 import {appStateType} from "../../redux/store";
 import {
-    followAC,
+    followAC, followingToUserInProgress,
     InitialUsersStateType,
     isFetching,
     setCountAC,
@@ -19,8 +19,8 @@ import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     usersPage: Array<UserType>
-    follow: (id: string) => void
-    unFollow: (id: string) => void
+    follow: (id: number) => void
+    unFollow: (id: number) => void
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (currentPage: number) => void
     setCount: (Count: number) => void
@@ -29,6 +29,8 @@ type UsersPropsType = {
     currentPage: number
     isFetching: boolean
     isFetchingToggle: (value: boolean) => void
+    followingInProgress: number[]
+    followingToUserInProgress: (status: boolean, userId: number) => void
 }
 
 export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUsersStateType> {
@@ -47,10 +49,10 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
     }
 
     //Callback
-    follow = (id: string) => {
+    follow = (id: number) => {
         this.props.follow(id)
     }
-    unFollow = (id: string) => {
+    unFollow = (id: number) => {
         this.props.unFollow(id)
     }
     setUsers = (users: Array<UserType>) => {
@@ -83,6 +85,8 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
                     usersPage={this.props.usersPage}
                     follow={this.props.follow}
                     unFollow={this.props.unFollow}
+                    followingInProgress={this.props.followingInProgress}
+                    followingToUserInProgress={this.props.followingToUserInProgress}
                 />
                 {/*                {this.props.isFetching
                     ? <Preloader/>
@@ -107,19 +111,20 @@ const mapStateToProps = (state: appStateType) => {
         pageSize: state.usersPage.pageSize,
         count: state.usersPage.count,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
-
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        follow: (id: string) => dispatch(followAC(id)),
-        unFollow: (id: string) => dispatch(unFollowAC(id)),
+        follow: (id: number) => dispatch(followAC(id)),
+        unFollow: (id: number) => dispatch(unFollowAC(id)),
         setUsers: (users: Array<UserType>) => dispatch(setUsersAC(users)),
         setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),
         setCount: (count: number) => dispatch(setCountAC(count)),
-        isFetchingToggle: (value: boolean) => dispatch(isFetching(value))
+        isFetchingToggle: (value: boolean) => dispatch(isFetching(value)),
+        followingToUserInProgress: (status: boolean, userId: number) => dispatch(followingToUserInProgress(status, userId))
     }
 }
 
