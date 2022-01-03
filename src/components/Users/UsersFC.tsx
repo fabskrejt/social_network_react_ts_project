@@ -3,6 +3,7 @@ import style from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
 import {Preloader} from "../common/Preloader/Preloader";
 import {default as axios} from "axios";
+import {usersAPI} from "../../api/api";
 
 
 export type UsersFCPropsType = {
@@ -42,14 +43,9 @@ export const UsersFC = (props: UsersFCPropsType) => {
                             {i.followed ?
                                 <button disabled={props.followingInProgress.some(id => id === i.id)} onClick={() => {
                                     props.followingToUserInProgress(true, i.id) //disabling button
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`, {
-                                        withCredentials: true,
-                                        headers: {
-                                            'API-KEY': '3938ec03-652e-45e2-8e89-4b9560fc50c6',
-                                        },
-                                    })
-                                        .then((response) => {
-                                                if (response.data.resultCode === 0) {
+                                    usersAPI.unfollowUser(i.id)
+                                        .then((data) => {
+                                                if (data.resultCode === 0) {
                                                     props.unFollow(i.id)
                                                     props.followingToUserInProgress(false, i.id)  //unDisabling button
                                                 }

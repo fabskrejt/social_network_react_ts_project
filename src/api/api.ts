@@ -15,6 +15,10 @@ export const usersAPI = {
         return instance.get(`users?page=${pageNumber}&count=${pageSize}`,)
             .then(response => response.data)
     },
+    unfollowUser(userId: number) {
+        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+            .then(response => response.data)
+    }
 }
 
 /*export const getUser = (pageSize:number, pageNumber:number)=> {

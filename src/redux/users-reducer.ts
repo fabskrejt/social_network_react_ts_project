@@ -65,15 +65,14 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
 export type UserReducerActionType =
     FollowACType
     | SetUsersACType
-    | changeCurrentPageACType
-    | setCountACType
-    | isFetchingType
-    | unFollowAC
-    | followingToUserInProgress
+    | ChangeCurrentPageACType
+    | SetCountACType
+    | IsFetchingType
+    | UnFollowAC
+    | FollowingToUserInProgress
 
 
 type FollowACType = ReturnType<typeof followAC>
-
 export const followAC = (id: number) => {
     return {
         type: 'FOLLOW',
@@ -81,7 +80,7 @@ export const followAC = (id: number) => {
     } as const
 }
 
-type followingToUserInProgress = ReturnType<typeof followingToUserInProgress>
+type FollowingToUserInProgress = ReturnType<typeof followingToUserInProgress>
 export const followingToUserInProgress = (status: boolean, userId: number) => {
     return {
         type: FOLLOWING_IN_PROGRESS,
@@ -90,7 +89,7 @@ export const followingToUserInProgress = (status: boolean, userId: number) => {
     } as const
 }
 
-type unFollowAC = ReturnType<typeof unFollowAC>
+type UnFollowAC = ReturnType<typeof unFollowAC>
 export const unFollowAC = (id: number) => {
     return {
         type: 'UNFOLLOW',
@@ -106,7 +105,7 @@ export const setUsersAC = (users: Array<UserType>) => {
     } as const
 }
 
-type changeCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+type ChangeCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 export const setCurrentPageAC = (currentPage: number) => {
     return {
         type: 'CHANGE-CURRENT-PAGE',
@@ -114,7 +113,7 @@ export const setCurrentPageAC = (currentPage: number) => {
     } as const
 }
 
-type setCountACType = ReturnType<typeof setCountAC>
+type SetCountACType = ReturnType<typeof setCountAC>
 export const setCountAC = (count: number) => {
     return {
         type: 'SET-COUNT',
@@ -122,15 +121,13 @@ export const setCountAC = (count: number) => {
     } as const
 }
 
-type isFetchingType = ReturnType<typeof isFetching>
+type IsFetchingType = ReturnType<typeof isFetching>
 export const isFetching = (value: boolean) => {
     return {
         type: 'TOGGLE-FETCHING',
         value,
     } as const
 }
-
-
 
 export const getUsersThunkCreator = (pageSize: number, currentPage: number) => {
     return (dispatch: Dispatch) => {
@@ -142,6 +139,3 @@ export const getUsersThunkCreator = (pageSize: number, currentPage: number) => {
         )
     }
 }
-
-
-export type GetUsersThunkCreator = ReturnType<typeof getUsersThunkCreator>

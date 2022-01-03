@@ -1,21 +1,23 @@
 import {appStateType} from "../../redux/store";
 import {
-    followAC, followingToUserInProgress, GetUsersThunkCreator, getUsersThunkCreator,
+    followAC,
+    followingToUserInProgress,
+    getUsersThunkCreator,
     InitialUsersStateType,
     isFetching,
     setCountAC,
     setCurrentPageAC,
     setUsersAC,
-    unFollowAC, UserReducerActionType,
+    unFollowAC,
+    UserReducerActionType,
     UserType
 } from "../../redux/users-reducer";
-import {Action, AnyAction, Dispatch} from "redux";
 import {connect} from "react-redux";
 import React from "react";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
-import {ThunkAction, ThunkDispatch} from 'redux-thunk'
+import {ThunkDispatch} from 'redux-thunk'
 
 type UsersPropsType = {
     usersPage: Array<UserType>
@@ -31,7 +33,7 @@ type UsersPropsType = {
     isFetchingToggle: (value: boolean) => void
     followingInProgress: number[]
     followingToUserInProgress: (status: boolean, userId: number) => void
-    getUsers: (pageSize: number, currentPage: number)=> void
+    getUsers: (pageSize: number, currentPage: number) => void
 }
 
 export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUsersStateType> {
@@ -121,7 +123,7 @@ const mapStateToProps = (state: appStateType) => {
 }
 //type ThunkType = ThunkAction<void, appStateType, unknown, UserReducerActionType>
 
-const mapDispatchToProps = (dispatch:ThunkDispatch<appStateType,unknown, UserReducerActionType> ) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserReducerActionType>) => {
     return {
         follow: (id: number) => dispatch(followAC(id)),
         unFollow: (id: number) => dispatch(unFollowAC(id)),
