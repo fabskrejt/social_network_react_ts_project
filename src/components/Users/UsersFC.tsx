@@ -1,9 +1,6 @@
 import React from "react";
 import style from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
-import {Preloader} from "../common/Preloader/Preloader";
-import {default as axios} from "axios";
-import {usersAPI} from "../../api/api";
 
 
 export type UsersFCPropsType = {
@@ -42,26 +39,11 @@ export const UsersFC = (props: UsersFCPropsType) => {
 
                             {i.followed ?
                                 <button disabled={props.followingInProgress.some(id => id === i.id)} onClick={() => {
-                                    props.followingToUserInProgress(true, i.id) //disabling button
-                                    usersAPI.unfollowUser(i.id)
-                                        .then((data) => {
-                                                if (data.resultCode === 0) {
-                                                    props.unFollow(i.id)
-                                                    props.followingToUserInProgress(false, i.id)  //unDisabling button
-                                                }
-                                            }
-                                        )
+                                    props.unFollow(i.id) //Thunk callback
                                 }
                                 }>Unfollow</button> :
                                 <button disabled={props.followingInProgress.some(id => id === i.id)} onClick={() => {
-                                    props.followingToUserInProgress(true, i.id)
-                                   usersAPI.followUser(i.id)
-                                        .then((data) => {
-                                            if (data.resultCode === 0) {
-                                                props.follow(i.id)
-                                                props.followingToUserInProgress(false, i.id) //unDisabling button
-                                            }
-                                        })
+                                    props.follow(i.id) //Thunk callback
                                 }
                                 }>Follow</button>
                             }

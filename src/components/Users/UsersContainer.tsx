@@ -1,14 +1,14 @@
 import {appStateType} from "../../redux/store";
 import {
     followAC,
-    followingToUserInProgress,
+    followingToUserInProgress, followUserThunkCreator,
     getUsersThunkCreator,
     InitialUsersStateType,
     isFetching,
     setCountAC,
     setCurrentPageAC,
     setUsersAC,
-    unFollowAC,
+    unFollowAC, unfollowUserThunkCreator,
     UserReducerActionType,
     UserType
 } from "../../redux/users-reducer";
@@ -125,14 +125,15 @@ const mapStateToProps = (state: appStateType) => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserReducerActionType>) => {
     return {
-        follow: (id: number) => dispatch(followAC(id)),
-        unFollow: (id: number) => dispatch(unFollowAC(id)),
         setUsers: (users: Array<UserType>) => dispatch(setUsersAC(users)),
         setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),
         setCount: (count: number) => dispatch(setCountAC(count)),
         isFetchingToggle: (value: boolean) => dispatch(isFetching(value)),
         followingToUserInProgress: (status: boolean, userId: number) => dispatch(followingToUserInProgress(status, userId)),
-        getUsers: (pageSize: number, currentPage: number) => dispatch(getUsersThunkCreator(pageSize, currentPage))
+        //Thunk
+        getUsers: (pageSize: number, currentPage: number) => dispatch(getUsersThunkCreator(pageSize, currentPage)),
+        follow: (userId: number) => dispatch(followUserThunkCreator(userId)),
+        unFollow: (userId: number) => dispatch(unfollowUserThunkCreator(userId)),
     }
 }
 
