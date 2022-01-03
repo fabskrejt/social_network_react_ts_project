@@ -35,7 +35,8 @@ export const UsersFC = (props: UsersFCPropsType) => {
                     <div key={i.id} className={style.user}>
                         <div className={style.userAva}>
                             <img
-                                src={i.photos.small === null ? 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg' : i.photos.small}/>
+                                src={i.photos.small === null ? 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg' : i.photos.small}
+                            />
 
                             {i.followed ?
                                 <button disabled={props.followingInProgress.some(id => id === i.id)} onClick={() => {

@@ -1,29 +1,17 @@
 import React from "react";
-import {default as axios} from "axios";
 import {connect} from "react-redux";
 import {appStateType} from "../../redux/store";
-import {Dispatch} from "redux";
 import Profile from "./Profile";
-import {setUserProfile} from "../../redux/profile-reducer";
+import {getUserProfileThunkCreator} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-
-/*
-type ProfileAPIContainerPropsType = {
-    setUserProfile: (profile: any) => void
-}
-*/
+import {ThunkDispatch} from "redux-thunk";
+import {UserReducerActionType} from "../../redux/users-reducer";
 
 class ProfileContainer extends React.Component<PropsType, any> {
 
     componentDidMount() {
         const userId = this.props.match.params.userId
-        //  this.props.isFetchingToggle(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then((response) => {
-                    this.props.setUserProfile(response.data)
-                    // this.props.isFetchingToggle(false)
-                }
-            )
+        this.props.setUserProfile(userId)
     }
 
     render() {
@@ -33,7 +21,7 @@ class ProfileContainer extends React.Component<PropsType, any> {
     }
 }
 
-type ProfileType = {
+export type ProfileType = {
 
     "aboutMe": string
     "contacts": {
@@ -49,7 +37,7 @@ type ProfileType = {
     "lookingForAJob": boolean,
     "lookingForAJobDescription": string
     "fullName": string
-    "userId": string,
+    "userId": number | null,
     "photos": {
         "small": string
         "large": string
@@ -57,7 +45,7 @@ type ProfileType = {
 }
 
 type PathParamsType = {
-    userId: string
+    userId: number
 }
 
 type MapStateToPropsType = {
@@ -68,19 +56,18 @@ type MapDispatchToPropsType = {
 }
 
 type OwnPropsType = MapDispatchToPropsType & MapStateToPropsType
+ //@ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 const mapStateToProps = (state: appStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile
-
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserReducerActionType>): MapDispatchToPropsType => {
     return {
-        setUserProfile: (profile: any) => dispatch(setUserProfile(profile)),
-        //setUsers: (users: Array<UserType>) => dispatch(setUsersAC(users)),
+        setUserProfile: (userId: number) => dispatch(getUserProfileThunkCreator(userId)),
     }
 }
 

@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -34,7 +36,7 @@ const initialState = {
         "lookingForAJob": true,
         "lookingForAJobDescription": '',
         "fullName": '',
-        "userId": '',
+        "userId": null,
         "photos": {
             "small": '',
             "large": '',
@@ -73,4 +75,16 @@ export const setUserProfile = (profile: any) => {
         type: SET_USER_PROFILE,
         profile,
     } as const
+}
+
+export const getUserProfileThunkCreator = (userId:number)=>{
+   return (dispatch: Dispatch)=>{
+       //  this.props.isFetchingToggle(true)
+       usersAPI.getProfile(userId)
+           .then((response) => {
+                   dispatch(setUserProfile(response.data))
+                   // this.props.isFetchingToggle(false)
+               }
+           )
+   }
 }

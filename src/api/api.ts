@@ -22,9 +22,17 @@ export const usersAPI = {
     followUser(userId: number) {
         return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
             .then(response => response.data)
+    },
+    getProfile(userId: number) {
+      return  instance.get(`profile/` + userId)
     }
 }
 
+export const authAPI = {
+    me() {
+        return
+    }
+}
 /*export const getUser = (pageSize:number, pageNumber:number)=> {
    return instance.get(`users?page=${pageNumber}&count=${pageSize}`, )
 }*/
