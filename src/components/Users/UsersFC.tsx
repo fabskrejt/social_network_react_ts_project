@@ -55,14 +55,9 @@ export const UsersFC = (props: UsersFCPropsType) => {
                                 }>Unfollow</button> :
                                 <button disabled={props.followingInProgress.some(id => id === i.id)} onClick={() => {
                                     props.followingToUserInProgress(true, i.id)
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`, {}, {
-                                        withCredentials: true,
-                                        headers: {
-                                            'API-KEY': '3938ec03-652e-45e2-8e89-4b9560fc50c6',
-                                        },
-                                    })
-                                        .then((response) => {
-                                            if (response.data.resultCode === 0) {
+                                   usersAPI.followUser(i.id)
+                                        .then((data) => {
+                                            if (data.resultCode === 0) {
                                                 props.follow(i.id)
                                                 props.followingToUserInProgress(false, i.id) //unDisabling button
                                             }

@@ -18,6 +18,10 @@ export const usersAPI = {
     unfollowUser(userId: number) {
         return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
             .then(response => response.data)
+    },
+    followUser(userId: number) {
+        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+            .then(response => response.data)
     }
 }
 
