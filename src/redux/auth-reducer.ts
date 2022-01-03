@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+
 const SET_USER_DATA = 'SET-USER-DATA';
 const initialState = {
     id: null,
@@ -13,9 +16,9 @@ type InitialStateType = {
     login: null | string
     isAuth: boolean
 }
-type ActionTypes = setUserData
+export type AuthReducerActionTypes = setUserData
 
-export const authReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
+export const authReducer = (state: InitialStateType = initialState, action: AuthReducerActionTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {...state, ...action.payload, isAuth: true}
@@ -30,4 +33,18 @@ export const setUserDataAC = (id: string, email: string, login: string) => {
         type: SET_USER_DATA,
         payload: {id, email, login}
     } as const
+}
+
+export const getAuthUserDataThunkCreator = () =>{
+    return (dispatch: Dispatch) =>{
+        authAPI.me()
+            .then((response) => {
+                    if (response.data.resultCode === 0) {
+                        const {id, email, login} = response.data.data
+                        dispatch(setUserDataAC(id, email, login))
+                    }
+                    //this.props.isFetchingToggle(false)
+                }
+            )
+    }
 }

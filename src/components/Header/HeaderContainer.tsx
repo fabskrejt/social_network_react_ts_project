@@ -1,25 +1,14 @@
 import React from "react";
 import Header from "./Header";
-import {default as axios} from "axios";
 import {appStateType} from "../../redux/store";
-import {Dispatch} from "redux";
-import {setUserDataAC} from "../../redux/auth-reducer";
+import {AuthReducerActionTypes, getAuthUserDataThunkCreator} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
+import {ThunkDispatch} from "redux-thunk";
 
 class HeaderContainer extends React.Component<any, any> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0//auth/me`, {
-            withCredentials: true,
-        })
-            .then((response) => {
-                    if (response.data.resultCode === 0) {
-                        const {id, email, login} = response.data.data
-                        this.props.setUserData(id, email, login)
-                    }
-                    //this.props.isFetchingToggle(false)
-                }
-            )
+        this.props.setUserData()
     }
 
     render() {
@@ -29,7 +18,6 @@ class HeaderContainer extends React.Component<any, any> {
     }
 }
 
-
 const mapSateToProps = (state: appStateType) => {
     return {
         login: state.auth.login,
@@ -38,9 +26,10 @@ const mapSateToProps = (state: appStateType) => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, AuthReducerActionTypes>) => {
     return {
-        setUserData: (id: string, email: string, login: string) => dispatch(setUserDataAC(id, email, login))
+        setUserData: () => dispatch(getAuthUserDataThunkCreator())
+
     }
 }
 export default connect(mapSateToProps, mapDispatchToProps)(HeaderContainer)

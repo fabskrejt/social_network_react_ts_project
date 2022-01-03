@@ -1,14 +1,14 @@
 import {appStateType} from "../../redux/store";
 import {
-    followAC,
-    followingToUserInProgress, followUserThunkCreator,
+    followingToUserInProgress,
+    followUserThunkCreator,
     getUsersThunkCreator,
     InitialUsersStateType,
     isFetching,
     setCountAC,
     setCurrentPageAC,
     setUsersAC,
-    unFollowAC, unfollowUserThunkCreator,
+    unfollowUserThunkCreator,
     UserReducerActionType,
     UserType
 } from "../../redux/users-reducer";
@@ -41,16 +41,6 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
 //Lifecycle
     componentDidMount() {
         this.props.getUsers(this.props.pageSize, this.props.currentPage)
-
-        /*        this.props.isFetchingToggle(true)
-                /!*axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`,{
-                    withCredentials: true
-                })*!/
-                usersAPI.getUser(this.props.pageSize, this.props.currentPage).then((data) => {
-                        this.setUsers(data.items)
-                        this.props.isFetchingToggle(false)
-                    }
-                )*/
     }
 
     //Callback

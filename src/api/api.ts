@@ -16,11 +16,11 @@ export const usersAPI = {
             .then(response => response.data)
     },
     unfollowUser(userId: number) {
-        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+        return instance.delete(`follow/${userId}`)
             .then(response => response.data)
     },
     followUser(userId: number) {
-        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+        return instance.post(`follow/${userId}`)
             .then(response => response.data)
     },
     getProfile(userId: number) {
@@ -30,7 +30,7 @@ export const usersAPI = {
 
 export const authAPI = {
     me() {
-        return
+        return instance.get(`auth/me`)
     }
 }
 /*export const getUser = (pageSize:number, pageNumber:number)=> {
