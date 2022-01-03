@@ -1,4 +1,5 @@
-import {v1} from "uuid";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 const FOLLOWING_IN_PROGRESS = 'FOLLOWING-IN-PROGRESS'
 
@@ -61,7 +62,7 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
 }
 
 
-type UserReducerActionType =
+export type UserReducerActionType =
     FollowACType
     | SetUsersACType
     | changeCurrentPageACType
@@ -69,6 +70,7 @@ type UserReducerActionType =
     | isFetchingType
     | unFollowAC
     | followingToUserInProgress
+
 
 type FollowACType = ReturnType<typeof followAC>
 
@@ -87,6 +89,7 @@ export const followingToUserInProgress = (status: boolean, userId: number) => {
         userId,
     } as const
 }
+
 type unFollowAC = ReturnType<typeof unFollowAC>
 export const unFollowAC = (id: number) => {
     return {
@@ -102,6 +105,7 @@ export const setUsersAC = (users: Array<UserType>) => {
         users,
     } as const
 }
+
 type changeCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 export const setCurrentPageAC = (currentPage: number) => {
     return {
@@ -125,3 +129,19 @@ export const isFetching = (value: boolean) => {
         value,
     } as const
 }
+
+
+
+export const getUsersThunkCreator = (pageSize: number, currentPage: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(isFetching(true))
+        usersAPI.getUser(pageSize, currentPage).then((data) => {
+                dispatch(setUsersAC(data.items))
+                dispatch(isFetching(false))
+            }
+        )
+    }
+}
+
+
+export type GetUsersThunkCreator = ReturnType<typeof getUsersThunkCreator>

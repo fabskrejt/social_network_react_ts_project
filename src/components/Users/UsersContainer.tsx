@@ -1,21 +1,21 @@
 import {appStateType} from "../../redux/store";
 import {
-    followAC, followingToUserInProgress,
+    followAC, followingToUserInProgress, GetUsersThunkCreator, getUsersThunkCreator,
     InitialUsersStateType,
     isFetching,
     setCountAC,
     setCurrentPageAC,
     setUsersAC,
-    unFollowAC,
+    unFollowAC, UserReducerActionType,
     UserType
 } from "../../redux/users-reducer";
-import {Dispatch} from "redux";
+import {Action, AnyAction, Dispatch} from "redux";
 import {connect} from "react-redux";
 import React from "react";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
-
+import {ThunkAction, ThunkDispatch} from 'redux-thunk'
 
 type UsersPropsType = {
     usersPage: Array<UserType>
@@ -31,21 +31,24 @@ type UsersPropsType = {
     isFetchingToggle: (value: boolean) => void
     followingInProgress: number[]
     followingToUserInProgress: (status: boolean, userId: number) => void
+    getUsers: (pageSize: number, currentPage: number)=> void
 }
 
 export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUsersStateType> {
 
 //Lifecycle
     componentDidMount() {
-        this.props.isFetchingToggle(true)
-        /*axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`,{
-            withCredentials: true
-        })*/
-        usersAPI.getUser(this.props.pageSize, this.props.currentPage).then((data) => {
-                this.setUsers(data.items)
-                this.props.isFetchingToggle(false)
-            }
-        )
+        this.props.getUsers(this.props.pageSize, this.props.currentPage)
+
+        /*        this.props.isFetchingToggle(true)
+                /!*axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`,{
+                    withCredentials: true
+                })*!/
+                usersAPI.getUser(this.props.pageSize, this.props.currentPage).then((data) => {
+                        this.setUsers(data.items)
+                        this.props.isFetchingToggle(false)
+                    }
+                )*/
     }
 
     //Callback
@@ -60,6 +63,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
     }
 
     onPageChanged = (pageNumber: number) => {
+        //this.props.getUsers(this.props.pageSize, pageNumber)
         this.props.setCurrentPage(pageNumber)
         this.props.isFetchingToggle(true)
         usersAPI.getUser(this.props.pageSize, pageNumber)
@@ -115,8 +119,9 @@ const mapStateToProps = (state: appStateType) => {
         followingInProgress: state.usersPage.followingInProgress,
     }
 }
+//type ThunkType = ThunkAction<void, appStateType, unknown, UserReducerActionType>
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch:ThunkDispatch<appStateType,unknown, UserReducerActionType> ) => {
     return {
         follow: (id: number) => dispatch(followAC(id)),
         unFollow: (id: number) => dispatch(unFollowAC(id)),
@@ -124,7 +129,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),
         setCount: (count: number) => dispatch(setCountAC(count)),
         isFetchingToggle: (value: boolean) => dispatch(isFetching(value)),
-        followingToUserInProgress: (status: boolean, userId: number) => dispatch(followingToUserInProgress(status, userId))
+        followingToUserInProgress: (status: boolean, userId: number) => dispatch(followingToUserInProgress(status, userId)),
+        getUsers: (pageSize: number, currentPage: number) => dispatch(getUsersThunkCreator(pageSize, currentPage))
     }
 }
 
