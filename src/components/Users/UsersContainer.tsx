@@ -18,6 +18,7 @@ import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
 import {ThunkDispatch} from 'redux-thunk'
+import {Redirect} from "react-router-dom";
 
 type UsersPropsType = {
     usersPage: Array<UserType>
@@ -34,6 +35,7 @@ type UsersPropsType = {
     followingInProgress: number[]
     followingToUserInProgress: (status: boolean, userId: number) => void
     getUsers: (pageSize: number, currentPage: number) => void
+    isAuth: boolean
 }
 
 export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUsersStateType> {
@@ -68,9 +70,9 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
     }
 
     render() {
+        if (!this.props.isAuth) return <Redirect to={'/login'}/> //If not authorised, redirect to Login
         return (
             <div>
-
                 {this.props.isFetching
                 && <Preloader/>}
                 <UsersFC
@@ -109,6 +111,7 @@ const mapStateToProps = (state: appStateType) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth,
     }
 }
 //type ThunkType = ThunkAction<void, appStateType, unknown, UserReducerActionType>
