@@ -5,10 +5,12 @@ import DialogItem from "./DialogItem/DialogItem";
 /*import {ActionTypes, MessagesPageType} from "../../redux/state";*/
 import {Button} from "../Button/Button";
 import {MessagesPageType} from "../../redux/dialog-reducer";
+import {Redirect} from "react-router-dom";
 
 type DialogsPropsType = {
     dialogsPage: MessagesPageType
     addMessage: (addMessage:string)=>void
+    isAuth: boolean
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -26,6 +28,7 @@ export const Dialogs = (props: DialogsPropsType) => {
         }
     }
 
+    if (!props.isAuth) return <Redirect to={'/login'}/> //If not authorised, redirect to Login
     return (
         <div className={dStyle.dialogPage}>
             <div className={dStyle.users}>
