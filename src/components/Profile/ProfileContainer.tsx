@@ -7,6 +7,7 @@ import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {ThunkDispatch} from "redux-thunk";
 import {UserReducerActionType} from "../../redux/users-reducer";
 import {Login} from "../Login/Login";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class ProfileContainer extends React.Component<PropsType, any> {
 
@@ -16,7 +17,7 @@ class ProfileContainer extends React.Component<PropsType, any> {
     }
 
     render() {
-        if(this.props.isAuth) return <Redirect to={'/login'}/>
+       // if(!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <Profile {...this.props}/>
         )
@@ -76,4 +77,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserR
 }
 
 const withRouterProfileContainer = withRouter(ProfileContainer)
-export default connect(mapStateToProps, mapDispatchToProps)(withRouterProfileContainer)
+export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(withRouterProfileContainer))

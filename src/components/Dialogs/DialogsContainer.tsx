@@ -3,6 +3,7 @@ import {addMessageAC, MessagesPageType} from "../../redux/dialog-reducer";
 import {connect} from "react-redux";
 import {appStateType} from "../../redux/store";
 import {Dispatch} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 /*export const DialogsContainer = (props: { store: StoreType }) => {
     const state = props.store.getState()
@@ -20,7 +21,7 @@ import {Dispatch} from "redux";
 }*/
 type MapStatePropsType ={
     dialogsPage:MessagesPageType
-    isAuth: boolean
+    //isAuth: boolean
 }
 
 type MapDispatchPropsType ={
@@ -30,7 +31,7 @@ type MapDispatchPropsType ={
 const mapStateToProps = (state:appStateType): MapStatePropsType => {
     return {
         dialogsPage: state.messagesPage,
-        isAuth: state.auth.isAuth,
+      //  isAuth: state.auth.isAuth,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
@@ -39,4 +40,5 @@ const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+
+export const DialogsContainer = withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Dialogs))
