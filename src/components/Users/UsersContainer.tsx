@@ -19,6 +19,7 @@ import {Preloader} from "../common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
 import {ThunkDispatch} from 'redux-thunk'
 import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type UsersPropsType = {
     usersPage: Array<UserType>
@@ -70,7 +71,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'/login'}/> //If not authorised, redirect to Login
+        //if (!this.props.isAuth) return <Redirect to={'/login'}/> //If not authorised, redirect to Login
         return (
             <div>
                 {this.props.isFetching
@@ -130,4 +131,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserR
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export const UsersContainer = withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent))
