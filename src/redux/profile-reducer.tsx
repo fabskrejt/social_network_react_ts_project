@@ -48,13 +48,13 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 export const profileReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
-
+    debugger
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsDataType = {id: v1(), postText: action.value, like: 10}
             return {...state, postsData: [newPost, ...state.postsData]}
         case SET_USER_PROFILE:
-            return {...state, profile: action.profile}
+            return {...state, profile: {...action.profile}}
     }
     return state
 }
@@ -81,8 +81,8 @@ export const getUserProfileThunkCreator = (userId:number)=>{
    return (dispatch: Dispatch)=>{
        //  this.props.isFetchingToggle(true)
        usersAPI.getProfile(userId)
-           .then((response) => {
-                   dispatch(setUserProfile(response.data))
+           .then((data) => {
+                   dispatch(setUserProfile(data))
                    // this.props.isFetchingToggle(false)
                }
            )

@@ -25,12 +25,14 @@ export const usersAPI = {
     },
     getProfile(userId: number) {
       return  instance.get(`profile/` + userId)
+          .then(response => response.data)
     }
 }
 
 export const authAPI = {
     me() {
         return instance.get(`auth/me`)
+            .then(response => response.data)
     }
 }
 /*export const getUser = (pageSize:number, pageNumber:number)=> {

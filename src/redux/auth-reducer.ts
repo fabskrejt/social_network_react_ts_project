@@ -38,9 +38,9 @@ export const setUserDataAC = (id: string, email: string, login: string) => {
 export const getAuthUserDataThunkCreator = () =>{
     return (dispatch: Dispatch) =>{
         authAPI.me()
-            .then((response) => {
-                    if (response.data.resultCode === 0) {
-                        const {id, email, login} = response.data.data
+            .then((data) => {
+                    if (data.resultCode === 0) {
+                        const {id, email, login} = data.data
                         dispatch(setUserDataAC(id, email, login))
                     }
                     //this.props.isFetchingToggle(false)

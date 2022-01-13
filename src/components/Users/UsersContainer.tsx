@@ -18,7 +18,6 @@ import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
 import {ThunkDispatch} from 'redux-thunk'
-import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
@@ -135,4 +134,3 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserR
 export const UsersContainer = compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
     withAuthRedirect)(UsersAPIComponent)
-// export const UsersContainer = withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent))
