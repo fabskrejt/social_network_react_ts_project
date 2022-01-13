@@ -20,6 +20,7 @@ import {usersAPI} from "../../api/api";
 import {ThunkDispatch} from 'redux-thunk'
 import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type UsersPropsType = {
     usersPage: Array<UserType>
@@ -131,4 +132,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserR
     }
 }
 
-export const UsersContainer = withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent))
+export const UsersContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect)(UsersAPIComponent)
+// export const UsersContainer = withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent))
