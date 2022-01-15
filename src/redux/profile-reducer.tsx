@@ -82,6 +82,7 @@ export const getUserProfileThunkCreator = (userId:number)=>{
        //  this.props.isFetchingToggle(true)
        usersAPI.getProfile(userId)
            .then((data) => {
+               debugger
                    dispatch(setUserProfile(data))
                    // this.props.isFetchingToggle(false)
                }
