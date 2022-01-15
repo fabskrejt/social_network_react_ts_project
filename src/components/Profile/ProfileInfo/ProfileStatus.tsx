@@ -1,20 +1,47 @@
 import React, {useState} from "react";
 
-export const ProfileStatus = () => {
+// export const ProfileStatus = () => {
+//
+//     const [editMode, setEditMode] = useState(false)
+//     const changeStatusOn = () => {
+//         setEditMode(true)
+//     }
+//     const changeStatusOff = () => {
+//         setEditMode(false)
+//     }
+//     return (
+//         <div>
+//             {editMode ?
+//                 <input onBlur={changeStatusOff} autoFocus/>
+//                 : <span onDoubleClick={changeStatusOn}>Какой-то статус</span>
+//             }
+//         </div>
+//     )
+// }
 
-    const [editMode, setEditMode] = useState(false)
-    const changeStatusOn = () => {
-        setEditMode(true)
+export class ProfileStatus extends React.Component<any, any>{
+    constructor(props: any) {
+        super(props);
+        this.state ={
+            editMode: false
+        }
     }
-    const changeStatusOff = () => {
-        setEditMode(false)
+
+    changeStatusOn = () => {debugger
+       this.setState({editMode: true})
+
     }
-    return (
-        <div>
-            {editMode ?
-                <input onBlur={changeStatusOff} autoFocus/>
-                : <span onDoubleClick={changeStatusOn}>Какой-то статус</span>
-            }
-        </div>
-    )
+    changeStatusOff = () => {
+        this.setState({editMode: false})
+    }
+    render() {
+        return (
+            <div>
+                {this.state.editMode ?
+                    <input onBlur={this.changeStatusOff} autoFocus/>
+                    : <span onDoubleClick={this.changeStatusOn}>Какой-то статус</span>
+                }
+            </div>
+        )
+    }
 }
