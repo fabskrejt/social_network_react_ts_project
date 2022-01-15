@@ -2,7 +2,11 @@ import React from "react";
 import {connect} from "react-redux";
 import {appStateType} from "../../redux/store";
 import Profile from "./Profile";
-import {getUserProfileThunkCreator} from "../../redux/profile-reducer";
+import {
+    getUserProfileThunkCreator,
+    getUserStatusThunkCreator,
+    updateUserStatusThunkCreator
+} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {ThunkDispatch} from "redux-thunk";
 import {UserReducerActionType} from "../../redux/users-reducer";
@@ -11,13 +15,13 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component<PropsType, any> {
 
-    componentDidMount() {debugger
+    componentDidMount() {
         const userId = +this.props.match.params.userId
         this.props.setUserProfile(userId)
+        this.props.getUserStatus(userId)
     }
 
     render() {
-        debugger
         // if(!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <Profile {...this.props}/>
@@ -54,10 +58,14 @@ type PathParamsType = {
 
 type MapStateToPropsType = {
     profile: ProfileType
-   // isAuth: boolean
+    userStatus: string
+    // isAuth: boolean
 }
 type MapDispatchToPropsType = {
-    setUserProfile: (profile: any) => void
+    setUserProfile: (userId: number) => void
+    getUserStatus: (userId: number) => void
+    updateUserStatus: (status: string) => void
+
 }
 
 type OwnPropsType = MapDispatchToPropsType & MapStateToPropsType
@@ -67,6 +75,7 @@ type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 const mapStateToProps = (state: appStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
+        userStatus: state.profilePage.userStatus
         //isAuth: state.auth.isAuth,
     }
 }
@@ -74,6 +83,8 @@ const mapStateToProps = (state: appStateType): MapStateToPropsType => {
 const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserReducerActionType>): MapDispatchToPropsType => {
     return {
         setUserProfile: (userId: number) => dispatch(getUserProfileThunkCreator(userId)),
+        getUserStatus: (userId: number) => dispatch(getUserStatusThunkCreator(userId)),
+        updateUserStatus: (status: string) => dispatch(updateUserStatusThunkCreator(status)),
     }
 }
 
