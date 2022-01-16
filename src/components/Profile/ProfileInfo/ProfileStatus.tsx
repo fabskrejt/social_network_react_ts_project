@@ -8,7 +8,9 @@ export const ProfileStatus = (props: ProfileStatusPropsType) => {
 
     const [editMode, setEditMode] = useState(false)
     const [userStatus, setUserStatus] = useState(props.userStatus)
+
     const changeStatusOn = () => {
+        setUserStatus(props.userStatus)
         setEditMode(true)
     }
     const changeStatusOff = () => {
@@ -20,7 +22,7 @@ export const ProfileStatus = (props: ProfileStatusPropsType) => {
             {editMode ?
                 <input value={userStatus} onChange={(e) => setUserStatus(e.currentTarget.value)}
                        onBlur={changeStatusOff} autoFocus/>
-                : <span onDoubleClick={changeStatusOn}>{props.userStatus}</span>
+                : <span onDoubleClick={changeStatusOn}>{props.userStatus || 'Добавте статус'} </span>
             }
         </div>
     )
