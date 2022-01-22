@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 type ProfileStatusPropsType = {
     userStatus: string
@@ -8,9 +8,12 @@ export const ProfileStatus = (props: ProfileStatusPropsType) => {
 
     const [editMode, setEditMode] = useState(false)
     const [userStatus, setUserStatus] = useState(props.userStatus)
+    useEffect(() => {
+        setUserStatus(props.userStatus)
+    }, [props.userStatus])
 
     const changeStatusOn = () => {
-        setUserStatus(props.userStatus)
+        //setUserStatus(props.userStatus)
         setEditMode(true)
     }
     const changeStatusOff = () => {
