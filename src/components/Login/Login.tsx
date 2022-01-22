@@ -19,20 +19,19 @@ export const MyLoginForm = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Login </label>
-                    <input type={'text'}/>
+                    <Field name={'Login'} component="input" placeholder="First Name"/>
                 </div>
                 <div>
                     <label>Password </label>
-                    <input type={'text'}/>
+                    <Field name={'name'} component="input" placeholder="Password"/>
                 </div>
                 <div>
                     <label>Remember </label>
-                    <input type={'checkbox'}/>
+                    <Field name={'Remember'} component="input" type={'checkbox'}/>
                 </div>
-                <button>Submit</button>
+                <button type="submit">Submit</button>
             </form>)
         }
         />
-
     )
 }
