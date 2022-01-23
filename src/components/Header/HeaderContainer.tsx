@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import {appStateType} from "../../redux/store";
-import {AuthReducerActionTypes, getAuthUserDataThunkCreator} from "../../redux/auth-reducer";
+import {AuthReducerActionTypes, getAuthUserDataThunkCreator, logout} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
 
@@ -13,7 +13,7 @@ class HeaderContainer extends React.Component<any, any> {
 
     render() {
         return (
-            <Header login={this.props.login} isAuth={this.props.isAuth}/>
+            <Header login={this.props.login} isAuth={this.props.isAuth} logout={this.props.logout}/>
         )
     }
 }
@@ -28,7 +28,8 @@ const mapSateToProps = (state: appStateType) => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, AuthReducerActionTypes>) => {
     return {
-        setUserData: () => dispatch(getAuthUserDataThunkCreator())
+        setUserData: () => dispatch(getAuthUserDataThunkCreator()),
+        logout: () => dispatch(logout())
 
     }
 }

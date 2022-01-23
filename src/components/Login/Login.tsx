@@ -29,15 +29,15 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
         <Form onSubmit={props.onSubmit} render={({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Login </label>
-                    <Field name={'Login'} component="input" placeholder="First Name"/>
+
+                    <Field name={'Login'} component="input" placeholder="Login"/>
                 </div>
                 <div>
-                    <label>Password </label>
-                    <Field name={'Password'} component="input" placeholder="Password"/>
+
+                    <Field name={'Password'} component="input" placeholder="Password" type={'password'}/>
                 </div>
                 <div>
-                    <label>Remember </label>
+
                     <Field name={'Remember'} component="input" type={'checkbox'}/>
                 </div>
                 <button type="submit">Submit</button>

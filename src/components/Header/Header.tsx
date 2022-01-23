@@ -1,12 +1,14 @@
 import React from "react";
 import hStyle from './Header.module.css'
+import {NavLink} from "react-router-dom";
 
 type HeaderPropsType = {
     login: string
     isAuth: boolean
+    logout: () => void
 }
 
-const Header = (props:HeaderPropsType) => {
+const Header = (props: HeaderPropsType) => {
     return (
         <header className={hStyle.header}>
             <div>
@@ -15,7 +17,12 @@ const Header = (props:HeaderPropsType) => {
                 <span className='header__text'>Social Network</span>
             </div>
             {
-                props.isAuth ? <div>{props.login}</div>: <div>Login</div>
+                props.isAuth
+                    ? <div>
+                        <div> {props.login}</div>
+                        <div onClick={props.logout}> logout</div>
+                    </div>
+                    : <div><NavLink to={'/login'}>Login</NavLink></div>
             }
         </header>
     )
