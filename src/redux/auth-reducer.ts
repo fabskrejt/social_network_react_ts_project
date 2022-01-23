@@ -35,16 +35,32 @@ export const setUserDataAC = (id: string, email: string, login: string) => {
     } as const
 }
 
-export const getAuthUserDataThunkCreator = () =>{
-    return (dispatch: Dispatch) =>{
+export const getAuthUserDataThunkCreator = () => {
+    return (dispatch: Dispatch) => {
         authAPI.me()
             .then((data) => {
                     if (data.resultCode === 0) {
                         const {id, email, login} = data.data
                         dispatch(setUserDataAC(id, email, login))
+
                     }
                     //this.props.isFetchingToggle(false)
                 }
             )
     }
 }
+
+export const login =
+    (email: string, password: string, rememberMe: boolean) =>
+        (dispatch: Dispatch) => {
+                authAPI.login(email, password, rememberMe)
+                .then(res => {
+                    debugger
+                    if(res.resultCode === 0){
+                        //@ts-ignore
+                        dispatch(getAuthUserDataThunkCreator())
+                    }
+
+                    }
+                )
+        }
