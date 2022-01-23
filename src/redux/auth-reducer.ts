@@ -11,7 +11,7 @@ const initialState = {
 
 //type InitialStateType = typeof  initialState
 type InitialStateType = {
-    id: null | string
+    id: null | number
     email: null | string
     login: null | string
     isAuth: boolean
@@ -28,7 +28,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Auth
 }
 
 type setUserData = ReturnType<typeof setUserDataAC>
-export const setUserDataAC = (id: string | null, email: string | null, login: string | null, isAuth: boolean) => {
+export const setUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
         type: SET_USER_DATA,
         payload: {id, email, login, isAuth}
@@ -55,7 +55,7 @@ export const login =
         (dispatch: Dispatch) => {
             authAPI.login(email, password, rememberMe)
                 .then(res => {
-                        debugger
+
                         if (res.resultCode === 0) {
                             //@ts-ignore
                             dispatch(getAuthUserDataThunkCreator())
@@ -69,7 +69,6 @@ export const logout =
         (dispatch: Dispatch) => {
             authAPI.logout()
                 .then(res => {
-                        debugger
                         if (res.resultCode === 0) {
                             dispatch(setUserDataAC(null, null, null, false))
                         }

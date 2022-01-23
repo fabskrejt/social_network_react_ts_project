@@ -21,7 +21,6 @@ export const Dialogs = (props: DialogsPropsType) => {
     let dialogsElement = props.dialogsPage.dialogsData.map(i => <DialogItem name={i.name} id={i.id}/>)
     let messagesElement = props.dialogsPage.messages.map(i => <Message id={i.id} message={i.textMessage}/>)
     const onAddMessage = (value:any) => {
-        debugger
         if (value.message) {
             props.addMessage(value.message)
             /* props.dispatch(addMessageAC(messageText))*/

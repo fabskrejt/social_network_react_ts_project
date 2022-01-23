@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
-
+import {NavLink} from "react-router-dom";
 
 export type UsersFCPropsType = {
     currentPage: number
@@ -34,10 +34,11 @@ export const UsersFC = (props: UsersFCPropsType) => {
                 return (
                     <div key={i.id} className={style.user}>
                         <div className={style.userAva}>
-                            <img
+                     <NavLink to={`/profile/${i.id}`}>
+                         <img
                                 src={i.photos.small === null ? 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg' : i.photos.small}
                             />
-
+                     </NavLink>
                             {i.followed ?
                                 <button disabled={props.followingInProgress.some(id => id === i.id)} onClick={() => {
                                     props.unFollow(i.id) //Thunk callback
