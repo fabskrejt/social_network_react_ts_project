@@ -24,3 +24,7 @@ a {
 a:hover {
     color: red;
 }
+
+.login{
+    cursor: pointer;
+}
