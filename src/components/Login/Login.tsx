@@ -26,15 +26,30 @@ type MyLoginFormPropsType = {
     onSubmit: (value: any) => void
 }
 export const MyLoginForm = (props: MyLoginFormPropsType) => {
+    const required = (value:string) => (value ? undefined : 'Required')
     return (
         <Form onSubmit={props.onSubmit}  render={({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
                 <div>
-                    <Field name={'Login'} component="input" placeholder="Login"/>
+                    <Field name={'Login'} component="input" placeholder="Login" validate={required}>
+                    {({ input, meta }:any) => (
+                        <div>
+                            <input {...input} type="text" placeholder="Login" />
+                            {meta.error && meta.touched && <span>{meta.error}</span>}
+                        </div>
+                    )}
+                    </Field>
                 </div>
                 <div>
 
-                    <Field name={'Password'} component="input" placeholder="Password" type={'password'}/>
+                    <Field name={'Password'} component="input" placeholder="Password" type={'password'} validate={required}>
+                        {({ input, meta }:any) => (
+                            <div>
+                                <input {...input} type="password" placeholder="Password" />
+                                {meta.error && meta.touched && <span>{meta.error}</span>}
+                            </div>
+                        )}
+                    </Field>
                 </div>
                 <div>
 
