@@ -5,6 +5,7 @@ import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {appStateType} from "../../redux/store";
 
+
 type LoginPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
     isAuth: boolean
@@ -26,10 +27,9 @@ type MyLoginFormPropsType = {
 }
 export const MyLoginForm = (props: MyLoginFormPropsType) => {
     return (
-        <Form onSubmit={props.onSubmit} render={({handleSubmit}) => (
+        <Form onSubmit={props.onSubmit}  render={({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
                 <div>
-
                     <Field name={'Login'} component="input" placeholder="Login"/>
                 </div>
                 <div>
@@ -53,3 +53,4 @@ const mapStateToProps = (state: appStateType)=>{
 }
 
 export const LoginConnect = connect(mapStateToProps, {login})(Login)
+

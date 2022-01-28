@@ -13,8 +13,8 @@ import {UserReducerActionType} from "../../redux/users-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-class ProfileContainer extends React.Component<PropsType, any> {
 
+class ProfileContainer extends React.Component<PropsType, any> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if(!userId){
