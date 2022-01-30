@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {getAuthUserDataThunkCreator} from "./auth-reducer";
+
 const initialState = {
     isInitialised: false
 }
@@ -14,10 +17,22 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
     }
 }
 
-type initialisedActionType = ReturnType<typeof initialisedAC>
+type initialisedActionType = ReturnType<typeof initialisedSuccessAC>
 
-export const initialisedAC = () => {
+export const initialisedSuccessAC = () => {
     return {
         type: 'SET-INITIALISED'
     }
+}
+
+
+
+export const initialisedTC = () => (dispatch: Dispatch) => {
+    //@ts-ignore
+     let promise = dispatch(getAuthUserDataThunkCreator())
+         promise.then(() => {
+             dispatch(initialisedSuccessAC())
+         })
+
+
 }

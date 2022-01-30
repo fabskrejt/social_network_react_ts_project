@@ -35,6 +35,8 @@ class ProfileContainer extends React.Component<PropsType, any> {
     }
 }
 
+
+//types
 export type ProfileType = {
     "aboutMe": string
     "contacts": {

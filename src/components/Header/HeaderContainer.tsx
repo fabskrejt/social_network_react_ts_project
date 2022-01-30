@@ -8,7 +8,7 @@ import {ThunkDispatch} from "redux-thunk";
 class HeaderContainer extends React.Component<any, any> {
 
     componentDidMount() {
-        this.props.setUserData()
+       // this.props.setUserData()
     }
 
     render() {

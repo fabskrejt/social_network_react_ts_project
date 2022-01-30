@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {initialisedSuccessAC} from "./app-reducer";
 
 const SET_USER_DATA = 'SET-USER-DATA';
 const initialState = {
@@ -37,12 +38,11 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
 
 export const getAuthUserDataThunkCreator = () => {
     return (dispatch: Dispatch) => {
-        authAPI.me()
+      return  authAPI.me()
             .then((data) => {
                     if (data.resultCode === 0) {
                         const {id, email, login} = data.data
                         dispatch(setUserDataAC(id, email, login, true))
-
                     }
                     //this.props.isFetchingToggle(false)
                 }
