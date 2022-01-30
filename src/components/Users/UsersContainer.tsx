@@ -20,6 +20,14 @@ import {usersAPI} from "../../api/api";
 import {ThunkDispatch} from 'redux-thunk'
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCount,
+    getCurrentPage,
+    getFollowingInProgress, getIsAuth,
+    getIsFetching,
+    getPageSize,
+    getUsers
+} from "../../redux/users-selectors";
 
 type UsersPropsType = {
     usersPage: Array<UserType>
@@ -106,13 +114,13 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
 
 const mapStateToProps = (state: appStateType) => {
     return {
-        usersPage: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        count: state.usersPage.count,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth,
+        usersPage: getUsers(state),
+        pageSize: getPageSize(state),
+        count: getCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
+        isAuth: getIsAuth(state),
     }
 }
 //type ThunkType = ThunkAction<void, appStateType, unknown, UserReducerActionType>
