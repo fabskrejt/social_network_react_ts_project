@@ -15,6 +15,7 @@ import {compose} from "redux";
 
 
 class ProfileContainer extends React.Component<PropsType, any> {
+
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
@@ -23,10 +24,9 @@ class ProfileContainer extends React.Component<PropsType, any> {
 
         userId && this.props.setUserProfile(userId)
         userId && this.props.getUserStatus(userId)
-
     }
 
-    render() {
+    render() {console.log('ProfileContainer')
         // if(!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <Profile {...this.props}/>

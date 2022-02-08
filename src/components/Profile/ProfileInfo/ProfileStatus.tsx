@@ -4,8 +4,7 @@ type ProfileStatusPropsType = {
     userStatus: string
     updateUserStatus: (status: string) => void
 }
-export const ProfileStatus = (props: ProfileStatusPropsType) => {
-
+export const ProfileStatus =React.memo((props: ProfileStatusPropsType) => {
     const [editMode, setEditMode] = useState(false)
     const [userStatus, setUserStatus] = useState(props.userStatus)
     useEffect(() => {
@@ -29,31 +28,4 @@ export const ProfileStatus = (props: ProfileStatusPropsType) => {
             }
         </div>
     )
-}
-
-// export class ProfileStatus extends React.Component<any, any>{
-//     constructor(props: any) {
-//         super(props);
-//         this.state ={
-//             editMode: false
-//         }
-//     }
-//
-//     changeStatusOn = () => {debugger
-//        this.setState({editMode: true})
-//
-//     }
-//     changeStatusOff = () => {
-//         this.setState({editMode: false})
-//     }
-//     render() {
-//         return (
-//             <div>
-//                 {this.state.editMode ?
-//                     <input onBlur={this.changeStatusOff} autoFocus/>
-//                     : <span onDoubleClick={this.changeStatusOn}>Какой-то статус</span>
-//                 }
-//             </div>
-//         )
-//     }
-// }
+})

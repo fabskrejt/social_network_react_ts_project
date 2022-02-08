@@ -38,7 +38,7 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
 
 export const getAuthUserDataThunkCreator = () => {
     return (dispatch: Dispatch) => {
-      return  authAPI.me()
+        return authAPI.me()
             .then((data) => {
                     if (data.resultCode === 0) {
                         const {id, email, login} = data.data
@@ -55,12 +55,9 @@ export const login =
         (dispatch: Dispatch) => {
             authAPI.login(email, password, rememberMe)
                 .then(res => {
-
                         if (res.resultCode === 0) {
-                            //@ts-ignore
                             dispatch(getAuthUserDataThunkCreator())
                         }
-
                     }
                 )
         }
@@ -72,7 +69,6 @@ export const logout =
                         if (res.resultCode === 0) {
                             dispatch(setUserDataAC(null, null, null, false))
                         }
-
                     }
                 )
         }

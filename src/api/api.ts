@@ -53,6 +53,3 @@ export const authAPI = {
             .then(response => response.data)
     }
 }
-/*export const getUser = (pageSize:number, pageNumber:number)=> {
-   return instance.get(`users?page=${pageNumber}&count=${pageSize}`, )
-}*/
