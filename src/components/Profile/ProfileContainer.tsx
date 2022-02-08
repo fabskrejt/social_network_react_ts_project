@@ -76,7 +76,7 @@ type MapDispatchToPropsType = {
 }
 
 type OwnPropsType = MapDispatchToPropsType & MapStateToPropsType
-//@ts-ignore
+// @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 const mapStateToProps = (state: appStateType): MapStateToPropsType => {
