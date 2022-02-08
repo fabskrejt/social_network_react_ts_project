@@ -17,14 +17,13 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component<PropsType, any> {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if(!userId){
+        if (!userId) {
             userId = this.props.userId
         }
-        //@ts-ignore
-        this.props.setUserProfile(userId)
-        //@ts-ignore
-        this.props.getUserStatus(userId)
-        debugger
+
+        userId && this.props.setUserProfile(userId)
+        userId && this.props.getUserStatus(userId)
+
     }
 
     render() {
@@ -67,7 +66,7 @@ type MapStateToPropsType = {
     profile: ProfileType
     userStatus: string
     userId: number | null
-     //isAuth: boolean
+    //isAuth: boolean
 }
 type MapDispatchToPropsType = {
     setUserProfile: (userId: number) => void
@@ -103,5 +102,3 @@ export default compose<React.ComponentType>(
     withAuthRedirect
 )(ProfileContainer)
 
-//const withRouterProfileContainer = withRouter(ProfileContainer)
-//export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(withRouterProfileContainer))

@@ -23,7 +23,8 @@ import {compose} from "redux";
 import {
     getCount,
     getCurrentPage,
-    getFollowingInProgress, getIsAuth,
+    getFollowingInProgress,
+    getIsAuth,
     getIsFetching,
     getPageSize,
     getUsers
@@ -95,16 +96,6 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
                     followingInProgress={this.props.followingInProgress}
                     followingToUserInProgress={this.props.followingToUserInProgress}
                 />
-                {/*                {this.props.isFetching
-                    ? <Preloader/>
-                    : <UsersFC
-                        pageSize={this.props.pageSize}
-                        count={this.props.count}
-                        currentPage={this.props.currentPage}
-                        onPageChanged={this.onPageChanged}
-                        usersPage={this.props.usersPage}
-                        follow={this.follow}
-                    />}*/}
             </div>
 
         )

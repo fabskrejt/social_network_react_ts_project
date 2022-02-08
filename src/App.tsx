@@ -12,7 +12,7 @@ import {LoginConnect} from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {connect} from "react-redux";
 import {appStateType} from "./redux/store";
-import {initialisedSuccessAC, initialisedTC} from "./redux/app-reducer";
+import {initialisedTC} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
 type AppPropsType = {
@@ -59,4 +59,3 @@ const mapStateToProps = (state: appStateType) => {
     }
 }
 export default connect(mapStateToProps, {initialisedTC})(App);
-//export default App;
