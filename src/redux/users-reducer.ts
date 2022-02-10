@@ -1,7 +1,13 @@
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
-const FOLLOWING_IN_PROGRESS = 'FOLLOWING-IN-PROGRESS'
+const FOLLOWING_IN_PROGRESS = 'USERS-REDUCER/FOLLOWING-IN-PROGRESS'
+const FOLLOW = 'USERS-REDUCER/FOLLOW';
+const UNFOLLOW = 'USERS-REDUCER/UNFOLLOW';
+const SET_USERS = 'USERS-REDUCER/SET-USERS'
+const CHANGE_CURRENT_PAGE = 'USERS-REDUCER/CHANGE-CURRENT-PAGE'
+const SET_COUNT = 'USERS-REDUCER/SET-COUNT'
+const TOGGLE_FETCHING = 'USERS-REDUCER/TOGGLE-FETCHING'
 
 type PhotosType = {
     small: string
@@ -38,17 +44,17 @@ const initialState: InitialUsersStateType = {
 
 export const usersReducer = (state = initialState, action: UserReducerActionType): InitialUsersStateType => {
     switch (action.type) {
-        case 'FOLLOW':
+        case FOLLOW:
             return {...state, users: state.users.map(i => i.id === action.id ? {...i, followed: true} : i)}
-        case 'UNFOLLOW':
+        case UNFOLLOW:
             return {...state, users: state.users.map(i => i.id === action.id ? {...i, followed: false} : i)}
-        case "SET-USERS":
+        case SET_USERS:
             return {...state, users: action.users}
-        case 'CHANGE-CURRENT-PAGE':
+        case CHANGE_CURRENT_PAGE:
             return {...state, currentPage: action.currentPage}
-        case 'SET-COUNT':
+        case SET_COUNT:
             return {...state, count: action.count}
-        case "TOGGLE-FETCHING":
+        case TOGGLE_FETCHING:
             return {...state, isFetching: action.value}
         case FOLLOWING_IN_PROGRESS:
             return {
@@ -75,7 +81,7 @@ export type UserReducerActionType =
 type FollowACType = ReturnType<typeof followAC>
 export const followAC = (id: number) => {
     return {
-        type: 'FOLLOW',
+        type: FOLLOW,
         id
     } as const
 }
@@ -92,7 +98,7 @@ export const followingToUserInProgress = (status: boolean, userId: number) => {
 type UnFollowAC = ReturnType<typeof unFollowAC>
 export const unFollowAC = (id: number) => {
     return {
-        type: 'UNFOLLOW',
+        type: UNFOLLOW,
         id
     } as const
 }
@@ -100,7 +106,7 @@ export const unFollowAC = (id: number) => {
 type SetUsersACType = ReturnType<typeof setUsersAC>
 export const setUsersAC = (users: Array<UserType>) => {
     return {
-        type: 'SET-USERS',
+        type: SET_USERS,
         users,
     } as const
 }
@@ -108,7 +114,7 @@ export const setUsersAC = (users: Array<UserType>) => {
 type ChangeCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 export const setCurrentPageAC = (currentPage: number) => {
     return {
-        type: 'CHANGE-CURRENT-PAGE',
+        type: CHANGE_CURRENT_PAGE,
         currentPage
     } as const
 }
@@ -116,7 +122,7 @@ export const setCurrentPageAC = (currentPage: number) => {
 type SetCountACType = ReturnType<typeof setCountAC>
 export const setCountAC = (count: number) => {
     return {
-        type: 'SET-COUNT',
+        type: SET_COUNT,
         count,
     } as const
 }
@@ -124,7 +130,7 @@ export const setCountAC = (count: number) => {
 type IsFetchingType = ReturnType<typeof isFetching>
 export const isFetching = (value: boolean) => {
     return {
-        type: 'TOGGLE-FETCHING',
+        type: TOGGLE_FETCHING,
         value,
     } as const
 }
