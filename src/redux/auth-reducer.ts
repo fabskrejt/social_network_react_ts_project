@@ -1,8 +1,7 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
-import {initialisedSuccessAC} from "./app-reducer";
 
-const SET_USER_DATA = 'SET-USER-DATA';
+const SET_USER_DATA = 'AUTH-REDUCER/SET-USER-DATA';
 const initialState = {
     id: null,
     email: null,
@@ -56,6 +55,7 @@ export const login =
             authAPI.login(email, password, rememberMe)
                 .then(res => {
                         if (res.resultCode === 0) {
+                            // @ts-ignore
                             dispatch(getAuthUserDataThunkCreator())
                         }
                     }

@@ -7,7 +7,7 @@ import {
     getUserStatusThunkCreator,
     updateUserStatusThunkCreator
 } from "../../redux/profile-reducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, useParams, withRouter} from "react-router-dom";
 import {ThunkDispatch} from "redux-thunk";
 import {UserReducerActionType} from "../../redux/users-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -15,6 +15,7 @@ import {compose} from "redux";
 
 
 class ProfileContainer extends React.Component<PropsType, any> {
+
 
     componentDidMount() {
         let userId = this.props.match.params.userId
