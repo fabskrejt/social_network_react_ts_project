@@ -1,5 +1,7 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
+import {appStateType} from "./store";
 
 const SET_USER_DATA = 'AUTH-REDUCER/SET-USER-DATA';
 const initialState = {
@@ -35,7 +37,8 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
     } as const
 }
 
-export const getAuthUserDataThunkCreator = () => {
+type  ThunkType = ThunkAction<void,appStateType,unknown,AuthReducerActionTypes>
+export const getAuthUserDataThunkCreator = ():ThunkType => {
     return (dispatch: Dispatch) => {
         return authAPI.me()
             .then((data) => {

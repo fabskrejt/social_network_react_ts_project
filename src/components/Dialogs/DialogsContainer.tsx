@@ -6,41 +6,27 @@ import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import React from "react";
 
-/*export const DialogsContainer = (props: { store: StoreType }) => {
-    const state = props.store.getState()
-    const addMessage = (messageText: string) => {
-        if (messageText) {
-            props.store.dispatch(addMessageAC(messageText))
-        }
-    }
-
-    /!*    dialogsPage={props.appState.messagesPage}
-        dispatch={props.dispatch}*!/
-    return (
-        <Dialogs dialogsPage={state.messagesPage} addMessage={addMessage}/>
-    )
-}*/
-type MapStatePropsType ={
-    dialogsPage:MessagesPageType
+type MapStatePropsType = {
+    dialogsPage: MessagesPageType
     //isAuth: boolean
 }
 
-type MapDispatchPropsType ={
-    addMessage: (messageText:string) => void
+type MapDispatchPropsType = {
+    addMessage: (messageText: string) => void
 }
 
-const mapStateToProps = (state:appStateType): MapStatePropsType => {
+const mapStateToProps = (state: appStateType): MapStatePropsType => {
     return {
         dialogsPage: state.messagesPage,
-      //  isAuth: state.auth.isAuth,
+        //  isAuth: state.auth.isAuth,
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        addMessage: (messageText:string) => dispatch(addMessageAC(messageText)),
+        addMessage: (messageText: string) => dispatch(addMessageAC(messageText)),
     }
 }
 
 export const DialogsContainer = compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),
     withAuthRedirect
-    )(Dialogs)
+)(Dialogs)

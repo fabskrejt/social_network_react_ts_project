@@ -1,5 +1,6 @@
 import {usersAPI} from "../api/api";
-import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {appStateType} from "./store";
 
 const FOLLOWING_IN_PROGRESS = 'USERS-REDUCER/FOLLOWING-IN-PROGRESS'
 const FOLLOW = 'USERS-REDUCER/FOLLOW';
@@ -135,45 +136,31 @@ export const isFetching = (value: boolean) => {
     } as const
 }
 
-export const getUsersThunkCreator = (pageSize: number, currentPage: number) => {
-    return (dispatch: Dispatch) => {
-        dispatch(isFetching(true))
-        usersAPI.getUser(pageSize, currentPage).then((data) => {
-                dispatch(setUsersAC(data.items))
-                dispatch(isFetching(false))
-            }
-        )
+//Thunk
+type  ThunkType = ThunkAction<void, appStateType, unknown, UserReducerActionType>
+export const getUsersThunkCreator = (pageSize: number, currentPage: number): ThunkType => async dispatch => {
+    dispatch(isFetching(true))
+    let data = await usersAPI.getUser(pageSize, currentPage)
+    if (data.error === null) {
+        dispatch(setUsersAC(data.items))
+        dispatch(isFetching(false))
     }
 }
 
-export const unfollowUserThunkCreator = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        {
-            dispatch(followingToUserInProgress(true, userId)) //disabling button
-            usersAPI.unfollowUser(userId)
-                .then((data) => {
-                        if (data.resultCode === 0) {
-                            dispatch(unFollowAC(userId))
-                            dispatch(followingToUserInProgress(false, userId))  //unDisabling button
-                        }
-                    }
-                )
-        }
+export const unfollowUserThunkCreator = (userId: number): ThunkType => async dispatch => {
+    dispatch(followingToUserInProgress(true, userId)) //disabling button
+    let data = await usersAPI.unfollowUser(userId)
+    if (data.resultCode === 0) {
+        dispatch(unFollowAC(userId))
+        dispatch(followingToUserInProgress(false, userId))  //unDisabling button
     }
 }
 
-export const followUserThunkCreator = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        {
-            dispatch(followingToUserInProgress(true, userId)) //disabling button
-            usersAPI.followUser(userId)
-                .then((data) => {
-                        if (data.resultCode === 0) {
-                            dispatch(followAC(userId))
-                            dispatch(followingToUserInProgress(false, userId))  //unDisabling button
-                        }
-                    }
-                )
-        }
+export const followUserThunkCreator = (userId: number): ThunkType => async dispatch => {
+    dispatch(followingToUserInProgress(true, userId)) //disabling button
+    let data = await usersAPI.followUser(userId)
+    if (data.resultCode === 0) {
+        dispatch(followAC(userId))
+        dispatch(followingToUserInProgress(false, userId))  //unDisabling button
     }
 }
