@@ -10,7 +10,6 @@ const initialState = {
     isAuth: false,
 }
 
-//type InitialStateType = typeof  initialState
 type InitialStateType = {
     id: null | number
     email: null | string

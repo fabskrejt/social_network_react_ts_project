@@ -1,6 +1,9 @@
 import {v1} from "uuid";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {appStateType} from "./store";
+import {AuthReducerActionTypes} from "./auth-reducer";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -13,9 +16,6 @@ export type PostsDataType = {
     id: string
 }
 
-/*export type ProfilePageType = {
-    postsData: Array<PostsDataType>
-}*/
 const initialState = {
     userStatus: '',
     postsData: [
@@ -25,7 +25,7 @@ const initialState = {
     ] as Array<PostsDataType>,
     profile: {
         "aboutMe": "",
-        "contacts":  {
+        "contacts": {
             "facebook": "",
             "website": null,
             "vk": "",
@@ -45,7 +45,6 @@ const initialState = {
         }
     },
 }
-
 
 
 type InitialStateType = typeof initialState
@@ -88,41 +87,27 @@ export const setUserStatus = (status: string) => {
     } as const
 }
 
-
-export const updateUserStatusThunkCreator = (status: string)=>{
-    return (dispatch: Dispatch)=>{
-        //  this.props.isFetchingToggle(true)
-        profileAPI.updateUserStatus(status)
-            .then((response) => {
-                     if(response.data.resultCode === 0){
-                    dispatch(setUserStatus(status))
-                }
-                    // this.props.isFetchingToggle(false)
-                }
-            )
+//thunk
+type  ThunkType = ThunkAction<void, appStateType, unknown, ActionTypes>
+export const updateUserStatusThunkCreator = (status: string): ThunkType => async dispatch => {
+    //  this.props.isFetchingToggle(true)
+    const data = await profileAPI.updateUserStatus(status)
+    if (data.data.resultCode === 0) {
+        dispatch(setUserStatus(status))
     }
+    // this.props.isFetchingToggle(false)
 }
 
-export const getUserStatusThunkCreator = (userId: number)=>{
-    return (dispatch: Dispatch)=>{
-        //  this.props.isFetchingToggle(true)
-        profileAPI.getUserStatus(userId)
-            .then((response) => {
-                    dispatch(setUserStatus(response.data))
-                    // this.props.isFetchingToggle(false)
-                }
-            )
-    }
+export const getUserStatusThunkCreator = (userId: number): ThunkType => async dispatch => {
+    //  this.props.isFetchingToggle(true)
+    const data = await profileAPI.getUserStatus(userId)
+    dispatch(setUserStatus(data.data))
+    // this.props.isFetchingToggle(false)
 }
 
-export const getUserProfileThunkCreator = (userId:number)=>{
-   return (dispatch: Dispatch)=>{
-       //  this.props.isFetchingToggle(true)
-       profileAPI.getProfile(userId)
-           .then((data) => {
-                   dispatch(setUserProfile(data))
-                   // this.props.isFetchingToggle(false)
-               }
-           )
-   }
+export const getUserProfileThunkCreator = (userId: number): ThunkType => async dispatch => {
+    //  this.props.isFetchingToggle(true)
+    const data = await profileAPI.getProfile(userId)
+    dispatch(setUserProfile(data))
+    // this.props.isFetchingToggle(false)
 }
