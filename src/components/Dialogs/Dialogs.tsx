@@ -17,7 +17,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     }
     let dialogsElement = props.dialogsPage.dialogsData.map(i => <DialogItem name={i.name} id={i.id}/>)
     let messagesElement = props.dialogsPage.messages.map(i => <Message id={i.id} message={i.textMessage}/>)
-    const onAddMessage = (value: any) => {
+    const onAddMessage = (value: {message: string}) => {
         debugger
         if (value.message) {
             props.addMessage(value.message)
@@ -41,7 +41,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 type DialogsFormPropsType = {
     messageText: string
     changeMessageText: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    onAddMessage: (value: any) => void
+    onAddMessage: (value:{message: string}) => void
 }
 
 export const DialogsForm = (props: DialogsFormPropsType) => {
@@ -53,7 +53,6 @@ export const DialogsForm = (props: DialogsFormPropsType) => {
                     <button type="submit">Send</button>
                 </form>
             )}/>
-
         </div>
     )
 }
