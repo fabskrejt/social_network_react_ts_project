@@ -3,7 +3,7 @@ import {Field, Form} from 'react-final-form'
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
-import {appStateType} from "../../redux/store";
+import {AppStateType} from "../../redux/store";
 
 
 type LoginPropsType = {
@@ -61,7 +61,7 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
         />
     )
 }
-const mapStateToProps = (state: appStateType)=>{
+const mapStateToProps = (state: AppStateType)=>{
     return{
         isAuth: state.auth.isAuth
     }

@@ -1,20 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
-import {appStateType} from "../../redux/store";
+import {AppStateType} from "../../redux/store";
 import Profile from "./Profile";
 import {
     getUserProfileThunkCreator,
     getUserStatusThunkCreator,
+    InitialProfileStateType,
     updateUserStatusThunkCreator
 } from "../../redux/profile-reducer";
-import {RouteComponentProps, useParams, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {ThunkDispatch} from "redux-thunk";
 import {UserReducerActionType} from "../../redux/users-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
-class ProfileContainer extends React.Component<PropsType, any> {
+class ProfileContainer extends React.Component<PropsType, InitialProfileStateType> {
 
 
     componentDidMount() {
@@ -80,7 +81,7 @@ type OwnPropsType = MapDispatchToPropsType & MapStateToPropsType
 // @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-const mapStateToProps = (state: appStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
         userStatus: state.profilePage.userStatus,
@@ -89,7 +90,7 @@ const mapStateToProps = (state: appStateType): MapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserReducerActionType>): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, UserReducerActionType>): MapDispatchToPropsType => {
     return {
         setUserProfile: (userId: number) => dispatch(getUserProfileThunkCreator(userId)),
         getUserStatus: (userId: number) => dispatch(getUserStatusThunkCreator(userId)),

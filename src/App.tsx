@@ -11,7 +11,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import {LoginConnect} from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {connect} from "react-redux";
-import {appStateType} from "./redux/store";
+import {AppStateType} from "./redux/store";
 import {initialisedTC} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
@@ -53,7 +53,7 @@ class App extends React.Component<any, any> {
 
 }
 
-const mapStateToProps = (state: appStateType) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         initialised: state.app.isInitialised
     }

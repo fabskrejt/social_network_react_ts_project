@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import {appStateType} from "../../redux/store";
+import {AppStateType} from "../../redux/store";
 import {AuthReducerActionTypes, logout} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
@@ -18,14 +18,14 @@ class HeaderContainer extends React.Component<any, any> {
     }
 }
 
-const mapSateToProps = (state: appStateType) => {
+const mapSateToProps = (state: AppStateType) => {
     return {
         login: state.auth.login,
         isAuth: state.auth.isAuth,
     }
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, AuthReducerActionTypes>) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, AuthReducerActionTypes>) => {
     return {
         logout: () => dispatch(logout())
     }

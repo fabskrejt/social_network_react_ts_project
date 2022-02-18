@@ -1,6 +1,5 @@
-import {Dispatch} from "redux";
 import {getAuthUserDataThunkCreator} from "./auth-reducer";
-import {appStateType} from "./store";
+import {AppStateType} from "./store";
 import {ThunkAction} from 'redux-thunk'
 
 const initialState = {
@@ -28,7 +27,7 @@ export const initialisedSuccessAC = () => {
 }
 
 
-type  ThunkType = ThunkAction<void, appStateType, unknown, ActionType>
+type  ThunkType = ThunkAction<void, AppStateType, unknown, ActionType>
 export const initialisedTC = (): ThunkType => async dispatch => {
     await dispatch(getAuthUserDataThunkCreator())
     dispatch(initialisedSuccessAC())

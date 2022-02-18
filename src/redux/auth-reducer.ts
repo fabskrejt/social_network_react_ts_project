@@ -1,6 +1,6 @@
 import {authAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
-import {appStateType} from "./store";
+import {AppStateType} from "./store";
 
 const SET_USER_DATA = 'AUTH-REDUCER/SET-USER-DATA';
 const initialState = {
@@ -35,7 +35,7 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
     } as const
 }
 
-type  ThunkType = ThunkAction<void, appStateType, unknown, AuthReducerActionTypes>
+type  ThunkType = ThunkAction<void, AppStateType, unknown, AuthReducerActionTypes>
 export const getAuthUserDataThunkCreator = (): ThunkType => async dispatch => {
     const data = await authAPI.me()
     if (data.resultCode === 0) {

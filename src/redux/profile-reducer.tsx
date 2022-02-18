@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {profileAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
-import {appStateType} from "./store";
+import {AppStateType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -45,8 +45,8 @@ const initialState = {
 }
 
 
-type InitialStateType = typeof initialState
-export const profileReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
+export type InitialProfileStateType = typeof initialState
+export const profileReducer = (state: InitialProfileStateType = initialState, action: ActionTypes): InitialProfileStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsDataType = {id: v1(), postText: action.value, like: 10}
@@ -86,7 +86,7 @@ export const setUserStatus = (status: string) => {
 }
 
 //thunk
-type  ThunkType = ThunkAction<void, appStateType, unknown, ActionTypes>
+type  ThunkType = ThunkAction<void, AppStateType, unknown, ActionTypes>
 export const updateUserStatusThunkCreator = (status: string): ThunkType => async dispatch => {
     //  this.props.isFetchingToggle(true)
     const data = await profileAPI.updateUserStatus(status)

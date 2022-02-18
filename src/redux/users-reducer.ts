@@ -1,6 +1,6 @@
 import {usersAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
-import {appStateType} from "./store";
+import {AppStateType} from "./store";
 
 const FOLLOWING_IN_PROGRESS = 'USERS-REDUCER/FOLLOWING-IN-PROGRESS'
 const FOLLOW = 'USERS-REDUCER/FOLLOW';
@@ -137,7 +137,7 @@ export const isFetching = (value: boolean) => {
 }
 
 //Thunk
-type  ThunkType = ThunkAction<void, appStateType, unknown, UserReducerActionType>
+type  ThunkType = ThunkAction<void, AppStateType, unknown, UserReducerActionType>
 export const getUsersThunkCreator = (pageSize: number, currentPage: number): ThunkType => async dispatch => {
     dispatch(isFetching(true))
     let data = await usersAPI.getUser(pageSize, currentPage)

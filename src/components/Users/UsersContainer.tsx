@@ -1,4 +1,4 @@
-import {appStateType} from "../../redux/store";
+import {AppStateType} from "../../redux/store";
 import {
     followingToUserInProgress,
     followUserThunkCreator,
@@ -103,7 +103,7 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
 }
 
 
-const mapStateToProps = (state: appStateType) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         usersPage: getUsers(state),
         pageSize: getPageSize(state),
@@ -116,7 +116,7 @@ const mapStateToProps = (state: appStateType) => {
 }
 //type ThunkType = ThunkAction<void, appStateType, unknown, UserReducerActionType>
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<appStateType, unknown, UserReducerActionType>) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, UserReducerActionType>) => {
     return {
         setUsers: (users: Array<UserType>) => dispatch(setUsersAC(users)),
         setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),

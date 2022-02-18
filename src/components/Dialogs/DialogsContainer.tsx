@@ -1,7 +1,7 @@
 import {Dialogs} from "./Dialogs";
 import {addMessageAC, MessagesPageType} from "../../redux/dialog-reducer";
 import {connect} from "react-redux";
-import {appStateType} from "../../redux/store";
+import {AppStateType} from "../../redux/store";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import React from "react";
@@ -15,7 +15,7 @@ type MapDispatchPropsType = {
     addMessage: (messageText: string) => void
 }
 
-const mapStateToProps = (state: appStateType): MapStatePropsType => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         dialogsPage: state.messagesPage,
         //  isAuth: state.auth.isAuth,
