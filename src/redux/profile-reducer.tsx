@@ -1,9 +1,7 @@
 import {v1} from "uuid";
 import {profileAPI} from "../api/api";
-import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {appStateType} from "./store";
-import {AuthReducerActionTypes} from "./auth-reducer";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
