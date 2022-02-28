@@ -15,13 +15,7 @@ type UsersPropsType = {
     currentPage: number
 }
 
-/*export const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    headers:     {
-        "API-KEY": "92d6c8c0-8f2a-49e6-90f5-89b9382df096"
-    }
-});*/
+
  class UsersC extends React.Component<any, InitialUsersStateType> {
 
 //Lifecycle
