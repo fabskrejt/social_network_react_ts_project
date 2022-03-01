@@ -12,7 +12,7 @@ type LoginPropsType = {
 }
 export const Login = (props: LoginPropsType) => {
     const onSubmit = (value: any) => {
-       props.login(value.Login, value.Password, value.Remember = false)
+        props.login(value.Login, value.Password, value.Remember = false)
     }
     if (props.isAuth) return <Redirect to={'/profile'}/>
     return (
@@ -26,33 +26,32 @@ type MyLoginFormPropsType = {
     onSubmit: (value: any) => void
 }
 export const MyLoginForm = (props: MyLoginFormPropsType) => {
-    const required = (value:string) => (value ? undefined : 'Required')
+    const required = (value: string) => (value ? undefined : 'Required')
     return (
-        <Form onSubmit={props.onSubmit}  render={({handleSubmit}) => (
+        <Form onSubmit={props.onSubmit} render={({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
                 <div>
                     <Field name={'Login'} component="input" placeholder="Login" validate={required}>
-                    {({ input, meta }:any) => (
-                        <div>
-                            <input {...input} type="text" placeholder="Login" />
-                            {meta.error && meta.touched && <span>{meta.error}</span>}
-                        </div>
-                    )}
-                    </Field>
-                </div>
-                <div>
-
-                    <Field name={'Password'} component="input" placeholder="Password" type={'password'} validate={required}>
-                        {({ input, meta }:any) => (
+                        {({input, meta}: any) => (
                             <div>
-                                <input {...input} type="password" placeholder="Password" />
+                                <input {...input} type="text" placeholder="Login"/>
                                 {meta.error && meta.touched && <span>{meta.error}</span>}
                             </div>
                         )}
                     </Field>
                 </div>
                 <div>
-
+                    <Field name={'Password'} component="input" placeholder="Password" type={'password'}
+                           validate={required}>
+                        {({input, meta}: any) => (
+                            <div>
+                                <input {...input} type="password" placeholder="Password"/>
+                                {meta.error && meta.touched && <span>{meta.error}</span>}
+                            </div>
+                        )}
+                    </Field>
+                </div>
+                <div>
                     <Field name={'Remember'} component="input" type={'checkbox'}/>
                 </div>
                 <button type="submit">Submit</button>
@@ -61,8 +60,8 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
         />
     )
 }
-const mapStateToProps = (state: AppStateType)=>{
-    return{
+const mapStateToProps = (state: AppStateType) => {
+    return {
         isAuth: state.auth.isAuth
     }
 }
