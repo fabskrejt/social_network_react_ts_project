@@ -17,6 +17,10 @@ export const Login = (props: LoginPropsType) => {
     if (props.isAuth) return <Redirect to={'/profile'}/>
     return (
         <div>
+            <div style={{color:"lightgrey", fontSize: '35px'}}>
+            <span>Login for test: free@samuraijs.com</span><br/>
+            <span>Password: free</span>
+            </div>
             <h1>Login</h1>
             <MyLoginForm onSubmit={onSubmit}/>
         </div>
@@ -31,10 +35,10 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
         <Form onSubmit={props.onSubmit} render={({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
                 <div>
-                    <Field name={'Login'} component="input" placeholder="Login" validate={required}>
+                    <Field  name={'Login'} component="input" placeholder="Login" validate={required}>
                         {({input, meta}: any) => (
                             <div>
-                                <input {...input} type="text" placeholder="Login"/>
+                                <input  {...input} type="text" placeholder="Login"/>
                                 {meta.error && meta.touched && <span>{meta.error}</span>}
                             </div>
                         )}
