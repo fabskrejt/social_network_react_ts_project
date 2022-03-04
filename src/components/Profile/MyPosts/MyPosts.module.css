@@ -6,18 +6,30 @@
 .postsMaker {
     padding-top: 20px;
     padding-left: 20px;
+    min-height: 120px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+.postsMaker header{
+    margin: 5px 0;
+    font-size: 20px;
 }
 
 .input {
-    height: 70px;
-    width: 700px;
+    height: 120px;
+    width: 500px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #bebbbb;
     border-radius: 10px;
     border-style: none;
-
+    resize: none;
 }
 
 .button {
+    margin: 5px 0;
     background-color: #465065;
-    border-radius: 5px;
+    border-radius: 10px;
     color: whitesmoke;
 }
