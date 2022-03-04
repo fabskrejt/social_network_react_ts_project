@@ -15,6 +15,7 @@ import {AppStateType} from "./redux/store";
 import {initialisedTC} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
+
 class App extends React.Component<any, any> {
 
     componentDidMount() {
