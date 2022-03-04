@@ -17,7 +17,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     }
     let dialogsElement = props.dialogsPage.dialogsData.map(i => <DialogItem name={i.name} id={i.id}/>)
     let messagesElement = props.dialogsPage.messages.map(i => <Message id={i.id} message={i.textMessage}/>)
-    const onAddMessage = (value: {message: string}) => {
+    const onAddMessage = (value: { message: string }) => {
         if (value.message) {
             props.addMessage(value.message)
             setMessageText('')
@@ -29,7 +29,9 @@ export const Dialogs = (props: DialogsPropsType) => {
                 {dialogsElement}
             </div>
             <div className={dStyle.dialogs}>
-                {messagesElement}
+                <div>
+                    {messagesElement}
+                </div>
                 <DialogsForm messageText={messageText} changeMessageText={changeMessageText}
                              onAddMessage={onAddMessage}/>
             </div>
@@ -40,18 +42,20 @@ export const Dialogs = (props: DialogsPropsType) => {
 type DialogsFormPropsType = {
     messageText: string
     changeMessageText: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    onAddMessage: (value:{message: string}) => void
+    onAddMessage: (value: { message: string }) => void
 }
 
 export const DialogsForm = (props: DialogsFormPropsType) => {
+
     return (
-        <div className={dStyle.dialogs}>
+        <div className={dStyle.formStyle}>
             <Form onSubmit={props.onAddMessage} render={({handleSubmit, values}) => (
-                <form onSubmit={handleSubmit}>
+                <form>
                     <Field name={'message'} component={'textarea'}/>
                     <button type="submit">Send</button>
                 </form>
-            )}/>
+            )}
+            />
         </div>
     )
 }

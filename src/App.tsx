@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import NavBar from "./components/NavBar/NavBar";
-import {BrowserRouter, HashRouter, Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
@@ -15,10 +15,6 @@ import {AppStateType} from "./redux/store";
 import {initialisedTC} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
-type AppPropsType = {
-    initialisedAC: () => void
-    initialised: boolean
-}
 class App extends React.Component<any, any> {
 
     componentDidMount() {
