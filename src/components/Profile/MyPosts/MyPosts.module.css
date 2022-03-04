@@ -6,8 +6,7 @@
 .postsMaker {
     padding-top: 20px;
     padding-left: 20px;
-    min-height: 120px;
-    width: 500px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
 }
@@ -17,8 +16,7 @@
 }
 
 .input {
-    height: 120px;
-    width: 500px;
+    min-height: 120px;
     padding: 10px;
     box-sizing: border-box;
     background-color: #bebbbb;

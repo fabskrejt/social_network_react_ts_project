@@ -10,6 +10,7 @@
 .profileInfo {
     display: flex;
     align-items: center;
+    padding: 20px 0;
 }
 .description {
     padding-left: 20px;
