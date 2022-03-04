@@ -50,7 +50,7 @@ export const DialogsForm = (props: DialogsFormPropsType) => {
     return (
         <div className={dStyle.formStyle}>
             <Form onSubmit={props.onAddMessage} render={({handleSubmit, values}) => (
-                <form>
+                <form onSubmit={handleSubmit}>
                     <Field name={'message'} component={'textarea'}/>
                     <button type="submit">Send</button>
                 </form>
