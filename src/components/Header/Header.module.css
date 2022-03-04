@@ -5,14 +5,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 .headerImg {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-top: 5px;
+    margin-top: 2px;
 }
 
 a {
@@ -25,6 +25,16 @@ a:hover {
     color: red;
 }
 
-.login{
+.login {
     cursor: pointer;
+}
+
+.hh {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerText {
+    margin: 0 15px;
 }
