@@ -12,6 +12,7 @@ type PropsOfProfileInfo = {
     education: string
     site: string
     photos: PhotosType
+    userId: string
 }
 
 const ProfileInfo = (props: PropsOfProfileInfo) => {
@@ -23,10 +24,14 @@ const ProfileInfo = (props: PropsOfProfileInfo) => {
                      alt={'banner'}/>
             </section>
             <section className={pStyle.profileInfo}>
-                <div className='Avatar'>
+                <div className= {pStyle.Avatar}>
                     <img className={pStyle.avatarImg}
                          src={props.photos.small ? props.photos.small : 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg'}
                          alt={'avatar'}/>
+                    {!props.userId && <label className="custom-file-upload">
+                        <input type="file"/>
+                        Chose file
+                    </label> }
                 </div>
                 <div className={pStyle.description}>
                     <div className={pStyle.descriptionName}>
