@@ -37,6 +37,7 @@
     background-color: #465065;
     border-radius: 5px;
     text-align: center;
+    cursor: pointer;
 }
 
 .avatarImg {
