@@ -6,6 +6,7 @@ import {AppStateType} from "./store";
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_USER_STATUS = 'SET-USER-STATUS';
+const SET_USER_PHOTO_SUCCESS = 'SET-USER-PHOTO-SUCCESS';
 
 
 export type PostsDataType = {
@@ -55,11 +56,18 @@ export const profileReducer = (state: InitialProfileStateType = initialState, ac
             return {...state, profile: {...action.profile}}
         case SET_USER_STATUS:
             return {...state, userStatus: action.status}
+        case "SET-USER-PHOTO-SUCCESS":
+
+            return {...state, profile: {...state.profile, photos: action.photo}}
     }
     return state
 }
 
-export type ActionTypes = AddPostActionType | setUserProfileType | SetUserStatusType
+export type ActionTypes =
+    AddPostActionType
+    | setUserProfileType
+    | SetUserStatusType
+    | SetUserPhotoSuccessType
 
 type AddPostActionType = ReturnType<typeof addPostAC>
 export const addPostAC = (value: any) => {
@@ -85,27 +93,34 @@ export const setUserStatus = (status: string) => {
     } as const
 }
 
+export type SetUserPhotoSuccessType = ReturnType<typeof setUserPhotoSuccess>
+export const setUserPhotoSuccess = (photo: { "small": string, "large": string }) => {
+    return {
+        type: SET_USER_PHOTO_SUCCESS,
+        photo,
+    } as const
+}
+
 //thunk
 type  ThunkType = ThunkAction<void, AppStateType, unknown, ActionTypes>
 export const updateUserStatusThunkCreator = (status: string): ThunkType => async dispatch => {
-    //  this.props.isFetchingToggle(true)
     const data = await profileAPI.updateUserStatus(status)
     if (data.data.resultCode === 0) {
         dispatch(setUserStatus(status))
     }
-    // this.props.isFetchingToggle(false)
 }
 
 export const getUserStatusThunkCreator = (userId: number): ThunkType => async dispatch => {
-    //  this.props.isFetchingToggle(true)
     const data = await profileAPI.getUserStatus(userId)
     dispatch(setUserStatus(data.data))
-    // this.props.isFetchingToggle(false)
 }
 
 export const getUserProfileThunkCreator = (userId: number): ThunkType => async dispatch => {
-    //  this.props.isFetchingToggle(true)
     const data = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(data))
-    // this.props.isFetchingToggle(false)
+}
+
+export const sendPhotoThunkCreator = (file: File): ThunkType => async dispatch => {
+    const data = await profileAPI.sendPhoto(file)
+    dispatch(setUserPhotoSuccess(data.data))
 }

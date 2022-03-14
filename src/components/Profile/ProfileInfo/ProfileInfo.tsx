@@ -18,7 +18,7 @@ type PropsOfProfileInfo = {
 
 const ProfileInfo = (props: PropsOfProfileInfo) => {
     let sendPhoto = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e.target.files !== null){
+        if (e.target.files !== null) {
             props.sendPhoto(e.target.files[0])
         }
     }
@@ -32,7 +32,7 @@ const ProfileInfo = (props: PropsOfProfileInfo) => {
             <section className={pStyle.profileInfo}>
                 <div className={pStyle.Avatar}>
                     <img className={pStyle.avatarImg}
-                         src={props.photos.small ? props.photos.small : 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg'}
+                         src={props.photos.small ? props.photos.large : 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg'}
                          alt={'avatar'}/>
                     {!props.userId && <label className="custom-file-upload">
                         <input type="file" onChange={sendPhoto}/>

@@ -5,7 +5,7 @@ import Profile from "./Profile";
 import {
     getUserProfileThunkCreator,
     getUserStatusThunkCreator,
-    InitialProfileStateType,
+    InitialProfileStateType, sendPhotoThunkCreator,
     updateUserStatusThunkCreator
 } from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -74,6 +74,7 @@ type MapDispatchToPropsType = {
     setUserProfile: (userId: number) => void
     getUserStatus: (userId: number) => void
     updateUserStatus: (status: string) => void
+    sendPhoto: (file: File)=> void
 
 }
 
@@ -95,6 +96,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, UserR
         setUserProfile: (userId: number) => dispatch(getUserProfileThunkCreator(userId)),
         getUserStatus: (userId: number) => dispatch(getUserStatusThunkCreator(userId)),
         updateUserStatus: (status: string) => dispatch(updateUserStatusThunkCreator(status)),
+        sendPhoto: (file: File)=> dispatch(sendPhotoThunkCreator(file)),
     }
 }
 
