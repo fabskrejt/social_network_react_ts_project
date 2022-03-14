@@ -35,9 +35,7 @@ class ProfileContainer extends React.Component<PropsType, InitialProfileStateTyp
     }
 
     render() {
-        console.log('ProfileContainer')
-        // if(!this.props.isAuth) return <Redirect to={'/login'}/>
-        return (
+          return (
             <Profile {...this.props}/>
         )
     }
@@ -75,7 +73,6 @@ type MapStateToPropsType = {
     profile: ProfileType
     userStatus: string
     userId: number | null
-    //isAuth: boolean
 }
 type MapDispatchToPropsType = {
     setUserProfile: (userId: number) => void
@@ -94,7 +91,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         profile: state.profilePage.profile,
         userStatus: state.profilePage.userStatus,
         userId: state.auth.id,
-        //isAuth: state.auth.isAuth,
     }
 }
 
