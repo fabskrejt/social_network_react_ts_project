@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import pStyle from "./ProfileInfo.module.css";
 
 type PhotosType = {
@@ -13,9 +13,15 @@ type PropsOfProfileInfo = {
     site: string
     photos: PhotosType
     userId: string
+    sendPhoto: (a: File) => void
 }
 
 const ProfileInfo = (props: PropsOfProfileInfo) => {
+    let sendPhoto = (e: ChangeEvent<HTMLInputElement>) => {
+        if(e.target.files !== null){
+            props.sendPhoto(e.target.files[0])
+        }
+    }
     return (
         <div>
             <section className={pStyle.profileBanner}>
@@ -24,14 +30,14 @@ const ProfileInfo = (props: PropsOfProfileInfo) => {
                      alt={'banner'}/>
             </section>
             <section className={pStyle.profileInfo}>
-                <div className= {pStyle.Avatar}>
+                <div className={pStyle.Avatar}>
                     <img className={pStyle.avatarImg}
                          src={props.photos.small ? props.photos.small : 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg'}
                          alt={'avatar'}/>
                     {!props.userId && <label className="custom-file-upload">
-                        <input type="file"/>
+                        <input type="file" onChange={sendPhoto}/>
                         Chose file
-                    </label> }
+                    </label>}
                 </div>
                 <div className={pStyle.description}>
                     <div className={pStyle.descriptionName}>
