@@ -17,18 +17,25 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component<PropsType, InitialProfileStateType> {
 
-
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.userId
         }
-
         userId && this.props.setUserProfile(userId)
         userId && this.props.getUserStatus(userId)
     }
 
-    render() {console.log('ProfileContainer')
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<InitialProfileStateType>) {
+        this.refreshProfile()
+    }
+
+    render() {
+        console.log('ProfileContainer')
         // if(!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <Profile {...this.props}/>
@@ -74,7 +81,7 @@ type MapDispatchToPropsType = {
     setUserProfile: (userId: number) => void
     getUserStatus: (userId: number) => void
     updateUserStatus: (status: string) => void
-    sendPhoto: (file: File)=> void
+    sendPhoto: (file: File) => void
 
 }
 
@@ -96,7 +103,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, UserR
         setUserProfile: (userId: number) => dispatch(getUserProfileThunkCreator(userId)),
         getUserStatus: (userId: number) => dispatch(getUserStatusThunkCreator(userId)),
         updateUserStatus: (status: string) => dispatch(updateUserStatusThunkCreator(status)),
-        sendPhoto: (file: File)=> dispatch(sendPhotoThunkCreator(file)),
+        sendPhoto: (file: File) => dispatch(sendPhotoThunkCreator(file)),
     }
 }
 
