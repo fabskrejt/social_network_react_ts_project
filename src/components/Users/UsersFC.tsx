@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import style from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
@@ -15,21 +15,18 @@ export type UsersFCPropsType = {
     pageSize: number
     count: number
 }
+
 export const UsersFC = (props: UsersFCPropsType) => {
-    //need fix pagination (quantity pages)
-    const pageCount = Math.ceil(props.count / props.pageSize)
-    const pages = []
-    for (let i = 1; i <= 10; i++) {
-        pages.push(i)
-    }
+
     return (
         <div className={style.usersList}>
-            <div className={style.pagination}>
-                {pages.map(p => p === props.currentPage
-                    ? <span className={style.active} onClick={() => props.onPageChanged(p)}>{p}</span>
-                    : <span onClick={() => props.onPageChanged(p)}>{p}</span>
-                )}
-            </div>
+            <Paginator
+                count={props.count}
+                pageSize={props.pageSize}
+                currentPage={props.currentPage}
+                onPageChanged={props.onPageChanged}
+                portionSize={15}
+            />
 
             {props.usersPage.map(i => {
                 return (
@@ -63,3 +60,34 @@ export const UsersFC = (props: UsersFCPropsType) => {
     )
 }
 
+const Paginator = (props: any) => {
+    const pagesCount = Math.ceil(props.count / props.pageSize)
+    const pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
+    let portionCount = Math.ceil(pagesCount / props.portionSize)
+    let [portionNumber, setPortionNumber] = useState(1)
+    let leftPortionPageNumber = (portionNumber - 1) * props.portionSize
+    let rightPortionPageNumber = portionNumber * props.portionSize
+
+    return (
+        <div className={style.pagination}>
+            {
+                portionNumber > 1
+                && <button onClick={() => setPortionNumber(portionNumber - 1)}>Prev</button>
+            }
+            {pages
+                .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
+                .map(p => p === props.currentPage
+                    ? <span key={p} className={style.active} onClick={() => props.onPageChanged(p)}>{p}</span>
+                    : <span key={p} onClick={() => props.onPageChanged(p)}>{p}</span>
+                )
+            }
+            {
+                portionCount > portionNumber
+                && <button onClick={() => setPortionNumber(portionNumber + 1)}>Next</button>
+            }
+        </div>
+    )
+}

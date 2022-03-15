@@ -45,7 +45,6 @@ export const profileAPI = {
             }
         })
     }
-
 }
 
 export const authAPI = {

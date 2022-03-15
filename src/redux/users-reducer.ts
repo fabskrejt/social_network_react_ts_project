@@ -28,7 +28,7 @@ export type UserType = {
 export type InitialUsersStateType = {
     users: Array<UserType>
     pageSize: number
-    count: number
+    count: number | null
     currentPage: number
     isFetching: boolean
     followingInProgress: number[]
@@ -37,7 +37,7 @@ export type InitialUsersStateType = {
 const initialState: InitialUsersStateType = {
     users: [],
     pageSize: 5,
-    count: 10,
+    count: null,
     currentPage: 1,
     isFetching: false,
     followingInProgress: []
@@ -143,6 +143,7 @@ export const getUsersThunkCreator = (pageSize: number, currentPage: number): Thu
     let data = await usersAPI.getUser(pageSize, currentPage)
     if (data.error === null) {
         dispatch(setUsersAC(data.items))
+        dispatch(setCountAC(data.totalCount))
         dispatch(isFetching(false))
     }
 }

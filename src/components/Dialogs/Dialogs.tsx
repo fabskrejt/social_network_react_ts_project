@@ -15,8 +15,8 @@ export const Dialogs = (props: DialogsPropsType) => {
     const changeMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setMessageText(e.currentTarget.value)
     }
-    let dialogsElement = props.dialogsPage.dialogsData.map(i => <DialogItem name={i.name} id={i.id}/>)
-    let messagesElement = props.dialogsPage.messages.map(i => <Message id={i.id} message={i.textMessage}/>)
+    let dialogsElement = props.dialogsPage.dialogsData.map(i => <DialogItem key={i.id} name={i.name} id={i.id}/>)
+    let messagesElement = props.dialogsPage.messages.map(i => <Message key={i.id} id={i.id} message={i.textMessage}/>)
     const onAddMessage = (value: { message: string }) => {
         if (value.message) {
             props.addMessage(value.message)
