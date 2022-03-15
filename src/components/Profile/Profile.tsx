@@ -5,7 +5,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileStatus} from "./ProfileInfo/ProfileStatus";
 
 
-const Profile = (props:any) => {debugger
+const Profile = (props:any) => {
             return (
         <main className={pStyle.main}>
             <ProfileInfo sendPhoto={props.sendPhoto} userId={props.match.params.userId} userName={props.profile.fullName} birthday={'31.10.1992'} city={'Rostov-on-Don'} education={'TPU'}
