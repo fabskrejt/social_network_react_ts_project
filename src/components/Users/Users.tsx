@@ -41,8 +41,7 @@ export const Users = (props: UsersPropsType) => {
     })
 
     return (
-        //{id: v1(), name: 'Rusik', city: 'Tomsk', education: 'TUSUR', site: 'non', folowed: true},
-        <div className={style.usersList}>
+            <div className={style.usersList}>
             {usersList}
             <button onClick={()=>setUsers(users)}>Get users</button>
         </div>

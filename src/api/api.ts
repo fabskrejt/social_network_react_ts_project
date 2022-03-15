@@ -27,7 +27,7 @@ export const usersAPI = {
 
 export const profileAPI = {
     getProfile(userId: number) {
-        return instance.get(`profile/` + userId)
+        return instance.get<GetUserProfileType>(`profile/` + userId)
             .then(response => response.data)
     },
     getUserStatus(userId: number) {
@@ -36,10 +36,10 @@ export const profileAPI = {
     updateUserStatus(status: string) {
         return instance.put(`/profile/status/`, {status})
     },
-    sendPhoto(file: File){
+    sendPhoto(file: File) {
         const formData = new FormData()
         formData.append('image', file)
-        return instance.put(`/profile/photo`, formData,{
+        return instance.put(`/profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -61,4 +61,28 @@ export const authAPI = {
         return instance.delete('/auth/login')
             .then(response => response.data)
     }
+}
+
+
+//types for request
+export type GetUserProfileType = {
+    aboutMe: string
+    contacts: {
+        facebook: string
+        website: string
+        vk: string
+        twitter: string
+        instagram: string
+        youtube: string
+        github: string
+        mainLink: string
+    }
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos: {
+        large: string
+        small: string
+    }
+    userId: number | null
 }

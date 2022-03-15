@@ -1,7 +1,8 @@
 import {v1} from "uuid";
-import {profileAPI} from "../api/api";
+import {GetUserProfileType, profileAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
+import {ProfileType} from "../components/Profile/ProfileContainer";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -23,16 +24,16 @@ const initialState = {
         {id: v1(), postText: 'What are you do?', like: 25},
     ] as Array<PostsDataType>,
     profile: {
-        "aboutMe": "",
+        "aboutMe": '',
         "contacts": {
-            "facebook": "",
-            "website": null,
+            "facebook": '',
+            "website": '',
             "vk": "",
             "twitter": '',
             "instagram": '',
-            "youtube": null,
+            "youtube": '',
             "github": '',
-            "mainLink": null,
+            "mainLink": '',
         },
         "lookingForAJob": true,
         "lookingForAJobDescription": '',
@@ -42,7 +43,7 @@ const initialState = {
             "small": '',
             "large": '',
         }
-    },
+    } as ProfileType,
 }
 
 
@@ -77,7 +78,7 @@ export const addPostAC = (value: any) => {
 }
 
 export type setUserProfileType = ReturnType<typeof setUserProfile>
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: GetUserProfileType) => {
     return {
         type: SET_USER_PROFILE,
         profile,
@@ -123,3 +124,4 @@ export const sendPhotoThunkCreator = (file: File): ThunkType => async dispatch =
     const data = await profileAPI.sendPhoto(file)
     dispatch(setUserPhotoSuccess(data.data))
 }
+
