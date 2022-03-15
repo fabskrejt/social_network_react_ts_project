@@ -1,5 +1,8 @@
 import React, {ChangeEvent} from "react";
 import pStyle from "./ProfileInfo.module.css";
+import userAva from "../../../assets/defaultUserAva.png"
+import defaultBanner from "../../../assets/defaultBanner.png"
+
 
 type PhotosType = {
     "small": string
@@ -26,13 +29,13 @@ const ProfileInfo = (props: PropsOfProfileInfo) => {
         <div>
             <section className={pStyle.profileBanner}>
                 <img className={pStyle.profileBannerImg}
-                     src='https://images.squarespace-cdn.com/content/v1/57dea572579fb3ea46810d43/1477314236757-Z9L4BOPJRYS6JZEO0OBA/image-asset.png?format=1000w'
+                     src={defaultBanner}
                      alt={'banner'}/>
             </section>
             <section className={pStyle.profileInfo}>
                 <div className={pStyle.Avatar}>
                     <img className={pStyle.avatarImg}
-                         src={props.photos.small ? props.photos.large : 'https://image.shutterstock.com/image-vector/conversation-talking-black-icon-50x50-260nw-1037215327.jpg'}
+                         src={props.photos.small ? props.photos.large : userAva}
                          alt={'avatar'}/>
                     {!props.userId && <label className="custom-file-upload">
                         <input type="file" onChange={sendPhoto}/>
