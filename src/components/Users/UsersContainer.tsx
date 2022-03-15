@@ -97,7 +97,6 @@ export class UsersAPIComponent extends React.Component<UsersPropsType, InitialUs
                     followingToUserInProgress={this.props.followingToUserInProgress}
                 />
             </div>
-
         )
     }
 }

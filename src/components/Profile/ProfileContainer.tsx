@@ -15,7 +15,7 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
-class ProfileContainer extends React.Component<PropsType, InitialProfileStateType> {
+class ProfileContainer extends React.Component<ProfileContainerPropsType, InitialProfileStateType> {
 
     refreshProfile() {
         let userId = this.props.match.params.userId
@@ -30,7 +30,7 @@ class ProfileContainer extends React.Component<PropsType, InitialProfileStateTyp
         this.refreshProfile()
     }
 
-    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<InitialProfileStateType>) {
+    componentDidUpdate(prevProps: Readonly<ProfileContainerPropsType>, prevState: Readonly<InitialProfileStateType>) {
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
         }
@@ -43,6 +43,28 @@ class ProfileContainer extends React.Component<PropsType, InitialProfileStateTyp
     }
 }
 
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
+        profile: state.profilePage.profile,
+        userStatus: state.profilePage.userStatus,
+        userId: state.auth.id,
+    }
+}
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, UserReducerActionType>): MapDispatchToPropsType => {
+    return {
+        setUserProfile: (userId: number) => dispatch(getUserProfileThunkCreator(userId)),
+        getUserStatus: (userId: number) => dispatch(getUserStatusThunkCreator(userId)),
+        updateUserStatus: (status: string) => dispatch(updateUserStatusThunkCreator(status)),
+        sendPhoto: (file: File) => dispatch(sendPhotoThunkCreator(file)),
+    }
+}
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
 
 //types
 export type ProfileType = {
@@ -86,28 +108,4 @@ type MapDispatchToPropsType = {
 
 type OwnPropsType = MapDispatchToPropsType & MapStateToPropsType
 // @ts-ignore
-type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
-
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        profile: state.profilePage.profile,
-        userStatus: state.profilePage.userStatus,
-        userId: state.auth.id,
-    }
-}
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, UserReducerActionType>): MapDispatchToPropsType => {
-    return {
-        setUserProfile: (userId: number) => dispatch(getUserProfileThunkCreator(userId)),
-        getUserStatus: (userId: number) => dispatch(getUserStatusThunkCreator(userId)),
-        updateUserStatus: (status: string) => dispatch(updateUserStatusThunkCreator(status)),
-        sendPhoto: (file: File) => dispatch(sendPhotoThunkCreator(file)),
-    }
-}
-
-export default compose<React.ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps),
-    withRouter,
-    withAuthRedirect
-)(ProfileContainer)
-
+export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsType

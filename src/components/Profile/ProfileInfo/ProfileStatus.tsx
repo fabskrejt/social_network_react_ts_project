@@ -1,19 +1,23 @@
 import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
 type ProfileStatusPropsType = {
     userStatus: string
     updateUserStatus: (status: string) => void
 }
-export const ProfileStatus =React.memo((props: ProfileStatusPropsType) => {
+export const ProfileStatus = React.memo((props: ProfileStatusPropsType) => {
     const [editMode, setEditMode] = useState(false)
     const [userStatus, setUserStatus] = useState(props.userStatus)
+
+    let params = useParams<{userId:string}>()
     useEffect(() => {
         setUserStatus(props.userStatus)
     }, [props.userStatus])
 
-    const changeStatusOn = () => {
-        //setUserStatus(props.userStatus)
-        setEditMode(true)
+    const changeStatusOn = () => {debugger
+         if(!params.userId){
+            setEditMode(true)
+        }
     }
     const changeStatusOff = () => {
         setEditMode(false)

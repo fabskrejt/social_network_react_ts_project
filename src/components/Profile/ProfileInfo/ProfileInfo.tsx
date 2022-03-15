@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import pStyle from "./ProfileInfo.module.css";
 import userAva from "../../../assets/defaultUserAva.png"
 import defaultBanner from "../../../assets/defaultBanner.png"
+import {ProfileType} from "../ProfileContainer";
 
 
 type PhotosType = {
@@ -9,6 +10,7 @@ type PhotosType = {
     "large": string
 }
 type PropsOfProfileInfo = {
+    profile: ProfileType
     userName: string
     birthday: string
     city: string
@@ -35,7 +37,8 @@ const ProfileInfo = (props: PropsOfProfileInfo) => {
             <section className={pStyle.profileInfo}>
                 <div className={pStyle.Avatar}>
                     <img className={pStyle.avatarImg}
-                         src={props.photos.small ? props.photos.large : userAva}
+                        // src={props.photos.small ? props.photos.large : userAva}
+                         src={props.profile.photos.large ? props.photos.large : userAva}
                          alt={'avatar'}/>
                     {!props.userId && <label className="custom-file-upload">
                         <input type="file" onChange={sendPhoto}/>
@@ -44,7 +47,7 @@ const ProfileInfo = (props: PropsOfProfileInfo) => {
                 </div>
                 <div className={pStyle.description}>
                     <div className={pStyle.descriptionName}>
-                        {props.userName}
+                        {props.profile.fullName}
                     </div>
                     <div className='birthday'>
                         {props.birthday}
