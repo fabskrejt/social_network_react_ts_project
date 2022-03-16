@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/store";
-
+import style from "./Login.module.css"
 
 type LoginPropsType = {
     login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
@@ -12,7 +12,7 @@ type LoginPropsType = {
     captchaUrl: null | string
 }
 export const Login = (props: LoginPropsType) => {
-    const onSubmit = (value: any) => { debugger
+    const onSubmit = (value: any) => {
         props.login(value.Login, value.Password, value.Remember = false, value.Captcha)
     }
     if (props.isAuth) return <Redirect to={'/profile'}/>
@@ -35,7 +35,7 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
     const required = (value: string) => (value ? undefined : 'Required')
     return (
         <Form onSubmit={props.onSubmit} render={({handleSubmit}) => (
-            <form onSubmit={handleSubmit}>
+            <form className={style.form} onSubmit={handleSubmit}>
                 <div>
                     <Field name={'Login'} component="input" placeholder="Login" validate={required}>
                         {({input, meta}: any) => (
@@ -58,9 +58,12 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
                     </Field>
                 </div>
                 <div>
-                    <Field name={'Remember'} component="input" type={'checkbox'}/>
+                    <label>
+                        <Field name={'Remember'} component="input" type={'checkbox'}/>
+                        Remember me
+                    </label>
                 </div>
-                {props.captchaUrl && <img src={props.captchaUrl}/>}
+                {props.captchaUrl && <img src={props.captchaUrl} alt={'captcha'}/>}
                 {
                     props.captchaUrl &&
                     <Field name={'Captcha'} component="input" placeholder="Captcha" validate={required}>

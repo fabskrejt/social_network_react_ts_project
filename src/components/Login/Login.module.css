@@ -1,0 +1,12 @@
+.form input[type=text], input[type=password] {
+    margin: 5px 0;
+    height: 30px;
+    width: 200px;
+    font-size: 20px;
+}
+
+.form input[type= checkbox] {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+}

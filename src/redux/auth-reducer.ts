@@ -60,7 +60,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     const data = await authAPI.login(email, password, rememberMe,captcha)
     if (data.resultCode === 0) {
         dispatch(getAuthUserDataThunkCreator())
-    } else { debugger
+    } else {
         if (data.resultCode === 10) {
             dispatch(getCaptcha())
         }
