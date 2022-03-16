@@ -16,7 +16,7 @@ type InitialStateType = {
     login: null | string
     isAuth: boolean
 }
-export type AuthReducerActionTypes = setUserData
+export type AuthReducerActionTypes = SetUserData | SetCaptchaURL
 
 export const authReducer = (state: InitialStateType = initialState, action: AuthReducerActionTypes): InitialStateType => {
     switch (action.type) {
@@ -27,11 +27,19 @@ export const authReducer = (state: InitialStateType = initialState, action: Auth
     }
 }
 
-type setUserData = ReturnType<typeof setUserDataAC>
+type SetUserData = ReturnType<typeof setUserDataAC>
 export const setUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
         type: SET_USER_DATA,
         payload: {id, email, login, isAuth}
+    } as const
+}
+
+type SetCaptchaURL = ReturnType<typeof setCaptchaUrlAC>
+export const setCaptchaUrlAC = (captchaUrl:string) => {
+    return {
+        type: SET_USER_DATA,
+        payload: {captchaUrl}
     } as const
 }
 
