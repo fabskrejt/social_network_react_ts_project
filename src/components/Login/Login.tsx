@@ -7,13 +7,13 @@ import {AppStateType} from "../../redux/store";
 
 
 type LoginPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
     isAuth: boolean
     captchaUrl: null | string
 }
 export const Login = (props: LoginPropsType) => {
-    const onSubmit = (value: any) => {
-        props.login(value.Login, value.Password, value.Remember = false)
+    const onSubmit = (value: any) => { debugger
+        props.login(value.Login, value.Password, value.Remember = false, value.Captcha)
     }
     if (props.isAuth) return <Redirect to={'/profile'}/>
     return (
@@ -23,12 +23,13 @@ export const Login = (props: LoginPropsType) => {
                 <span>Password: free</span>
             </div>
             <h1>Login</h1>
-            <MyLoginForm onSubmit={onSubmit}/>
+            <MyLoginForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </div>
     )
 }
 type MyLoginFormPropsType = {
     onSubmit: (value: any) => void
+    captchaUrl: null | string
 }
 export const MyLoginForm = (props: MyLoginFormPropsType) => {
     const required = (value: string) => (value ? undefined : 'Required')
@@ -59,6 +60,18 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
                 <div>
                     <Field name={'Remember'} component="input" type={'checkbox'}/>
                 </div>
+                {props.captchaUrl && <img src={props.captchaUrl}/>}
+                {
+                    props.captchaUrl &&
+                    <Field name={'Captcha'} component="input" placeholder="Captcha" validate={required}>
+                        {({input, meta}: any) => (
+                            <div>
+                                <input  {...input} type="text" placeholder="Captcha"/>
+                                {meta.error && meta.touched && <span>{meta.error}</span>}
+                            </div>
+                        )}
+                    </Field>
+                }
                 <button type="submit">Submit</button>
             </form>)
         }
