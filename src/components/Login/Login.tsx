@@ -9,6 +9,7 @@ import {AppStateType} from "../../redux/store";
 type LoginPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
     isAuth: boolean
+    captchaUrl: null | string
 }
 export const Login = (props: LoginPropsType) => {
     const onSubmit = (value: any) => {
@@ -17,9 +18,9 @@ export const Login = (props: LoginPropsType) => {
     if (props.isAuth) return <Redirect to={'/profile'}/>
     return (
         <div>
-            <div style={{color:"lightgrey", fontSize: '35px'}}>
-            <span>Login for test: free@samuraijs.com</span><br/>
-            <span>Password: free</span>
+            <div style={{color: "lightgrey", fontSize: '35px'}}>
+                <span>Login for test: free@samuraijs.com</span><br/>
+                <span>Password: free</span>
             </div>
             <h1>Login</h1>
             <MyLoginForm onSubmit={onSubmit}/>
@@ -35,7 +36,7 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
         <Form onSubmit={props.onSubmit} render={({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
                 <div>
-                    <Field  name={'Login'} component="input" placeholder="Login" validate={required}>
+                    <Field name={'Login'} component="input" placeholder="Login" validate={required}>
                         {({input, meta}: any) => (
                             <div>
                                 <input  {...input} type="text" placeholder="Login"/>
@@ -66,7 +67,8 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
 }
 const mapStateToProps = (state: AppStateType) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
 }
 

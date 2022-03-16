@@ -48,7 +48,6 @@ export const setCaptchaUrlAC = (captchaUrl: string) => {
 }
 
 //thunks
-type  ThunkType = ThunkAction<void, AppStateType, unknown, AuthReducerActionTypes>
 export const getAuthUserDataThunkCreator = (): ThunkType => async dispatch => {
     const data = await authAPI.me()
     if (data.resultCode === 0) {
@@ -61,11 +60,22 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
     const data = await authAPI.login(email, password, rememberMe)
     if (data.resultCode === 0) {
         dispatch(getAuthUserDataThunkCreator())
+    } else {
+        if (data.resultCode === 10) {
+            dispatch(getCaptcha)
+        }
     }
 }
+
 export const logout = (): ThunkType => async dispatch => {
     const data = await authAPI.logout()
     if (data.resultCode === 0) {
         dispatch(setUserDataAC(null, null, null, false))
     }
 }
+export const getCaptcha = (): ThunkType => async dispatch => {
+    const data = await authAPI.getCaptcha()
+    dispatch(setCaptchaUrlAC(data.url))
+}
+
+type  ThunkType = ThunkAction<void, AppStateType, unknown, AuthReducerActionTypes>
