@@ -3,11 +3,13 @@ import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
 
 const SET_USER_DATA = 'AUTH-REDUCER/SET-USER-DATA';
+const SET_CAPTCHA_URL = "SET-CAPTCHA-URL";
 const initialState = {
     id: null,
     email: null,
     login: null,
     isAuth: false,
+    captchaUrl: null
 }
 
 type InitialStateType = {
@@ -15,12 +17,14 @@ type InitialStateType = {
     email: null | string
     login: null | string
     isAuth: boolean
+    captchaUrl: null | string
 }
 export type AuthReducerActionTypes = SetUserData | SetCaptchaURL
 
 export const authReducer = (state: InitialStateType = initialState, action: AuthReducerActionTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
+        case SET_CAPTCHA_URL:
             return {...state, ...action.payload}
         default:
             return state
@@ -36,13 +40,14 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
 }
 
 type SetCaptchaURL = ReturnType<typeof setCaptchaUrlAC>
-export const setCaptchaUrlAC = (captchaUrl:string) => {
+export const setCaptchaUrlAC = (captchaUrl: string) => {
     return {
-        type: SET_USER_DATA,
+        type: SET_CAPTCHA_URL,
         payload: {captchaUrl}
     } as const
 }
 
+//thunks
 type  ThunkType = ThunkAction<void, AppStateType, unknown, AuthReducerActionTypes>
 export const getAuthUserDataThunkCreator = (): ThunkType => async dispatch => {
     const data = await authAPI.me()
