@@ -35,7 +35,7 @@ type SetUserData = ReturnType<typeof setUserDataAC>
 export const setUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
         type: SET_USER_DATA,
-        payload: {id, email, login, isAuth}
+        payload: {id, email, login, isAuth, captchaUrl: null}
     } as const
 }
 
