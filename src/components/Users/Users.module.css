@@ -37,11 +37,13 @@
 }
 
 
+.pagination{
+padding-bottom: 10px;
+}
 .pagination span{
     padding-left: 3px;
     cursor: pointer;
 }
-
 .active {
     font-weight: bolder;
     background-color: rebeccapurple;
