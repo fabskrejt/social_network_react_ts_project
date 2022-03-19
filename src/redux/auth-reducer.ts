@@ -22,12 +22,13 @@ type InitialStateType = {
     captchaUrl: null | string
     error: null | string
 }
-export type AuthReducerActionTypes = SetUserData | SetCaptchaURL
+export type AuthReducerActionTypes = SetUserData | SetCaptchaURL | SetErrorType
 
 export const authReducer = (state: InitialStateType = initialState, action: AuthReducerActionTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
         case SET_CAPTCHA_URL:
+        case SET_ERROR:
             return {...state, ...action.payload}
         default:
             return state
@@ -73,9 +74,10 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
         dispatch(getAuthUserDataThunkCreator())
     } else {
         if (data.resultCode === 10) {
+            dispatch(setErrorAC(data.messages[0]))
             dispatch(getCaptcha())
         } else if (data.resultCode === 1) {
-
+            dispatch(setErrorAC(data.messages[0]))
         }
     }
 }
@@ -88,7 +90,6 @@ export const logout = (): ThunkType => async dispatch => {
 }
 export const getCaptcha = (): ThunkType => async dispatch => {
     const data = await authAPI.getCaptcha()
-    debugger
     dispatch(setCaptchaUrlAC(data.url))
 }
 

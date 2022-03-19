@@ -10,6 +10,7 @@ type LoginPropsType = {
     login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
     isAuth: boolean
     captchaUrl: null | string
+    error: null | string
 }
 export const Login = (props: LoginPropsType) => {
     const onSubmit = (value: any) => {
@@ -23,13 +24,14 @@ export const Login = (props: LoginPropsType) => {
                 <span>Password: free</span>
             </div>
             <h1>Login</h1>
-            <MyLoginForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
+            <MyLoginForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} error ={props.error}/>
         </div>
     )
 }
 type MyLoginFormPropsType = {
     onSubmit: (value: any) => void
     captchaUrl: null | string
+    error: string | null
 }
 export const MyLoginForm = (props: MyLoginFormPropsType) => {
     const required = (value: string) => (value ? undefined : 'Required')
@@ -75,6 +77,7 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
                         )}
                     </Field>
                 }
+                {props.error && <div style={{padding:"5px 0", color: "red"}}>{props.error}</div>}
                 <button type="submit">Submit</button>
             </form>)
         }
@@ -84,7 +87,8 @@ export const MyLoginForm = (props: MyLoginFormPropsType) => {
 const mapStateToProps = (state: AppStateType) => {
     return {
         isAuth: state.auth.isAuth,
-        captchaUrl: state.auth.captchaUrl
+        captchaUrl: state.auth.captchaUrl,
+        error: state.auth.error
     }
 }
 
