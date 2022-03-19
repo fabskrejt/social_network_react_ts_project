@@ -4,12 +4,14 @@ import {AppStateType} from "./store";
 
 const SET_USER_DATA = 'AUTH-REDUCER/SET-USER-DATA';
 const SET_CAPTCHA_URL = "SET-CAPTCHA-URL";
+const SET_ERROR = 'SET-ERROR'
 const initialState = {
     id: null,
     email: null,
     login: null,
     isAuth: false,
-    captchaUrl: null
+    captchaUrl: null,
+    error: null
 }
 
 type InitialStateType = {
@@ -18,6 +20,7 @@ type InitialStateType = {
     login: null | string
     isAuth: boolean
     captchaUrl: null | string
+    error: null | string
 }
 export type AuthReducerActionTypes = SetUserData | SetCaptchaURL
 
@@ -47,6 +50,14 @@ export const setCaptchaUrlAC = (captchaUrl: string) => {
     } as const
 }
 
+type SetErrorType = ReturnType<typeof setErrorAC>
+export const setErrorAC = (error: string) => {
+    return {
+        type: SET_ERROR,
+        payload: {error}
+    } as const
+}
+
 //thunks
 export const getAuthUserDataThunkCreator = (): ThunkType => async dispatch => {
     const data = await authAPI.me()
@@ -57,12 +68,14 @@ export const getAuthUserDataThunkCreator = (): ThunkType => async dispatch => {
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: null | string): ThunkType => async dispatch => {
-    const data = await authAPI.login(email, password, rememberMe,captcha)
+    const data = await authAPI.login(email, password, rememberMe, captcha)
     if (data.resultCode === 0) {
         dispatch(getAuthUserDataThunkCreator())
     } else {
         if (data.resultCode === 10) {
             dispatch(getCaptcha())
+        } else if (data.resultCode === 1) {
+
         }
     }
 }

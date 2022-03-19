@@ -57,7 +57,7 @@ export const profileReducer = (state: InitialProfileStateType = initialState, ac
             return {...state, profile: {...action.profile}}
         case SET_USER_STATUS:
             return {...state, userStatus: action.status}
-        case "SET-USER-PHOTO-SUCCESS":
+        case SET_USER_PHOTO_SUCCESS:
             return {...state, profile: {...state.profile, photos: action.photo}}
     }
     return state
