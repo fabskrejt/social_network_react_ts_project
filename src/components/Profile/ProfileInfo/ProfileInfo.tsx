@@ -61,6 +61,10 @@ const ProfileInfo = (props: PropsOfProfileInfo) => {
                     <div className='site'>
                         {props.site}
                     </div>
+                    <div>
+                        Looking For A Job:
+                        {props.profile.lookingForAJob ? 'Yes' : 'No'}
+                    </div>
                 </div>
             </section>
         </div>
