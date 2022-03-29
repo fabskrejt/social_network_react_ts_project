@@ -26,7 +26,7 @@ const ProfileInfo = (props: PropsOfProfileInfo) => {
         if (e.target.files !== null) {
             props.sendPhoto(e.target.files[0])
         }
-    }
+    }   
     return (
         <div>
             <section className={pStyle.profileBanner}>
@@ -65,6 +65,7 @@ const ProfileInfo = (props: PropsOfProfileInfo) => {
                         Looking For A Job:
                         {props.profile.lookingForAJob ? 'Yes' : 'No'}
                     </div>
+                    <button onClick={()=>{}}>Change info </button>
                 </div>
             </section>
         </div>
